@@ -1,0 +1,271 @@
+type Query {
+	me: User
+	totalStudents: Int!
+	allStudents: [Student!]!
+	totalUsers: Int!
+	allUsers: [User!]!
+	classRoster(period: periodName): [Student!]!
+	student(_id: ID!): Student!
+	lesson(_id: ID!): Lesson!
+	findStudentByPeriodAndDesk(period: periodName!, desk: Int!): Student
+	numberOfStudentsInCourse(period: periodName): Int!
+	findLesson(_id: ID!): Lesson
+	findAllLessons: [Lesson!]
+	# findUnitByName: [Unit!]
+	# findUnitsByGrade: [Unit!]
+}
+
+type Mutation {
+	createAccount(name: String!, password: String!): User!
+	login(name: String!, password: String!): User
+	logout: Boolean
+	addStudent(input: StudentDetails!): Student!
+	removeStudent(_id: ID!): RemoveStudentPayLoad!
+	updateStudent(
+		_id: ID!
+		firstName: String!
+		lastName: String!
+		responsibilityPoints: Int!
+		desk: Int!
+		period: periodName!
+		teacher: String!
+	): Student!
+	updateResponsibilityPoints(_id: ID!, responsibilityPoints: Int!): Student!
+	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
+	createLesson(input: CreateLessonInput): Lesson!
+	editLesson(_id: ID!): Student!
+	removeLesson(_id: ID!): RemoveLessonPayLoad!
+	createUnit(inpu: UnitInput): Unit!
+}
+
+type RemoveLessonPayLoad {
+	removed: Boolean!
+	lesson: Lesson!
+}
+
+input UnitInput {
+	name: String!
+	gradeLevel: gradeLevelEnum!
+}
+
+type Unit {
+	_id: ID!
+	name: String!
+	# hasLessons: [Lesson]
+	gradeLevel: gradeLevelEnum!
+}
+
+input CreateLessonInput {
+	lessonName: String!
+	# inUnit: UnitInput!
+	essentialQuestion: EssentialQuestionInput!
+	socraticQuestions: [SocraticQuestionInput!]
+	vocabWords: [VocabInput]
+	readings: ReadingsInput
+	workDue: [AssignmentsInput]
+	warmup: String!
+}
+
+enum gradeLevelEnum {
+	SIXTH
+	SEVENTH
+	EIGTH
+}
+
+input AssignmentsInput {
+	name: String!
+	type: AssignmentType!
+	dueDate: String!
+}
+
+enum AssignmentType {
+	OEQ
+	THINKING_GUIDE
+	BLOG
+	CLASSWORK
+	TEST
+	WARMUP
+}
+
+type Assignments {
+	name: String!
+	type: AssignmentType!
+	# inUnit: Unit
+	dueDate: String!
+}
+
+type Reading {
+	pages: String
+	sections: String
+}
+
+input ReadingsInput {
+	pages: String!
+	sections: String!
+}
+
+input VocabInput {
+	word: String!
+	partOfSpeech: partsOfSpeechEnum!
+	definition: String!
+}
+
+enum partsOfSpeechEnum {
+	NOUN
+	VERB
+	ADJECTIVE
+	ADVERB
+	PREPOSITION
+	PRONOUN
+	INTERJECTION
+	CONJUNCTION
+}
+
+input EssentialQuestionInput {
+	type: essentialQuestionTypeEnum!
+	textStructure: majorTextStructureEnum!
+	question: String!
+}
+
+input SocraticQuestionInput {
+	type: socraticQuestionsTypeEnum!
+	question: String!
+}
+
+enum socraticQuestionsTypeEnum {
+	CONCEPTUAL_CLARIFICATION
+	PROBING_ASSUMPTIONS
+	PROBING_RATIONALE_REASONS_EVIDENCE
+	QUESTIONING_VIEWPOINTS_AND_PERSPECTIVE
+	PROBING_IMPLICATIONS_AND_CONSEQUENCES
+	QUESTION_THE_QUESTION
+}
+
+enum essentialQuestionTypeEnum {
+	HOW
+	WHY
+}
+type Lesson {
+	_id: ID!
+	lessonName: String!
+	# unit: Unit!
+	essentialQuestion: EssentialQuestion!
+	socraticQuestions: [Questions]
+	vocabWords: [Vocab]
+	readings: Reading
+	workDue: [Assignments]
+	warmup: String
+}
+
+type EssentialQuestion {
+	type: essentialQuestionTypeEnum!
+	textStructure: majorTextStructureEnum!
+	question: String!
+}
+
+type RemoveStudentPayLoad {
+	removed: Boolean
+	student: Student!
+}
+
+# input CreateAccountInput {
+# 	id: ID!
+# 	name: String!
+# 	password: String!
+# }
+
+# type LoginPayload {
+# 	user: User
+# 	token: String!
+# }
+
+type User {
+	_id: ID!
+	name: String!
+}
+
+enum periodName {
+	A
+	B
+	C
+	D
+	E
+	F
+}
+
+type Student {
+	_id: ID!
+	firstName: String!
+	lastName: String!
+	responsibilityPoints: Int!
+	period: periodName!
+	desk: Int!
+	teacher: String!
+	isHiddenFromRoster: Boolean!
+	# isAbsent: [SchoolDayInfo]
+}
+
+type SchoolDayInfo {
+	_id: ID!
+	date: String!
+	number: Int!
+	markingPeriod: markingPeriods!
+}
+
+input QuestionInput {
+	type: String
+	question: String
+}
+
+type Vocab {
+	word: String
+	partOfSpeech: String
+	definition: String
+}
+
+type Questions {
+	type: String
+	question: String
+	# majorTextStructure: majorTextStructures!
+	# minorTextStructure: [minorTextStructures]
+}
+
+enum majorTextStructureEnum {
+	CAUSE_AND_EFFECT
+	CAUSE
+	EFFECT
+	PROBLEM_AND_SOLUTION
+	PROBLEM
+	SOLUTION
+}
+
+enum markingPeriods {
+	FIRST
+	SECOND
+	THIRD
+	FOURTH
+}
+
+input StudentDetails {
+	firstName: String!
+	lastName: String!
+	responsibilityPoints: Int!
+	period: periodName!
+	desk: Int!
+	teacher: String!
+	isHiddenFromRoster: Boolean!
+}
+
+type Teacher {
+	teachesCourses: [Course!]!
+}
+
+type Course {
+	name: String!
+	section: String!
+	period: periodName!
+	isTaughtBy: Teacher!
+	isEmpty: Boolean!
+	roster: [Student]
+	assignmentList: [Assignments]
+}

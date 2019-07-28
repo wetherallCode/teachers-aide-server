@@ -1,0 +1,32 @@
+{
+	"name": "teachers-aide-server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon -e js,json,graphql",
+		"push": "npx apollo service:push"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"apollo-boost": "^0.4.3",
+		"apollo-server-express": "^2.7.0",
+		"bcrypt": "^3.0.6",
+		"connect-mongodb-session": "^2.2.0",
+		"cors": "^2.8.5",
+		"dotenv": "^8.0.0",
+		"express": "^4.17.1",
+		"express-session": "^1.16.2",
+		"graphql": "^14.4.2",
+		"graphql-playground-middleware-express": "^1.7.12",
+		"mongodb": "^3.3.0-beta2",
+		"nodemon": "^1.19.1",
+		"objectid": "^3.2.1"
+	},
+	"devDependencies": {
+		"pm2": "^3.5.1"
+	}
+}
