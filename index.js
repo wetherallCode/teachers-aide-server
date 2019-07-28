@@ -74,7 +74,8 @@ async function start() {
 
 	httpServer.listen({ port: process.env.PORT || 4000 }),
 		() => {
-			console.log(`🚀 Server ready at ${url}`)
+			console.log(`🚀 Server ready at ${server.graphqlPath}`)
 		}
 }
 start()
+// port: process.env.PORT ||
