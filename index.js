@@ -59,11 +59,11 @@ async function start() {
 	})
 
 	server.applyMiddleware({
-		app
-		// cors: {
-		// 	credentials: true,
-		// 	origin: 'https://mrwetherall.org'
-		// }
+		app,
+		cors: {
+			credentials: true,
+			origin: 'https://mrwetherall.org'
+		}
 	})
 
 	app.get('/', (req, res) => res.end(`Teacher's Aide API`))
