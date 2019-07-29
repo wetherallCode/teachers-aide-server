@@ -59,11 +59,11 @@ async function start() {
 	})
 
 	server.applyMiddleware({
-		app,
-		cors: {
-			credentials: true,
-			origin: 'https://mrwetherall.org'
-		}
+		app
+		// cors: {
+		// 	credentials: true,
+		// 	origin: 'https://mrwetherall.org'
+		// }
 	})
 
 	app.get('/', (req, res) => res.end(`Teacher's Aide API`))
@@ -74,7 +74,7 @@ async function start() {
 
 	httpServer.listen({ port: process.env.PORT || 4000 }),
 		() => {
-			console.log(`🚀 Server ready at ${server.graphqlPath}`)
+			console.log(`🚀 Server ready at ${url}`)
 		}
 }
 start()
