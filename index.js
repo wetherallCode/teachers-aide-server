@@ -61,12 +61,15 @@ async function start() {
 	server.applyMiddleware({
 		app,
 		cors: {
-			// credentials: false,
+			credentials: true,
 			// origin: 'https://mrwetherall.org'
-			// origin: 'https://mrwetherall-client.herokuapp.com/'
+			origin: [
+				'https://mrwetherall-client.herokuapp.com/',
+				'https://mrwetherall-hooks-client.herokuapp.com/'
+			]
 			// origin: 'https://mrwetherall-hooks-client.herokuapp.com/'
 			// origin: 'http://localhost:3000'
-			origin: '*'
+			// origin: '*'
 		}
 	})
 
