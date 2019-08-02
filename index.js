@@ -63,6 +63,7 @@ async function start() {
 		cors: {
 			credentials: true,
 			// origin: 'https://mrwetherall.org'
+			// origin: 'https://mrwetherall-client.herokuapp.com/'
 			origin: 'http://localhost:3000'
 		}
 	})
