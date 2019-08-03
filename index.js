@@ -70,7 +70,7 @@ async function start() {
 
 	httpServer.listen({ port: process.env.PORT || 4000 }),
 		() => {
-			console.log(`🚀 Server ready at ${url}`)
+			console.log(`🚀 Server ready at ${port}`)
 		}
 }
 start()
