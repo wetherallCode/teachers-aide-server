@@ -59,11 +59,7 @@ async function start() {
 	})
 
 	server.applyMiddleware({
-		app,
-		cors: {
-			// credentials: true,
-			origin: false
-		}
+		app
 	})
 
 	app.get('/', (req, res) => res.end(`Teacher's Aide API`))
@@ -84,3 +80,7 @@ start()
 // 	'https://mrwetherall-hooks-client.herokuapp.com/',
 // 	'http://localhost:3000'
 // ]
+// cors: {
+// 	// credentials: true,
+// 	origin: false
+// }
