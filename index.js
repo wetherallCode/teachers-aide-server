@@ -53,6 +53,8 @@ async function start() {
 		typeDefs,
 		resolvers,
 		context,
+		introspection: true,
+		playground: true,
 		engine: {
 			apiKey: process.env.ENGINE_API_KEY
 		}
