@@ -61,7 +61,7 @@ async function start() {
 	server.applyMiddleware({
 		app,
 		cors: {
-			credentials: true,
+			// credentials: true,
 			origin: false
 		}
 	})
