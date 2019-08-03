@@ -62,11 +62,7 @@ async function start() {
 		app,
 		cors: {
 			credentials: true,
-			origin: [
-				'https://mrwetherall-client.herokuapp.com/',
-				'https://mrwetherall-hooks-client.herokuapp.com/',
-				'http://localhost:3000'
-			]
+			origin: false
 		}
 	})
 
@@ -83,3 +79,8 @@ async function start() {
 }
 start()
 // port: process.env.PORT ||
+// [
+// 	'https://mrwetherall-client.herokuapp.com/',
+// 	'https://mrwetherall-hooks-client.herokuapp.com/',
+// 	'http://localhost:3000'
+// ]
