@@ -66,7 +66,7 @@ async function start() {
 		app,
 		cors: {
 			credentials: true,
-			origin: 'https://mrwetherall-hooks-client.herokuapp.com/'
+			origin: 'https://mrwetherall-hooks-client.herokuapp.com'
 		}
 	})
 
