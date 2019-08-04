@@ -64,7 +64,7 @@ async function start() {
 	server.applyMiddleware({
 		app,
 		cors: {
-			credentials: true,
+			credentials: false,
 			origin: ['https://mrwetherall-hooks-client.herokuapp.com/', 'http://localhost:3000']
 		}
 	})
