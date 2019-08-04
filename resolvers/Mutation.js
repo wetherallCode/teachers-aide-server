@@ -33,7 +33,7 @@ module.exports = {
 		user.id = user._id.toString()
 		// starts the session
 		req.session.userId = user.id
-		console.log(user + ' is logged in')
+		console.log(user.name + ' is logged in')
 		return user
 	},
 
