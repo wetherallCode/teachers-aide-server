@@ -2,6 +2,7 @@ const { ApolloServer } = require('apollo-server-express')
 const expressPlayground = require('graphql-playground-middleware-express').default
 const express = require('express')
 const path = require('path')
+const cors = require('cors')
 const session = require('express-session')
 const { readFileSync } = require('fs')
 const { createServer } = require('http')
@@ -61,7 +62,11 @@ async function start() {
 	})
 
 	server.applyMiddleware({
-		app
+		app,
+		cors: {
+			credentials: true,
+			origin: ['https://mrwetherall-hooks-client.herokuapp.com/', 'http://localhost:3000']
+		}
 	})
 
 	app.get('/', (req, res) => res.end(`Teacher's Aide API`))
@@ -76,7 +81,6 @@ async function start() {
 		}
 }
 start()
-// port: process.env.PORT ||
 // [
 // 	'https://mrwetherall-client.herokuapp.com/',
 // 	'https://mrwetherall-hooks-client.herokuapp.com/',

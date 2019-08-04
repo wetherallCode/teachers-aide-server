@@ -5,15 +5,15 @@ module.exports = {
 	async createAccount(_, { name, password }, { users }) {
 		let existingUser = await users.findOne({ name })
 		if (!existingUser) {
-			let hash = await bcrypt.hash(password, 10)
+			let hashedPassword = await bcrypt.hash(password, 10)
 			let newUser = {
 				name,
-				password: hash
+				password: hashedPassword
 			}
 			await users.insertOne(newUser)
 			return newUser
 		} else {
-			throw new Error(`${name} already exists, dude! Try again!!`)
+			throw new Error(`${name} already exists. Try again!!`)
 		}
 	},
 
@@ -24,6 +24,7 @@ module.exports = {
 		if (!user) {
 			throw new Error('Wrong User Name')
 		}
+
 		const valid = await bcrypt.compare(password, user.password)
 		if (!valid) {
 			throw new Error('Wrong Password')
