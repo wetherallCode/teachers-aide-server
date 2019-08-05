@@ -12,6 +12,7 @@ module.exports = {
 	me: (_, __, { req, users }) => {
 		console.log(req)
 		if (!req.session.userId) {
+			console.log('null')
 			return null
 		}
 
