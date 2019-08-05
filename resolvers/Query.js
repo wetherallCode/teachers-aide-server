@@ -10,7 +10,7 @@ module.exports = {
 	allUsers: (_, __, { users }) => users.find().toArray(),
 
 	me: (_, __, { req, users }) => {
-		console.log(req)
+		console.log(req.session)
 		if (!req.session.userId) {
 			console.log('null')
 			return null
