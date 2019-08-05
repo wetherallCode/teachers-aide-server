@@ -11,6 +11,7 @@ module.exports = {
 				password: hashedPassword
 			}
 			await users.insertOne(newUser)
+
 			return newUser
 		} else {
 			throw new Error(`${name} already exists. Try again!!`)
@@ -33,7 +34,7 @@ module.exports = {
 		user.id = user._id.toString()
 		// starts the session
 		req.session.userId = user.id
-		console.log(user.name + ' is logged in')
+		console.log(req.session)
 		return user
 	},
 
