@@ -69,7 +69,7 @@ async function start() {
 			origin: [
 				'https://mrwetherall-hooks-client.herokuapp.com',
 				'http://localhost:3000',
-				'http://mrwetherall.org'
+				'https://mrwetherall.org'
 			]
 		}
 	})
