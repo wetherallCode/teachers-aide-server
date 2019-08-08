@@ -42,14 +42,12 @@ async function start() {
 	const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true })
 	const db = client.db()
 
-	const context = async ({ req, connection, res }) => {
+	const context = async ({ req }) => {
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')
-		let token
-		let currentUser
 
-		return { users, currentUser, studentData, lessonData, db, req }
+		return { users, studentData, lessonData, db, req }
 	}
 
 	const server = new ApolloServer({
