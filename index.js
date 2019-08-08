@@ -31,7 +31,8 @@ async function start() {
 			resave: false,
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-				path: '/'
+				path: '/',
+				sameSite: true
 			},
 			store: store,
 			saveUninitialized: false
