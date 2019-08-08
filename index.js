@@ -30,8 +30,8 @@ async function start() {
 			secret: process.env.SESSION_SECRET,
 			resave: false,
 			cookie: {
-				maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-				secure: true
+				maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+				// secure: true
 			},
 			store: store,
 			saveUninitialized: false
@@ -86,12 +86,3 @@ async function start() {
 		}
 }
 start()
-// [
-// 	'https://mrwetherall-client.herokuapp.com/',
-// 	'https://mrwetherall-hooks-client.herokuapp.com/',
-// 	'http://localhost:3000'
-// ]
-// cors: {
-// 	// credentials: true,
-// 	origin: false
-// }
