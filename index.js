@@ -31,7 +31,6 @@ async function start() {
 			resave: false,
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-				// secure: true
 				path: '/'
 			},
 			store: store,
@@ -57,8 +56,6 @@ async function start() {
 		typeDefs,
 		resolvers,
 		context,
-		introspection: true,
-		playground: true,
 		engine: {
 			apiKey: process.env.ENGINE_API_KEY
 		}
