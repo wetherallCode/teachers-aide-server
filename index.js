@@ -32,11 +32,13 @@ async function start() {
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
 				// secure: true
+				path: '/'
 			},
 			store: store,
 			saveUninitialized: false
 		})
 	)
+
 	const MONGO_DB = process.env.DB_HOST
 	const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true })
 	const db = client.db()
