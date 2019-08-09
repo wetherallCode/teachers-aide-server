@@ -31,8 +31,7 @@ async function start() {
 			resave: false,
 			cookie: {
 				maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-				path: '/',
-				sameSite: true
+				path: '/'
 			},
 			store: store,
 			saveUninitialized: false
@@ -68,6 +67,8 @@ async function start() {
 				'https://mrwetherall-hooks-client.herokuapp.com',
 				'http://localhost:3000',
 				'https://mrwetherall.org'
+				'https://www.mrwetherall.org'
+			]
 			]
 		}
 	})
