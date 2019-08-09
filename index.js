@@ -69,7 +69,6 @@ async function start() {
 				'https://mrwetherall.org',
 				'http://www.mrwetherall.org'
 			]
-			]
 		}
 	})
 
