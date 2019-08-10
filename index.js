@@ -29,9 +29,8 @@ async function start() {
 		session({
 			secret: process.env.SESSION_SECRET,
 			resave: true,
-			cookie: { 
-				httpOnly: false 
-				secure: true,
+			cookie: {
+				httpOnly: false
 			},
 			store: store,
 			saveUninitialized: false
