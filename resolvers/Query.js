@@ -10,13 +10,13 @@ module.exports = {
 	allUsers: (_, __, { users }) => users.find().toArray(),
 
 	me: (_, __, { req, users }) => {
-		console.log(req.session.userId)
 		if (!req.session.userId) {
 			console.log('user is null')
 			return null
 		}
-
-		return users.findOne({ _id: ObjectID(req.session.userId) })
+		const me = users.findOne({ _id: ObjectID(req.session.userId) })
+		console.log(me)
+		return me
 	},
 
 	async classRoster(_, { period }, { studentData }) {
