@@ -28,10 +28,8 @@ async function start() {
 	app.use(
 		session({
 			secret: process.env.SESSION_SECRET,
-			resave: true,
-			cookie: {
-				httpOnly: false
-			},
+			resave: false,
+			cookie: {},
 			store: store,
 			saveUninitialized: false
 		})
