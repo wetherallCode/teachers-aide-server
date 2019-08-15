@@ -37,7 +37,7 @@ type Mutation {
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	createClassPeriod(input: CreateClassPeriodInput): ClassPeriod!
+	# createClassPeriod(input: CreateClassPeriodInput): ClassPeriod!
 	createUnit(input: UnitInput): Unit!
 }
 

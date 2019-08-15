@@ -135,10 +135,10 @@ module.exports = {
 			removed = true
 		}
 		return { removed, lesson }
-	},
-
-	async createClassPeriod(_, __, { classPeriodData }) {
-		let newClassPeriod
-		return { dateAssigned, lesson }
 	}
+
+	// async createClassPeriod(_, __, { classPeriodData }) {
+	// 	let newClassPeriod
+	// 	return { dateAssigned, lesson }
+	// }
 }
