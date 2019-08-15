@@ -1,5 +1,3 @@
-scalar Date
-
 type Query {
 	me: User
 	totalStudents: Int!
@@ -209,7 +207,7 @@ type Student {
 
 type SchoolDayInfo {
 	_id: ID!
-	date: Date!
+	date: String!
 	number: Int!
 	markingPeriod: markingPeriods!
 }
