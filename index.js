@@ -8,6 +8,7 @@ const { readFileSync } = require('fs')
 const { createServer } = require('http')
 const { MongoClient } = require('mongodb')
 const MongoDBStore = require('connect-mongodb-session')(session)
+
 require('dotenv').config()
 
 const typeDefs = readFileSync('./typeDefs.graphql', 'UTF-8')
@@ -30,8 +31,7 @@ async function start() {
 			secret: process.env.SESSION_SECRET,
 			resave: false,
 			cookie: {
-				maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
-				path: '/'
+				maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
 			},
 			store: store,
 			saveUninitialized: false
@@ -46,8 +46,9 @@ async function start() {
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')
+		let classPeriodData = db.collection('classPeriodData')
 
-		return { users, studentData, lessonData, db, req }
+		return { users, studentData, lessonData, classPeriodData, db, req }
 	}
 
 	const server = new ApolloServer({
@@ -80,7 +81,7 @@ async function start() {
 	const httpServer = createServer(app)
 	server.installSubscriptionHandlers(httpServer)
 
-	httpServer.listen({ port: process.env.PORT || 4000 }),
+	httpServer.listen({ port: 4000 }),
 		() => {
 			console.log(`🚀 Server ready at ${port}`)
 		}

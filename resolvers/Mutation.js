@@ -135,5 +135,11 @@ module.exports = {
 			removed = true
 		}
 		return { removed, lesson }
+	},
+
+	async createClassPeriod(_, { ...args }, { classPeriodData }) {
+		console.log(args)
+		let newClassPeriod
+		return { dateAssigned, classPeriod }
 	}
 }

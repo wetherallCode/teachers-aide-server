@@ -1,3 +1,5 @@
+scalar Date
+
 type Query {
 	me: User
 	totalStudents: Int!
@@ -32,10 +34,39 @@ type Mutation {
 	): Student!
 	updateResponsibilityPoints(_id: ID!, responsibilityPoints: Int!): Student!
 	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
-	createLesson(input: CreateLessonInput): Lesson!
+	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	createUnit(inpu: UnitInput): Unit!
+	createClassPeriod(input: ClassPeriodInput): CreateClassPeriodPayLoad!
+	createUnit(input: UnitInput): Unit!
+}
+
+type Course {
+	# name: String!
+	grade: gradeLevelEnum!
+	# section: String!
+	period: periodName!
+	isTaughtBy: Teacher!
+	isEmpty: Boolean!
+	roster: [Student]
+	assignmentList: [Assignments]
+	currentLesson: [Lesson]
+}
+
+input ClassPeriodInput {
+	lesson: LessonInput!
+	grade: gradeLevelEnum!
+}
+
+type CreateClassPeriodPayLoad {
+	classPeriod: ClassPeriod!
+	dateAssigned: Date!
+}
+
+type ClassPeriod {
+	_id: ID!
+	lesson: Lesson
+	grade: gradeLevelEnum!
 }
 
 type RemoveLessonPayLoad {
@@ -46,17 +77,19 @@ type RemoveLessonPayLoad {
 input UnitInput {
 	name: String!
 	gradeLevel: gradeLevelEnum!
+	hasLessons: [LessonInput]
 }
 
 type Unit {
 	_id: ID!
 	name: String!
-	# hasLessons: [Lesson]
+	hasLessons: [Lesson]
 	gradeLevel: gradeLevelEnum!
 }
 
-input CreateLessonInput {
+input LessonInput {
 	lessonName: String!
+	period: [periodName!]
 	# inUnit: UnitInput!
 	essentialQuestion: EssentialQuestionInput!
 	socraticQuestions: [SocraticQuestionInput!]
@@ -64,6 +97,18 @@ input CreateLessonInput {
 	readings: ReadingsInput
 	workDue: [AssignmentsInput]
 	warmup: String!
+}
+type Lesson {
+	_id: ID!
+	lessonName: String!
+	period: [periodName]
+	# unit: Unit!
+	essentialQuestion: EssentialQuestion!
+	socraticQuestions: [Questions]
+	vocabWords: [Vocab]
+	readings: Reading
+	workDue: [Assignments]
+	warmup: String
 }
 
 enum gradeLevelEnum {
@@ -145,17 +190,6 @@ enum essentialQuestionTypeEnum {
 	HOW
 	WHY
 }
-type Lesson {
-	_id: ID!
-	lessonName: String!
-	# unit: Unit!
-	essentialQuestion: EssentialQuestion!
-	socraticQuestions: [Questions]
-	vocabWords: [Vocab]
-	readings: Reading
-	workDue: [Assignments]
-	warmup: String
-}
 
 type EssentialQuestion {
 	type: essentialQuestionTypeEnum!
@@ -207,7 +241,7 @@ type Student {
 
 type SchoolDayInfo {
 	_id: ID!
-	date: String!
+	date: Date!
 	number: Int!
 	markingPeriod: markingPeriods!
 }
@@ -258,14 +292,4 @@ input StudentDetails {
 
 type Teacher {
 	teachesCourses: [Course!]!
-}
-
-type Course {
-	name: String!
-	section: String!
-	period: periodName!
-	isTaughtBy: Teacher!
-	isEmpty: Boolean!
-	roster: [Student]
-	assignmentList: [Assignments]
 }
