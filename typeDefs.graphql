@@ -37,36 +37,21 @@ type Mutation {
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	createClassPeriod(input: ClassPeriodInput): CreateClassPeriodPayLoad!
+	createClassPeriod(input: CreateClassPeriodInput): ClassPeriod!
 	createUnit(input: UnitInput): Unit!
 }
 
-type Course {
-	# name: String!
-	grade: gradeLevelEnum!
-	# section: String!
-	period: periodName!
-	isTaughtBy: Teacher!
-	isEmpty: Boolean!
-	roster: [Student]
-	assignmentList: [Assignments]
-	currentLesson: [Lesson]
-}
-
-input ClassPeriodInput {
+input CreateClassPeriodInput {
 	lesson: LessonInput!
-	grade: gradeLevelEnum!
 }
 
 type CreateClassPeriodPayLoad {
 	classPeriod: ClassPeriod!
-	dateAssigned: Date!
 }
 
 type ClassPeriod {
 	_id: ID!
 	lesson: Lesson
-	grade: gradeLevelEnum!
 }
 
 type RemoveLessonPayLoad {
@@ -77,19 +62,17 @@ type RemoveLessonPayLoad {
 input UnitInput {
 	name: String!
 	gradeLevel: gradeLevelEnum!
-	hasLessons: [LessonInput]
 }
 
 type Unit {
 	_id: ID!
 	name: String!
-	hasLessons: [Lesson]
+	# hasLessons: [Lesson]
 	gradeLevel: gradeLevelEnum!
 }
 
 input LessonInput {
 	lessonName: String!
-	period: [periodName!]
 	# inUnit: UnitInput!
 	essentialQuestion: EssentialQuestionInput!
 	socraticQuestions: [SocraticQuestionInput!]
@@ -101,7 +84,6 @@ input LessonInput {
 type Lesson {
 	_id: ID!
 	lessonName: String!
-	period: [periodName]
 	# unit: Unit!
 	essentialQuestion: EssentialQuestion!
 	socraticQuestions: [Questions]
@@ -292,4 +274,14 @@ input StudentDetails {
 
 type Teacher {
 	teachesCourses: [Course!]!
+}
+
+type Course {
+	name: String!
+	section: String!
+	period: periodName!
+	isTaughtBy: Teacher!
+	isEmpty: Boolean!
+	roster: [Student]
+	assignmentList: [Assignments]
 }
