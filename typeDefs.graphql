@@ -43,15 +43,18 @@ type Mutation {
 
 input CreateClassPeriodInput {
 	lesson: LessonInput!
+	dateAssigned: Date!
 }
 
 type CreateClassPeriodPayLoad {
 	classPeriod: ClassPeriod!
+	dateAssigned: Date!
 }
 
 type ClassPeriod {
 	_id: ID!
 	lesson: Lesson
+	dateAssigned: Date!
 }
 
 type RemoveLessonPayLoad {
