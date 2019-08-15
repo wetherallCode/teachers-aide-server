@@ -1,3 +1,5 @@
+scalar Date
+
 type Query {
 	me: User
 	totalStudents: Int!
@@ -35,7 +37,7 @@ type Mutation {
 	createLesson(input: CreateLessonInput): Lesson!
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	createUnit(inpu: UnitInput): Unit!
+	# createUnit(inpu: UnitInput): Unit!
 }
 
 type RemoveLessonPayLoad {
@@ -43,17 +45,17 @@ type RemoveLessonPayLoad {
 	lesson: Lesson!
 }
 
-input UnitInput {
-	name: String!
-	gradeLevel: gradeLevelEnum!
-}
+# input UnitInput {
+# 	name: String!
+# 	gradeLevel: gradeLevelEnum!
+# }
 
-type Unit {
-	_id: ID!
-	name: String!
-	# hasLessons: [Lesson]
-	gradeLevel: gradeLevelEnum!
-}
+# type Unit {
+# 	_id: ID!
+# 	name: String!
+# 	# hasLessons: [Lesson]
+# 	gradeLevel: gradeLevelEnum!
+# }
 
 input CreateLessonInput {
 	lessonName: String!
