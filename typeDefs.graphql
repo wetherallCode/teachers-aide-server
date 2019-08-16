@@ -46,6 +46,7 @@ type ClassPeriodPayLoad {
 }
 
 type ClassPeriod {
+	_id: ID
 	grade: gradeLevelEnum
 	assignedLesson: Lesson
 	assignedDate: String
