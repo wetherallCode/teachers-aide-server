@@ -125,6 +125,17 @@ module.exports = {
 		return newLesson
 	},
 
+	async createClassPeriod(_, args, { classPeriodData }) {
+		const {} = args
+		console.log(`ClassPeriodInput: ${args.input}, args: ${args}`)
+		let newClassPeriod = {
+			...args.input
+		}
+		const { insertedId } = insertedId
+
+		return newClassPeriod
+	},
+
 	async removeLesson(_, { _id }, { lessonData }) {
 		const lesson = await lessonData.findOne({ _id: ObjectID(_id) })
 

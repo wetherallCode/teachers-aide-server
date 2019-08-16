@@ -37,24 +37,24 @@ type Mutation {
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	createClassPeriod(input: ClassPeriodInput): ClassPeriodPayLoad!
-	# createUnit(inpu: UnitInput): Unit!
+	createClassPeriod(input: ClassPeriodInput): ClassPeriodPayLoad
+	# createUnit(input: UnitInput): Unit!
 }
 
 type ClassPeriodPayLoad {
-	classPeriod: ClassPeriod!
+	classPeriod: ClassPeriod
 }
 
 type ClassPeriod {
-	grade: gradeLevelEnum!
-	assignedLesson: Lesson!
-	assignedDate: String!
+	grade: gradeLevelEnum
+	assignedLesson: Lesson
+	assignedDate: String
 }
 
 input ClassPeriodInput {
-	grade: gradeLevelEnum!
-	assignedLesson: LessonInput!
-	assignedDate: String!
+	grade: gradeLevelEnum
+	assignedLesson: LessonInput
+	assignedDate: String
 }
 
 type RemoveLessonPayLoad {
