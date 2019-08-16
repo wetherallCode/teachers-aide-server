@@ -130,7 +130,7 @@ module.exports = {
 		{ grade, assignedDate, assignedLesson, ...args },
 		{ classPeriodData }
 	) {
-		console.log(`grade: ${grade}, assignedDate: ${assignedDate}, assignedLesson: ${assignedLesson}`)
+		console.log(_id)
 		let newClassPeriod = {
 			...args.input
 		}
