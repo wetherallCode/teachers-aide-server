@@ -131,7 +131,8 @@ module.exports = {
 		let newClassPeriod = {
 			...args.input
 		}
-		const { insertedId } = insertedId
+		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
+		newClassPeriod._id = insertedId
 
 		return newClassPeriod
 	},
