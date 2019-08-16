@@ -128,7 +128,7 @@ module.exports = {
 	async createClassPeriod(
 		_,
 		{
-			input: { grade, assignedDate, assignedLesson },
+			// input: { grade, assignedDate, assignedLesson },
 			...args
 		},
 		{ classPeriodData }
