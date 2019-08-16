@@ -127,7 +127,10 @@ module.exports = {
 
 	async createClassPeriod(
 		_,
-		{ grade, assignedDate, assignedLesson, ...args },
+		{
+			input: { grade, assignedDate, assignedLesson },
+			...args
+		},
 		{ classPeriodData }
 	) {
 		console.log(args.input.grade)
@@ -136,7 +139,7 @@ module.exports = {
 		}
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
-		console.log(newClassPeriod)
+
 		return newClassPeriod
 	},
 
