@@ -137,7 +137,7 @@ module.exports = {
 		}
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
-
+		console.log(newClassPeriod)
 		return newClassPeriod
 	},
 
