@@ -125,8 +125,11 @@ module.exports = {
 		return newLesson
 	},
 
-	async createClassPeriod(_, args, { classPeriodData }) {
-		console.log(...args)
+	async createClassPeriod(
+		_,
+		{ grade, assignedDate, assignedLesson, ...args },
+		{ classPeriodData }
+	) {
 		let newClassPeriod = {
 			...args.input
 		}
