@@ -55,7 +55,7 @@ type ClassPeriod {
 
 input ClassPeriodInput {
 	grade: gradeLevelEnum
-	assignedLesson: LessonInput
+	assignedLesson: String
 	assignedDate: String
 }
 
