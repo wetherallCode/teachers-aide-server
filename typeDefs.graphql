@@ -35,9 +35,9 @@ type Mutation {
 	updateResponsibilityPoints(_id: ID!, responsibilityPoints: Int!): Student!
 	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
 	createLesson(input: LessonInput): Lesson!
+	createClassPeriod(input: ClassPeriodInput): ClassPeriod
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	createClassPeriod(input: ClassPeriodInput): ClassPeriodPayLoad
 	# createUnit(input: UnitInput): Unit!
 }
 
@@ -46,7 +46,7 @@ type ClassPeriodPayLoad {
 }
 
 type ClassPeriod {
-	_id: ID
+	_id: ID!
 	grade: gradeLevelEnum
 	assignedLesson: Lesson
 	assignedDate: String

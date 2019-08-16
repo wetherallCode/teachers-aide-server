@@ -6,7 +6,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "nodemon -e js,json,graphql",
-		"push": "npx apollo service:push"
+		"push-apollo": "npx apollo service:push",
+		"push-heroku": "git push heroku master",
+		"push-github": "git push origin master"
 	},
 	"keywords": [],
 	"author": "",
