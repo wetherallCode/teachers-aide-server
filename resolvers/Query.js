@@ -54,5 +54,10 @@ module.exports = {
 	async findAllLessons(_, __, { lessonData }) {
 		const lessons = await lessonData.find().toArray()
 		return lessons
+	},
+
+	async findClassPeriod(_, { _id }, { classPeriodData }) {
+		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
+		return classPeriod
 	}
 }
