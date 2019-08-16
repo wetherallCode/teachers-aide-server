@@ -125,7 +125,7 @@ module.exports = {
 		return newLesson
 	},
 
-	async createClassPeriod(_, args, { classPeriodData }) {
+	async createClassPeriod(_, { ...args }, { classPeriodData }) {
 		const {} = args
 		console.log(`ClassPeriodInput: ${args.input}, args: ${args}`)
 		let newClassPeriod = {
