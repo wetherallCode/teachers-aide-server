@@ -132,7 +132,7 @@ type Assignments {
 	name: String!
 	type: AssignmentType!
 	# inUnit: Unit
-	dueDate: String!
+	dueDate: Date!
 }
 
 type Reading {
