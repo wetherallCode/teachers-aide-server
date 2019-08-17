@@ -50,14 +50,14 @@ type ClassPeriod {
 	_id: ID!
 	grade: gradeLevelEnum
 	assignedLesson: Lesson
-	assignedDate: String
+	assignedDate: Date
 	period: periodName
 }
 
 input ClassPeriodInput {
 	grade: gradeLevelEnum
 	assignedLesson: String
-	assignedDate: String
+	assignedDate: Date
 	period: periodName
 }
 
