@@ -39,7 +39,20 @@ type Mutation {
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
-	# createUnit(input: UnitInput): Unit!
+	createUnit(input: UnitInput): Unit!
+	# addLessonsToUnit:
+}
+
+input UnitInput {
+	name: String!
+	gradeLevel: gradeLevelEnum!
+}
+
+type Unit {
+	_id: ID!
+	name: String!
+	hasLessons: [Lesson]
+	gradeLevel: gradeLevelEnum!
 }
 
 type ClassPeriodPayLoad {
@@ -66,27 +79,27 @@ type RemoveLessonPayLoad {
 	lesson: Lesson!
 }
 
-# input UnitInput {
-# 	name: String!
-# 	gradeLevel: gradeLevelEnum!
-# }
-
-# type Unit {
-# 	_id: ID!
-# 	name: String!
-# 	# hasLessons: [Lesson]
-# 	gradeLevel: gradeLevelEnum!
-# }
-
 input LessonInput {
 	lessonName: String!
-	# inUnit: UnitInput!
+	inUnit: UnitInput!
 	essentialQuestion: EssentialQuestionInput!
 	socraticQuestions: [SocraticQuestionInput!]
 	vocabWords: [VocabInput]
 	readings: ReadingsInput
 	workDue: [AssignmentsInput]
 	warmup: String!
+}
+
+type Lesson {
+	_id: ID!
+	lessonName: String!
+	inUnit: Unit!
+	essentialQuestion: EssentialQuestion!
+	socraticQuestions: [Questions]
+	vocabWords: [Vocab]
+	readings: Reading
+	workDue: [Assignments]
+	warmup: String
 }
 
 enum gradeLevelEnum {
@@ -167,17 +180,6 @@ enum socraticQuestionsTypeEnum {
 enum essentialQuestionTypeEnum {
 	HOW
 	WHY
-}
-type Lesson {
-	_id: ID!
-	lessonName: String!
-	# unit: Unit!
-	essentialQuestion: EssentialQuestion!
-	socraticQuestions: [Questions]
-	vocabWords: [Vocab]
-	readings: Reading
-	workDue: [Assignments]
-	warmup: String
 }
 
 type EssentialQuestion {

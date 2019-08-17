@@ -133,7 +133,7 @@ module.exports = {
 		{ classPeriodData, lessonData }
 	) {
 		const lessonName = await lessonData.findOne({ lessonName: assignedLesson })
-
+		console.log(assignedDate)
 		let newClassPeriod = {
 			grade,
 			assignedDate,
