@@ -56,8 +56,9 @@ module.exports = {
 		return lessons
 	},
 
-	async findClassPeriod(_, { _id }, { classPeriodData }) {
-		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
+	async findClassPeriod(_, { assignedDate, assignedLesson }, { classPeriodData }) {
+		const classPeriod = await classPeriodData.findOne({ assignedDate, assignedLesson })
+		console.log(classPeriod)
 		return classPeriod
 	}
 }
