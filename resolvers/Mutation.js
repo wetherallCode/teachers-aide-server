@@ -125,6 +125,16 @@ module.exports = {
 		return newLesson
 	},
 
+	async createUnit(_, args, { unitData }) {
+		let newUnit = {
+			...args.input
+		}
+		const { insertedId } = await unitData.insertOne(newUnit)
+		newUnit._id = insertedId
+
+		return newUnit
+	},
+
 	async createClassPeriod(
 		_,
 		{
