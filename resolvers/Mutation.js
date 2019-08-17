@@ -126,7 +126,7 @@ module.exports = {
 	},
 
 	async createUnit(_, args, { unitData }) {
-		console.log(args)
+		console.log(args.input)
 		let newUnit = {
 			...args.input
 		}
