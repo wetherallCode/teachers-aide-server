@@ -95,11 +95,16 @@ type Lesson {
 	lessonName: String
 	inUnit: Unit
 	essentialQuestion: EssentialQuestion
-	socraticQuestions: [Questions]
+	socraticQuestions: [SocraticQuestion]
 	vocabWords: [Vocab]
 	readings: Reading
 	workDue: [Assignments]
 	warmup: String
+}
+
+type SocraticQuestion {
+	type: socraticQuestionsTypeEnum!
+	question: String!
 }
 
 enum gradeLevelEnum {
