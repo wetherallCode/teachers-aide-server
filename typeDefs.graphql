@@ -81,7 +81,7 @@ type RemoveLessonPayLoad {
 
 input LessonInput {
 	lessonName: String!
-	inUnit: UnitInput!
+	inUnit: UnitInput
 	essentialQuestion: EssentialQuestionInput!
 	socraticQuestions: [SocraticQuestionInput!]
 	vocabWords: [VocabInput]
@@ -93,7 +93,7 @@ input LessonInput {
 type Lesson {
 	_id: ID!
 	lessonName: String!
-	inUnit: Unit!
+	inUnit: Unit
 	essentialQuestion: EssentialQuestion!
 	socraticQuestions: [Questions]
 	vocabWords: [Vocab]
