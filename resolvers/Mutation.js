@@ -128,14 +128,17 @@ module.exports = {
 	async createClassPeriod(
 		_,
 		{
-			// input: { grade, assignedDate, assignedLesson },
-			...args
+			input: { grade, assignedDate, assignedLesson }
+			// ...args
 		},
-		{ classPeriodData }
+		{ classPeriodData, lessonData }
 	) {
 		console.log(grade)
+		const lessonName = await lessonData.findOne(assignedLesson)
+		console.log(lessonName)
 		let newClassPeriod = {
-			...args.input
+			grade,
+			assignedDate
 		}
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
