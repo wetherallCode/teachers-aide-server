@@ -58,7 +58,7 @@ module.exports = {
 
 	async findClassPeriod(_, { assignedDate, period }, { classPeriodData }) {
 		const classPeriod = await classPeriodData.findOne({ assignedDate, period })
-		console.log(classPeriod)
+
 		return classPeriod
 	}
 }
