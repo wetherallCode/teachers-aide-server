@@ -51,12 +51,14 @@ type ClassPeriod {
 	grade: gradeLevelEnum
 	assignedLesson: Lesson
 	assignedDate: String
+	period: periodName
 }
 
 input ClassPeriodInput {
 	grade: gradeLevelEnum
 	assignedLesson: String
 	assignedDate: String
+	period: periodName
 }
 
 type RemoveLessonPayLoad {
