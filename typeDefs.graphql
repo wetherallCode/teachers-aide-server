@@ -13,6 +13,8 @@ type Query {
 	numberOfStudentsInCourse(period: periodName): Int!
 	findLesson(_id: ID!): Lesson
 	findAllLessons: [Lesson!]
+	findUnit(_id: ID!): Unit!
+	findAllUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
 	findClassPeriod(period: periodName, assignedDate: String): ClassPeriod
 	# findUnitByName: [Unit!]
 	# findUnitsByGrade: [Unit!]
@@ -45,14 +47,14 @@ type Mutation {
 
 input UnitInput {
 	name: String!
-	gradeLevel: gradeLevelEnum!
+	gradeLevel: GradeLevelEnum!
 }
 
 type Unit {
 	_id: ID!
 	name: String!
 	hasLessons: [Lesson]
-	gradeLevel: gradeLevelEnum!
+	gradeLevel: GradeLevelEnum!
 }
 
 type ClassPeriodPayLoad {
@@ -61,14 +63,14 @@ type ClassPeriodPayLoad {
 
 type ClassPeriod {
 	_id: ID!
-	grade: gradeLevelEnum
+	grade: GradeLevelEnum
 	assignedLesson: Lesson
 	assignedDate: Date
 	period: periodName
 }
 
 input ClassPeriodInput {
-	grade: gradeLevelEnum
+	grade: GradeLevelEnum
 	assignedLesson: String
 	assignedDate: Date
 	period: periodName
@@ -107,7 +109,7 @@ type SocraticQuestion {
 	question: String!
 }
 
-enum gradeLevelEnum {
+enum GradeLevelEnum {
 	SIXTH
 	SEVENTH
 	EIGTH

@@ -60,5 +60,15 @@ module.exports = {
 		const classPeriod = await classPeriodData.findOne({ assignedDate, period })
 
 		return classPeriod
+	},
+
+	async findUnit(_, { _id }, { unitData }) {
+		const unit = await unitData.findOne({ _id: ObjectID(_id) })
+		return unit
+	},
+
+	async findAllUnitsByGrade(_, { gradeLevel }, { unitData }) {
+		const units = await unitData.find({ gradeLevel: gradeLevel }).toArray()
+		return units
 	}
 }
