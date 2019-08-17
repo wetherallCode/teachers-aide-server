@@ -115,9 +115,12 @@ module.exports = {
 		return { removed, student }
 	},
 
-	async createLesson(_, args, { lessonData }) {
+	async createLesson(_, args, { lessonData, unitData }) {
+		// const unitName = unitData.findOne( name: args.input.inUnit)
+
 		let newLesson = {
 			...args.input
+			// inUnit: args.input.unitName
 		}
 		const { insertedId } = await lessonData.insertOne(newLesson)
 		newLesson._id = insertedId

@@ -40,7 +40,7 @@ type Mutation {
 	editLesson(_id: ID!): Student!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
 	createUnit(input: UnitInput): Unit!
-	# addLessonsToUnit:
+	# addLessonsToUnit():
 }
 
 input UnitInput {
