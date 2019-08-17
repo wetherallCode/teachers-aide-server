@@ -129,7 +129,6 @@ module.exports = {
 		_,
 		{
 			input: { grade, assignedDate, assignedLesson }
-			// ...args
 		},
 		{ classPeriodData, lessonData }
 	) {
@@ -140,9 +139,10 @@ module.exports = {
 			assignedDate,
 			assignedLesson: lessonName
 		}
+
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
-		console.log(newClassPeriod)
+
 		return newClassPeriod
 	},
 

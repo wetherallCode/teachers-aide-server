@@ -13,7 +13,7 @@ type Query {
 	numberOfStudentsInCourse(period: periodName): Int!
 	findLesson(_id: ID!): Lesson
 	findAllLessons: [Lesson!]
-	findClassPeriod(_id: ID!): ClassPeriod!
+	findClassPeriod(assignedLesson: String, assignedDate: String): ClassPeriod!
 	# findUnitByName: [Unit!]
 	# findUnitsByGrade: [Unit!]
 }
