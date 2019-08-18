@@ -12,6 +12,7 @@ type Query {
 	findStudentByPeriodAndDesk(period: periodName!, desk: Int!): Student
 	numberOfStudentsInCourse(period: periodName): Int!
 	findLesson(_id: ID!): Lesson
+	findLessonByUnit(inUnit: String): Lesson
 	findAllLessons: [Lesson!]
 	findUnit(_id: ID!): Unit!
 	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
