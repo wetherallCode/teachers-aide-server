@@ -16,8 +16,6 @@ type Query {
 	findUnit(_id: ID!): Unit!
 	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
 	findClassPeriod(period: periodName, assignedDate: String): ClassPeriod
-	# findUnitByName: [Unit!]
-	# findUnitsByGrade: [Unit!]
 }
 
 type Mutation {
@@ -110,9 +108,9 @@ type SocraticQuestion {
 }
 
 enum GradeLevelEnum {
-	SIXTH
-	SEVENTH
 	EIGHTH
+	SEVENTH
+	SIXTH
 }
 
 input AssignmentsInput {
