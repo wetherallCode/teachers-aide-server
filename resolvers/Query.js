@@ -52,6 +52,7 @@ module.exports = {
 	},
 
 	async findLessonsByUnit(_, { inUnit }, { lessonData }) {
+		console.log(inUnit)
 		const lesson = await lessonData.find({ inUnit: inUnit }).toArray()
 		return lesson
 	},
