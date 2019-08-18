@@ -14,7 +14,7 @@ type Query {
 	findLesson(_id: ID!): Lesson
 	findAllLessons: [Lesson!]
 	findUnit(_id: ID!): Unit!
-	findAllUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
+	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
 	findClassPeriod(period: periodName, assignedDate: String): ClassPeriod
 	# findUnitByName: [Unit!]
 	# findUnitsByGrade: [Unit!]
@@ -112,7 +112,7 @@ type SocraticQuestion {
 enum GradeLevelEnum {
 	SIXTH
 	SEVENTH
-	EIGTH
+	EIGHTH
 }
 
 input AssignmentsInput {
