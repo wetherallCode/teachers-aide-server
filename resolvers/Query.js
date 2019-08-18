@@ -67,7 +67,7 @@ module.exports = {
 		return unit
 	},
 
-	async findAllUnitsByGrade(_, { gradeLevel }, { unitData }) {
+	async findUnitsByGrade(_, { gradeLevel }, { unitData }) {
 		const units = await unitData.find({ gradeLevel: gradeLevel }).toArray()
 		return units
 	}
