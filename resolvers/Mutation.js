@@ -117,7 +117,7 @@ module.exports = {
 
 	async createLesson(_, args, { lessonData, unitData }) {
 		const unitName = unitData.findOne({ name: args.input.inUnit })
-		console.log(args.input)
+		console.log(unitName)
 		let newLesson = {
 			...args.input,
 			inUnit: unitName
