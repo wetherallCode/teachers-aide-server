@@ -16,7 +16,7 @@ type Query {
 	findAllLessons: [Lesson!]
 	findUnit(_id: ID!): Unit!
 	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
-	findClassPeriod(period: periodName, assignedDate: String): ClassPeriod
+	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
 }
 
 type Mutation {
