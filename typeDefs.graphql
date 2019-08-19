@@ -118,22 +118,20 @@ input AssignmentsInput {
 	name: String!
 	type: AssignmentType!
 	dueDate: Date
+	readings: String
 }
 
 enum AssignmentType {
 	OEQ
 	THINKING_GUIDE
 	BLOG
-	CLASSWORK
-	TEST
-	WARMUP
 }
 
 type Assignments {
 	name: String!
 	type: AssignmentType!
-	# inUnit: Unit
 	dueDate: Date!
+	readings: String
 }
 
 type Reading {
