@@ -146,8 +146,8 @@ module.exports = {
 		},
 		{ classPeriodData, lessonData }
 	) {
+		console.log(grade, assignedDate, assignedLesson, period)
 		const lessonName = await lessonData.findOne({ lessonName: assignedLesson })
-		console.log(grade)
 		let newClassPeriod = {
 			grade,
 			assignedDate,
