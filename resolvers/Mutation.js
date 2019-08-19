@@ -117,7 +117,7 @@ module.exports = {
 
 	async createLesson(_, args, { lessonData, unitData }) {
 		const unitName = await unitData.findOne({ name: args.input.inUnit })
-		console.log(unitName)
+
 		let newLesson = {
 			...args.input,
 			inUnit: unitName
@@ -129,7 +129,6 @@ module.exports = {
 	},
 
 	async createUnit(_, args, { unitData }) {
-		console.log(args.input)
 		let newUnit = {
 			...args.input
 		}
@@ -146,7 +145,6 @@ module.exports = {
 		},
 		{ classPeriodData, lessonData }
 	) {
-		console.log(grade, assignedDate, assignedLesson, period)
 		const lessonName = await lessonData.findOne({ lessonName: assignedLesson })
 		let newClassPeriod = {
 			assignedDate,

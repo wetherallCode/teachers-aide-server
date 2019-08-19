@@ -98,7 +98,7 @@ type Lesson {
 	essentialQuestion: EssentialQuestion
 	socraticQuestions: [SocraticQuestion]
 	vocabWords: [Vocab]
-	readings: Reading
+	readings: Readings
 	workDue: [Assignments]
 	warmup: String
 }
@@ -115,10 +115,9 @@ enum GradeLevelEnum {
 }
 
 input AssignmentsInput {
-	name: String!
 	type: AssignmentType!
+	readings: ReadingsInput
 	dueDate: Date
-	readings: String
 }
 
 enum AssignmentType {
@@ -128,13 +127,12 @@ enum AssignmentType {
 }
 
 type Assignments {
-	name: String!
 	type: AssignmentType!
 	dueDate: Date!
-	readings: String
+	readings: Readings
 }
 
-type Reading {
+type Readings {
 	pages: String
 	sections: String
 }
