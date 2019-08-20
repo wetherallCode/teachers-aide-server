@@ -73,6 +73,12 @@ module.exports = {
 		return classPeriods
 	},
 
+	async findClassPeriodById(_, { _id }, { classPeriodData }) {
+		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
+
+		return classPeriod
+	},
+
 	async findUnit(_, { _id }, { unitData }) {
 		const unit = await unitData.findOne({ _id: ObjectID(_id) })
 		return unit
