@@ -189,7 +189,7 @@ module.exports = {
 
 		if (classPeriod) {
 			classPeriodData.deleteOne(classPeriod)
-			removed = false
+			removed = true
 		}
 		return { removed, classPeriod }
 	}
