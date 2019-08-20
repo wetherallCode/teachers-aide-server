@@ -184,7 +184,7 @@ module.exports = {
 	},
 
 	async removeClassPeriod(_, { _id }, { classPeriodData }) {
-		const classPeriod = await classPeriodData.findONe({ _id: ObjectID(_id) })
+		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
 		let removed = false
 
 		if (classPeriod) {
