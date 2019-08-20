@@ -122,6 +122,7 @@ module.exports = {
 			...args.input,
 			inUnit: unitName
 		}
+
 		const { insertedId } = await lessonData.insertOne(newLesson)
 		newLesson._id = insertedId
 
