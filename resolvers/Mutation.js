@@ -146,7 +146,13 @@ module.exports = {
 		},
 		{ classPeriodData, lessonData }
 	) {
+		const classPeriodCheck = await classPeriodData.findOne({ grade: grade, period: period })
+		if (classPeriodCheck) {
+			throw new Error('ClassPeriod already Created')
+		}
+
 		const lessonName = await lessonData.findOne({ lessonName: assignedLesson })
+
 		let newClassPeriod = {
 			assignedDate,
 			grade,
