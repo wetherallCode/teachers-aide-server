@@ -191,6 +191,6 @@ module.exports = {
 			classPeriodData.deleteOne(classPeriod)
 			removed = false
 		}
-		return removed, classPeriod
+		return { removed, classPeriod }
 	}
 }
