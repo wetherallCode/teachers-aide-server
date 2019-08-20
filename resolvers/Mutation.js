@@ -170,5 +170,27 @@ module.exports = {
 			removed = true
 		}
 		return { removed, lesson }
+	},
+
+	async removeUnit(_, { grade, name }, { unitData }) {
+		const unit = await unitData.findOne({ grade: grade, name: name })
+		let removed = false
+
+		if (unit) {
+			unitData.deleteOne(unit)
+			removed = true
+		}
+		return { removed, unit }
+	},
+
+	async removeClassPeriod(_, { _id }, { classPeriodData }) {
+		const classPeriod = await classPeriodData.findONe({ _id: ObjectID(_id) })
+		let removed = false
+
+		if (classPeriod) {
+			classPeriodData.deleteOne(classPeriod)
+			removed = false
+		}
+		return removed, classPeriod
 	}
 }
