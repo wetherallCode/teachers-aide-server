@@ -65,18 +65,18 @@ type ClassPeriodPayLoad {
 }
 
 type ClassPeriod {
-	_id: ID!
-	grade: GradeLevelEnum!
-	assignedLesson: Lesson!
-	assignedDate: Date!
-	period: periodName!
+	_id: ID
+	grade: GradeLevelEnum
+	assignedLesson: Lesson
+	assignedDate: Date
+	period: periodName
 }
 
 input ClassPeriodInput {
-	assignedLesson: String!
-	grade: GradeLevelEnum!
-	assignedDate: Date!
-	period: periodName!
+	assignedLesson: String
+	grade: GradeLevelEnum
+	assignedDate: Date
+	period: periodName
 }
 
 type RemoveLessonPayLoad {
