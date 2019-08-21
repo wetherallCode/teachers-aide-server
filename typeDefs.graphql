@@ -16,8 +16,8 @@ type Query {
 	findAllLessons: [Lesson!]
 	findUnit(_id: ID!): Unit!
 	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
-	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod!
-	findClassPeriods: [ClassPeriod!]!
+	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
+	findClassPeriods: [ClassPeriod]
 	findClassPeriodById(_id: ID!): ClassPeriod!
 }
 
@@ -298,6 +298,7 @@ input StudentDetails {
 }
 
 type Teacher {
+	name: String!
 	teachesCourses: [Course!]!
 }
 
@@ -305,7 +306,7 @@ type Course {
 	name: String!
 	section: String!
 	period: periodName!
-	isTaughtBy: Teacher!
+	hasTeacher: Teacher!
 	isEmpty: Boolean!
 	roster: [Student]
 	assignmentList: [Assignments]
