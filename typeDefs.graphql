@@ -45,7 +45,7 @@ type Mutation {
 	createUnit(input: UnitInput): Unit!
 	removeUnit(gradeLevel: GradeLevelEnum!, name: String!): RemoveUnitPayLoad!
 	removeClassPeriod(_id: ID!): RemoveClassPeriodPayLoad!
-	# addLessonsToUnit():
+	# addLessonsToUnit(grade: GradeLevelEnum, lessonName: String):
 }
 
 input UnitInput {
