@@ -131,7 +131,8 @@ enum GradeLevelEnum {
 
 input AssignmentsInput {
 	type: AssignmentType!
-	readings: ReadingsInput
+	readingPages: String
+	readingSections: String
 	dueDate: Date
 }
 
@@ -144,7 +145,8 @@ enum AssignmentType {
 type Assignments {
 	type: AssignmentType!
 	dueDate: Date!
-	readings: Readings
+	readingPages: String
+	readingSections: String
 }
 
 type Readings {
