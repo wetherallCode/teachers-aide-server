@@ -202,5 +202,12 @@ module.exports = {
 			removed = true
 		}
 		return { removed, classPeriod }
+	},
+
+	async markStudentAbsent(_, { _id, date }, { classPeriodData, studentData }) {
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		console.log(student)
+
+		return student
 	}
 }
