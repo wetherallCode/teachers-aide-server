@@ -210,7 +210,7 @@ module.exports = {
 		{ studentData, classPeriodData }
 	) {
 		const checkForDuplicates = await studentData.findOne({ _id: ObjectID(_id) })
-		console.log(checkForDuplicates.daysAbsent)
+		console.log(checkForDuplicates.daysAbsent.find(date) === true)
 
 		// if (checkForDuplicates.daysAbsent === date) {
 		// 	throw new Error('This student has already been marked absent')
