@@ -208,8 +208,8 @@ module.exports = {
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
-				$set: {
-					daysAbsent: [...daysAbsent, date]
+				$push: {
+					daysAbsent: date
 				}
 			}
 		)
