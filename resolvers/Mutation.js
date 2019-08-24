@@ -125,11 +125,12 @@ module.exports = {
 
 		const { insertedId } = await lessonData.insertOne(newLesson)
 		newLesson._id = insertedId
-		console.log(newLesson)
+
 		return newLesson
 	},
 
 	async createUnit(_, args, { unitData }) {
+		console.log(args)
 		let newUnit = {
 			...args.input
 		}
