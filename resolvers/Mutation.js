@@ -218,14 +218,14 @@ module.exports = {
 			}
 		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
-		// const addAbsentStudentToClassPeriod = await classPeriodData.updateOne(
-		// 	{ assignedDate, period },
-		// 	{
-		// 		$push: {
-		// 			absentStudents: updatedStudent
-		// 		}
-		// 	}
-		// )
+		const addAbsentStudentToClassPeriod = await classPeriodData.updateOne(
+			{ assignedDate, period },
+			{
+				$push: {
+					absentStudents: updatedStudent
+				}
+			}
+		)
 		return { updatedStudent }
 	}
 }
