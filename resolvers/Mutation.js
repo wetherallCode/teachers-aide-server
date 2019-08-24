@@ -205,6 +205,7 @@ module.exports = {
 	},
 	// assignedDate, period
 	async markStudentAbsent(_, { _id, date }, { classPeriodData, studentData }) {
+		console.log(_id, date)
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
