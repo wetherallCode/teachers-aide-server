@@ -204,7 +204,11 @@ module.exports = {
 		return { removed, classPeriod }
 	},
 	// assignedDate, period
-	async markStudentAbsent(_, { _id, date }, { studentData }) {
+	async markStudentAbsent(
+		_,
+		{ _id, date, assignedDate, period },
+		{ studentData, classPeriodData }
+	) {
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
