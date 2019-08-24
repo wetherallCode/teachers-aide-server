@@ -205,11 +205,16 @@ module.exports = {
 	},
 
 	async markStudentAbsent(_, { _id, date }, { classPeriodData, studentData }) {
-		const student = await studentData.findOne({ _id: ObjectID(_id) })
-		console.log(student)
-		student.daysAbsent = date
-
-		console.log(student)
-		return student
+		const updateStudent = await studentData.updateOne(
+			{ _id: ObjectID(_id) },
+			{
+				$set: {
+					daysAbsent: [...daysAbsent, date]
+				}
+			}
+		)
+		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
+		console.log(updatedStudent)
+		return null
 	}
 }
