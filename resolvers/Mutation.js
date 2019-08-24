@@ -226,6 +226,6 @@ module.exports = {
 				}
 			}
 		)
-		return { updatedStudent }
+		return { updatedStudent, addAbsentStudentToClassPeriod }
 	}
 }
