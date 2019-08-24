@@ -203,12 +203,8 @@ module.exports = {
 		}
 		return { removed, classPeriod }
 	},
-
-	async markStudentAbsent(
-		_,
-		{ _id, date, assignedDate, period },
-		{ classPeriodData, studentData }
-	) {
+	// assignedDate, period
+	async markStudentAbsent(_, { _id, date }, { classPeriodData, studentData }) {
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
@@ -219,14 +215,14 @@ module.exports = {
 		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
 
-		// const addAbsentStudentToClassPeriod = await classPeriodData.updateOne(
-		// 	{ assignedDate, period },
-		// 	{
-		// 		$push: {
-		// 			absentStudents: updatedStudent
-		// 		}
-		// 	}
-		// )
 		return { updatedStudent }
 	}
 }
+// const addAbsentStudentToClassPeriod = await classPeriodData.updateOne(
+// 	{ assignedDate, period },
+// 	{
+// 		$push: {
+// 			absentStudents: updatedStudent
+// 		}
+// 	}
+// )
