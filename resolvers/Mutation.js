@@ -215,6 +215,6 @@ module.exports = {
 		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
 		console.log(updatedStudent)
-		return null
+		return updatedStudent
 	}
 }
