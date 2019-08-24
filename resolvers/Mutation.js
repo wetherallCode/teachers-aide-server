@@ -116,7 +116,6 @@ module.exports = {
 	},
 
 	async createLesson(_, args, { lessonData, unitData }) {
-		console.log(args)
 		const unitName = await unitData.findOne({ name: args.input.inUnit })
 
 		let newLesson = {
@@ -126,7 +125,7 @@ module.exports = {
 
 		const { insertedId } = await lessonData.insertOne(newLesson)
 		newLesson._id = insertedId
-
+		console.log(newLesson)
 		return newLesson
 	},
 
