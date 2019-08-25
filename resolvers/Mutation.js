@@ -210,7 +210,7 @@ module.exports = {
 		{ studentData, classPeriodData }
 	) {
 		const findStudentAbsences = await studentData.findOne({ _id: ObjectID(_id) })
-		console.log(findStudentAbsences)
+		console.log(findStudentAbsences.daysAbsent)
 		// const checkForDuplicates = findStudentAbsences.find(element => element === date)
 		// console.log(checkForDuplicates)
 		// if (checkForDuplicates.daysAbsent === date) {
