@@ -215,10 +215,9 @@ module.exports = {
 			const checkForDuplicateAbsences = findStudentAbsences.daysAbsent.find(
 				element => element === date
 			)
-		}
-
-		if (checkForDuplicateAbsences) {
-			throw new Error('This student has already been marked absent')
+			if (checkForDuplicateAbsences) {
+				throw new Error('This student has already been marked absent')
+			}
 		}
 
 		const updateStudent = await studentData.updateOne(
@@ -230,7 +229,7 @@ module.exports = {
 			}
 		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
-		console.log(updatedStudent)
+
 		const addAbsentStudentToClassPeriod = await classPeriodData.updateOne(
 			{ assignedDate, period },
 			{
