@@ -212,7 +212,7 @@ module.exports = {
 		const findStudentAbsences = await studentData.findOne({ _id: ObjectID(_id) })
 
 		if (findStudentAbsences.daysAbsent !== undefined) {
-			const checkForDuplicateAbsences = findStudentAbsences.daysAbsent.find(
+			var checkForDuplicateAbsences = findStudentAbsences.daysAbsent.find(
 				element => element === date
 			)
 		}
