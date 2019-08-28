@@ -262,7 +262,8 @@ module.exports = {
 				}
 			}
 		)
-		console.log(removeAbsentStudentFromClassPeriod)
+		const updatedClass = await classPeriodData.findOne({ assignedDate, period })
+		console.log(updatedClass)
 		return updatedStudent
 	}
 }
