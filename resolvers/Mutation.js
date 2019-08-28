@@ -252,7 +252,7 @@ module.exports = {
 				$pull: { daysAbsent: { $in: [date] } }
 			}
 		)
-
+		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
 		return updateStudent
 	}
 }
