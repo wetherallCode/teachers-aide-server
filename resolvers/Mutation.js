@@ -258,7 +258,7 @@ module.exports = {
 			{ assignedDate, period },
 			{
 				$pull: {
-					absentStudents: { $in: [updatedStudent] }
+					absentStudents: { $in: [{ updatedStudent }] }
 				}
 			}
 		)
