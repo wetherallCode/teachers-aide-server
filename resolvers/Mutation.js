@@ -241,30 +241,14 @@ module.exports = {
 		)
 		return updatedStudent
 	},
-	async unduMarkStudentAbsent(
-		_,
-		{ _id, date, assignedDate, period },
-		{ studentData, classPeriodData }
-	) {
-		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
-
-		const removeAbsentStudentFromClassPeriod = await classPeriodData.updateOne(
-			{ assignedDate, period },
-			{
-				$pull: {
-					absentStudents: { updatedStudent }
-				}
-			}
-		)
+	async unduMarkStudentAbsent(_, { _id, date }, { studentData }) {
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
 				$pull: { daysAbsent: { $in: [date] } }
 			}
 		)
-
-		const updatedClass = await classPeriodData.findOne({ assignedDate, period })
-		console.log(updatedClass.absentStudents)
+		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
 		return updatedStudent
 	}
 }

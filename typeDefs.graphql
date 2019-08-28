@@ -46,7 +46,7 @@ type Mutation {
 	removeUnit(gradeLevel: GradeLevelEnum!, name: String!): RemoveUnitPayLoad!
 	removeClassPeriod(_id: ID!): RemoveClassPeriodPayLoad!
 	markStudentAbsent(_id: ID!, date: Date, period: periodName, assignedDate: Date): Student
-	unduMarkStudentAbsent(_id: ID!, date: Date, period: periodName, assignedDate: Date): Student
+	unduMarkStudentAbsent(_id: ID!, date: Date): Student
 	# addLessonsToUnit(grade: GradeLevelEnum, lessonName: String):
 }
 
