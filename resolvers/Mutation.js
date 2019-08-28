@@ -246,14 +246,8 @@ module.exports = {
 		{ _id, date, assignedDate, period },
 		{ studentData, classPeriodData }
 	) {
-		const updateStudent = await studentData.updateOne(
-			{ _id: ObjectID(_id) },
-			{
-				$pull: { daysAbsent: { $in: [date] } }
-			}
-		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
-		console.log(updatedStudent)
+
 		const removeAbsentStudentFromClassPeriod = await classPeriodData.updateOne(
 			{ assignedDate, period },
 			{
@@ -262,6 +256,13 @@ module.exports = {
 				}
 			}
 		)
+		const updateStudent = await studentData.updateOne(
+			{ _id: ObjectID(_id) },
+			{
+				$pull: { daysAbsent: { $in: [date] } }
+			}
+		)
+
 		const updatedClass = await classPeriodData.findOne({ assignedDate, period })
 		console.log(updatedClass.absentStudents)
 		return updatedStudent
