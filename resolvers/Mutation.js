@@ -253,7 +253,16 @@ module.exports = {
 			}
 		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
-		console.log(updatedStudent)
+
+		const removeAbsentStudentFromClassPeriod = await classPeriodData.updateOne(
+			{ assignedDate, period },
+			{
+				$pull: {
+					absentStudents: { $in: [updatedStudent] }
+				}
+			}
+		)
+		console.log(removeAbsentStudentFromClassPeriod)
 		return updatedStudent
 	}
 }
