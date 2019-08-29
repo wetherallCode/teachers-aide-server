@@ -102,6 +102,7 @@ input LessonInput {
 	inUnit: String
 	essentialQuestion: EssentialQuestionInput
 	socraticQuestions: [SocraticQuestionInput]
+	studyGuideQuestions: [String]
 	vocabWords: [VocabInput]
 	readings: ReadingsInput
 	workDue: [AssignmentsInput]
@@ -115,6 +116,7 @@ type Lesson {
 	inUnit: Unit
 	essentialQuestion: EssentialQuestion
 	socraticQuestions: [SocraticQuestion]
+	studyGuideQuestions: [String]
 	vocabWords: [Vocab]
 	readings: Readings
 	workDue: [Assignments]
