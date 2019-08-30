@@ -129,15 +129,15 @@ module.exports = {
 		return newLesson
 	},
 
-	async editLesson(_, { _id, ...args }, { lessonData }) {
+	async editLesson(_, { _id, ...args }, { lessonData, unitData }) {
 		console.log(args.input.inUnit)
-
+		const unitName = await unitData.findOne({ name: args.input.inUnit })
 		const editLesson = await lessonData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
 				$set: {
 					lessonName: args.input.lessonName,
-					inUnit: args.input.inUnit,
+					inUnit: unitName,
 					warmup: args.input.warmup,
 					essentialQuestion: args.input.essentialQuestion,
 					socraticQuestions: args.input.socraticQuestions,
