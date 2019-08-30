@@ -130,7 +130,7 @@ module.exports = {
 	},
 
 	async editLesson(_, { _id, ...args }, { lessonData, unitData }) {
-		console.log(_id, args)
+		console.log(args)
 		const unitName = await unitData.findOne({ name: args.input.inUnit })
 
 		const editLesson = await lessonData.updateOne(
