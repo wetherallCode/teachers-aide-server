@@ -129,7 +129,8 @@ module.exports = {
 		return newLesson
 	},
 
-	async editLesson(_, { _id, lessonName, ...args }, { lessonData }) {
+	async editLesson(_, { _id, lessonName, args }, { lessonData }) {
+		const { lessonName } = args
 		console.log(lessonName)
 
 		const editLesson = await lessonData.updateOne(
