@@ -130,8 +130,7 @@ module.exports = {
 	},
 
 	async editLesson(_, args, { lessonData }) {
-		console.log(args)
-		const lesson = await lessonData.updateOne(
+		const editLesson = await lessonData.updateOne(
 			{ _id: ObjectID(args._id) },
 			{
 				$set: {
@@ -147,8 +146,8 @@ module.exports = {
 				}
 			}
 		)
-		console.log(lesson)
-		return lesson
+		const editedLesson = await lessonData.findOne({ _id: ObjectID(_id) })
+		return editedLesson
 	},
 
 	async createUnit(_, args, { unitData }) {
