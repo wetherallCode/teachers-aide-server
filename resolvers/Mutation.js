@@ -135,7 +135,7 @@ module.exports = {
 			{ _id: ObjectID(args._id) },
 			{
 				$set: {
-					lessonName: args.lastName,
+					lessonName: args.lessonName,
 					inUnit: args.inUnit,
 					warmup: args.warmup,
 					essentialQuestion: args.essentialQuestion,
