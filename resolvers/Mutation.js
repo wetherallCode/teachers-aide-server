@@ -129,6 +129,27 @@ module.exports = {
 		return newLesson
 	},
 
+	async editLesson(_, args, { lessonData }) {
+		const lesson = await lessonData.updateOne(
+			{ _id: ObjectID(args._id) },
+			{
+				$set: {
+					lessonName: args.lastName,
+					inUnit: args.inUnit,
+					warmup: args.warmup,
+					essentialQuestion: args.essentialQuestion,
+					socraticQuestions: args.socraticQuestions,
+					studyGuideQuestions: args.studyGuideQuestions,
+					vocabWords: args.vocabWords,
+					readings: args.readings,
+					workDue: args.workDue
+				}
+			}
+		)
+
+		return lesson
+	},
+
 	async createUnit(_, args, { unitData }) {
 		console.log(args)
 		let newUnit = {
