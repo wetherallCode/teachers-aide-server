@@ -147,7 +147,7 @@ module.exports = {
 				}
 			}
 		)
-
+		console.log(lesson)
 		return lesson
 	},
 
