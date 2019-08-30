@@ -138,14 +138,14 @@ module.exports = {
 			{
 				$set: {
 					lessonName: args.input.lessonName,
-					inUnit: args.inUnit,
-					warmup: args.warmup,
-					essentialQuestion: args.essentialQuestion,
-					socraticQuestions: args.socraticQuestions,
-					studyGuideQuestions: args.studyGuideQuestions,
-					vocabWords: args.vocabWords,
-					readings: args.readings,
-					workDue: args.workDue
+					inUnit: args.input.inUnit,
+					warmup: args.input.warmup,
+					essentialQuestion: args.input.essentialQuestion,
+					socraticQuestions: args.input.socraticQuestions,
+					studyGuideQuestions: args.input.studyGuideQuestions,
+					vocabWords: args.input.vocabWords,
+					readings: args.input.readings,
+					workDue: args.input.workDue
 				}
 			}
 		)
