@@ -129,8 +129,9 @@ module.exports = {
 		return newLesson
 	},
 
-	async editLesson(_, { _id, ...args }, { lessonData }) {
-		console.log(args)
+	async editLesson(_, { _id, lessonName, ...args }, { lessonData }) {
+		console.log(lessonName)
+
 		const editLesson = await lessonData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
