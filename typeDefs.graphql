@@ -111,7 +111,6 @@ input LessonInput {
 
 type Lesson {
 	_id: ID
-	grade: GradeLevelEnum
 	lessonName: String
 	inUnit: Unit
 	essentialQuestion: EssentialQuestion
