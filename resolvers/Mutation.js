@@ -129,7 +129,7 @@ module.exports = {
 		return newLesson
 	},
 
-	async editLesson(_, { _id, lessonName, args }, { lessonData }) {
+	async editLesson(_, { _id, args }, { lessonData }) {
 		const { lessonName } = args
 		console.log(lessonName)
 
