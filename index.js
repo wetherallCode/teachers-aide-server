@@ -66,12 +66,7 @@ async function start() {
 		app,
 		cors: {
 			credentials: true,
-			origin: [
-				'https://mrwetherall-hooks-client.herokuapp.com',
-				'http://localhost:3000',
-				'https://mrwetherall.org',
-				'http://www.mrwetherall.org'
-			]
+			origin: ['http://localhost:3000', 'https://mrwetherall.org']
 		}
 	})
 
