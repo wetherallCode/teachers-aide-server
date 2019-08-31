@@ -148,6 +148,7 @@ module.exports = {
 			}
 		)
 		const editedLesson = await lessonData.findOne({ _id: ObjectID(_id) })
+
 		return editedLesson
 	},
 
