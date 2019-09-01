@@ -130,7 +130,6 @@ module.exports = {
 	},
 
 	async editLesson(_, { _id, ...args }, { lessonData, unitData }) {
-		console.log(args)
 		const unitName = await unitData.findOne({ name: args.input.inUnit })
 		const editLesson = await lessonData.updateOne(
 			{ _id: ObjectID(_id) },
@@ -180,7 +179,7 @@ module.exports = {
 		}
 
 		const lessonName = await lessonData.findOne({ lessonName: assignedLesson })
-
+		console.log(lessonName)
 		let newClassPeriod = {
 			assignedDate,
 			grade,
