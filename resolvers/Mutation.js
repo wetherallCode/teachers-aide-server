@@ -226,12 +226,8 @@ module.exports = {
 		}
 		return { removed, classPeriod }
 	},
-	// assignedDate, period
-	async markStudentAbsent(
-		_,
-		{ _id, date, assignedDate, period },
-		{ studentData, classPeriodData }
-	) {
+
+	async markStudentAbsent(_, { _id, date }, { studentData, classPeriodData }) {
 		const findStudentAbsences = await studentData.findOne({ _id: ObjectID(_id) })
 
 		if (findStudentAbsences.daysAbsent !== undefined) {

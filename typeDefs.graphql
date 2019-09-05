@@ -45,8 +45,10 @@ type Mutation {
 	createUnit(input: UnitInput): Unit!
 	removeUnit(gradeLevel: GradeLevelEnum!, name: String!): RemoveUnitPayLoad!
 	removeClassPeriod(_id: ID!): RemoveClassPeriodPayLoad!
-	markStudentAbsent(_id: ID!, date: Date, period: periodName, assignedDate: Date): Student
+	markStudentAbsent(_id: ID!, date: Date): Student
 	unduMarkStudentAbsent(_id: ID!, date: Date): Student
+	markStudentLate(_id: ID!, date: Date): Student
+	unduMarkStudentLate(_id: ID!, date: Date): Student
 	# addLessonsToUnit(grade: GradeLevelEnum, lessonName: String):
 }
 
@@ -233,12 +235,12 @@ type User {
 }
 
 enum periodName {
-	A
-	B
-	C
-	D
-	E
-	F
+	A12
+	B12
+	A34
+	B34
+	A67
+	B67
 }
 
 type Student {
@@ -251,6 +253,7 @@ type Student {
 	teacher: String!
 	isHiddenFromRoster: Boolean!
 	daysAbsent: [Date]
+	daysLate: [Date]
 }
 
 type SchoolDayInfo {
