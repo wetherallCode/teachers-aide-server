@@ -235,12 +235,12 @@ type User {
 }
 
 enum periodName {
-	A12
-	B12
-	A34
-	B34
-	A67
-	B67
+	A_12
+	B_12
+	A_34
+	B_34
+	A_67
+	B_67
 }
 
 type Student {
