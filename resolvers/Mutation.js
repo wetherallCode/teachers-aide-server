@@ -227,6 +227,17 @@ module.exports = {
 		return { removed, classPeriod }
 	},
 
+	async addLearningStyle(_, { _id, learningStyle }, { studentData }) {
+		const updatedStudent = await studentData.updateOne(
+			{ _id: ObjectID(_id) },
+			{
+				$set: {
+					learningStyle: learningStyle
+				}
+			}
+		)
+	},
+
 	async markStudentAbsent(_, { _id, date }, { studentData, classPeriodData }) {
 		const findStudentAbsences = await studentData.findOne({ _id: ObjectID(_id) })
 
