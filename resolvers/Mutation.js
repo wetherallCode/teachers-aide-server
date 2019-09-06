@@ -267,7 +267,7 @@ module.exports = {
 	},
 
 	async markStudentLate(_, { _id, date }, { studentData }) {
-		const findStudentLatenesses = await studentData.findone({ _id: ObjectID(_id) })
+		const findStudentLatenesses = await studentData.findOne({ _id: ObjectID(_id) })
 
 		if (
 			findStudentLatenesses.daysLate !== undefined &&
