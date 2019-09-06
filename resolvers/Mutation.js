@@ -265,6 +265,30 @@ module.exports = {
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
 		return updatedStudent
 	},
+
+	async markStudentLate(_, { _id, date }, { studentData }) {
+		const findStudentLatenesses = await studentData.findone({ _id: ObjectID(_id) })
+
+		if (
+			findStudentLatenesses.daysLate !== undefined &&
+			findStudentLatenesses.daysLate.find(day => day === date)
+		) {
+			throw new Error('This student has already been marked absent')
+		}
+
+		const updateStudent = await studentData.updateOne(
+			{ _id: ObjectID(_id) },
+			{
+				$push: {
+					daysLate: date
+				}
+			}
+		)
+
+		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
+		return updatedStudent
+	},
+
 	async unduMarkStudentAbsent(_, { _id, date }, { studentData }) {
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
