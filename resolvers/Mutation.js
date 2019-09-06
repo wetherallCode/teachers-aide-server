@@ -148,7 +148,7 @@ module.exports = {
 			}
 		)
 		const editedLesson = await lessonData.findOne({ _id: ObjectID(_id) })
-		console.log(editedLesson)
+
 		return editedLesson
 	},
 
@@ -179,7 +179,7 @@ module.exports = {
 		}
 
 		const lessonName = await lessonData.findOne({ lessonName: assignedLesson })
-		console.log(lessonName)
+
 		let newClassPeriod = {
 			assignedDate,
 			grade,
@@ -282,7 +282,8 @@ module.exports = {
 				$push: {
 					daysLate: date
 				}
-			}
+			},
+			{ $inc: { responsibilityPoints: -10 } }
 		)
 
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
@@ -305,7 +306,8 @@ module.exports = {
 			{ _id: ObjectID(_id) },
 			{
 				$pull: { daysLate: { $in: [date] } }
-			}
+			},
+			{ $inc: { responsibilityPoints: 10 } }
 		)
 		const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
 		return updatedStudent
