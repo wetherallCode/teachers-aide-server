@@ -76,6 +76,7 @@ type ClassPeriod {
 	assignedDate: Date
 	period: periodName
 	absentStudents: [Student]
+	# assignedHomework: [AssignedHomework]
 }
 
 input ClassPeriodInput {
@@ -83,6 +84,7 @@ input ClassPeriodInput {
 	grade: GradeLevelEnum
 	assignedDate: Date
 	period: periodName
+	assignedHomework: [AssignedHomework]
 }
 
 type RemoveLessonPayLoad {
@@ -154,6 +156,15 @@ type Assignments {
 	dueDate: Date!
 	readingPages: String
 	readingSections: String
+}
+
+type AssignedHomework {
+	_id: ID!
+	assignedDate: Date!
+	dueDate: Date!
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
 }
 
 type Readings {

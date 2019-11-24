@@ -15,20 +15,20 @@
 	"license": "ISC",
 	"dependencies": {
 		"apollo-boost": "^0.4.4",
-		"apollo-server-express": "^2.9.3",
+		"apollo-server-express": "^2.9.7",
 		"bcrypt": "^3.0.6",
 		"connect-mongodb-session": "^2.2.0",
 		"cors": "^2.8.5",
-		"dotenv": "^8.1.0",
+		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"express-session": "^1.16.2",
-		"graphql": "^14.5.4",
+		"express-session": "^1.17.0",
+		"graphql": "^14.5.8",
 		"graphql-playground-middleware-express": "^1.7.12",
-		"mongodb": "^3.3.2",
-		"nodemon": "^1.19.2",
+		"mongodb": "^3.3.3",
+		"nodemon": "^1.19.4",
 		"objectid": "^3.2.1"
 	},
 	"devDependencies": {
-		"pm2": "^3.5.1"
+		"pm2": "^4.1.2"
 	}
 }
