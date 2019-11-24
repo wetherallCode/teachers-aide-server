@@ -84,7 +84,7 @@ input ClassPeriodInput {
 	grade: GradeLevelEnum
 	assignedDate: Date
 	period: periodName
-	assignedHomework: [AssignedHomework]
+	# assignedHomework: [AssignedHomework]
 }
 
 type RemoveLessonPayLoad {
