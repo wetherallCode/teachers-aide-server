@@ -12,6 +12,7 @@ type Query {
 	findStudentByPeriodAndDesk(period: periodName!, desk: Int!): Student
 	numberOfStudentsInCourse(period: periodName): Int!
 	findLesson(_id: ID!): Lesson
+	findLessonByName(name: String!): Lesson
 	findLessonsByUnit(inUnit: String): [Lesson]
 	findAllLessons: [Lesson!]
 	findUnit(_id: ID!): Unit!
@@ -76,15 +77,32 @@ type ClassPeriod {
 	assignedDate: Date
 	period: periodName
 	absentStudents: [Student]
-	# assignedHomework: [AssignedHomework]
+	assignedHomework: [AssignedHomework]
 }
 
 input ClassPeriodInput {
-	assignedLesson: String
 	grade: GradeLevelEnum
+	assignedLesson: String
 	assignedDate: Date
 	period: periodName
-	# assignedHomework: [AssignedHomework]
+	# assignedHomework: [AssignedHomeworkInput]
+}
+
+input AssignedHomeworkInput {
+	assignedDate: Date!
+	dueDate: Date!
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
+}
+
+type AssignedHomework {
+	_id: ID!
+	assignedDate: Date!
+	dueDate: Date!
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
 }
 
 type RemoveLessonPayLoad {
@@ -156,15 +174,6 @@ type Assignments {
 	dueDate: Date!
 	readingPages: String
 	readingSections: String
-}
-
-type AssignedHomework {
-	_id: ID!
-	assignedDate: Date!
-	dueDate: Date!
-	readingPages: String!
-	readingSections: String!
-	assignmentType: AssignmentType
 }
 
 type Readings {
