@@ -275,6 +275,7 @@ type Student {
 
 input StudentAssignmentsInput {
 	assignmentType: AssignmentType!
+	section: String!
 	assignedDate: Date!
 	dueDate: Date!
 	score: Int!
@@ -282,6 +283,7 @@ input StudentAssignmentsInput {
 
 type StudentAssignments {
 	assignmentType: AssignmentType!
+	section: String!
 	assignedDate: Date!
 	dueDate: Date!
 	score: Int!
