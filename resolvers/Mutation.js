@@ -168,6 +168,7 @@ module.exports = {
 		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework } },
 		{ classPeriodData, lessonData, assignmentData }
 	) {
+		const studentsInClass = await studentData.findMany
 		assignedHomework.forEach(assignment => {
 			console.log(assignment)
 
