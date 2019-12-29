@@ -205,7 +205,7 @@ module.exports = {
 
 		const addAssignmentsToStudentsAssignmentList = await studentData.updateMany(
 			{ period: period },
-			{ set: { assignments: assignedHomework } }
+			{ $push: { assignments: assignedHomework } }
 		)
 
 		return newClassPeriod
