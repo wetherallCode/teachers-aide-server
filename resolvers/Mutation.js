@@ -216,6 +216,12 @@ module.exports = {
 		return newClassPeriod
 	},
 
+	async scoreAssignment(_, { args }, { studentData }) {
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		console.log(student)
+		return student
+	},
+
 	async removeLesson(_, { _id }, { lessonData }) {
 		const lesson = await lessonData.findOne({ _id: ObjectID(_id) })
 

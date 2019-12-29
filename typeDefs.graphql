@@ -55,7 +55,8 @@ type Mutation {
 	unduMarkStudentAbsent(_id: ID!, date: Date): Student
 	markStudentLate(_id: ID!, date: Date): Student
 	unduMarkStudentLate(_id: ID!, date: Date): Student
-	# addLessonsToUnit(grade: GradeLevelEnum, lessonName: String):
+
+	scoreAssignment(_id: ID!): Student!
 }
 
 input UnitInput {
@@ -275,8 +276,12 @@ type Student {
 
 input StudentAssignmentsInput {
 	assignmentType: AssignmentType!
+	readingPages: String!
+	readingSections: String!
 	assignedDate: Date!
 	dueDate: Date!
+	missing: Boolean!
+	exempt: Boolean!
 	score: Int!
 }
 
