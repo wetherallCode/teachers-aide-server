@@ -169,7 +169,7 @@ module.exports = {
 		{ classPeriodData, lessonData, assignmentData, studentData }
 	) {
 		const studentsInClass = await studentData.find({ period: period }).toArray()
-		console.log(studentsInClass)
+		console.log(studentsInClass.firstName)
 
 		assignedHomework.forEach(assignment => {
 			console.log(assignment)
