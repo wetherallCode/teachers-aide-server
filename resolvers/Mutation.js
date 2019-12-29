@@ -191,23 +191,27 @@ module.exports = {
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
 
-		console.log(lessonName)
+		console.log(assignedHomework)
 
-		// assignedHomework.forEach(assignment => {
-		// 	studentData.updateMany(
-		// 		{ period: period },
-		// 		{
-		// 			$push: {
-		// 				hasAssignments: {
-		// 					assignmentType: assignment.assignmentType,
-		// 					assignedDate: assignment.assignedDate,
-		// 					dueDate: assignment.dueDate,
-		// 					score: 0
-		// 				}
-		// 			}
-		// 		}
-		// 	)
-		// })
+		assignedHomework.forEach(assignment => {
+			studentData.updateMany(
+				{ period: period },
+				{
+					$push: {
+						hasAssignments: {
+							assignmentType: assignment.assignmentType,
+							assignedDate: assignment.assignedDate,
+							dueDate: assignment.dueDate,
+							readingPages: assignment.readingPages,
+							readingSections: assignment.readingSections,
+							missing: true,
+							exempt: false,
+							score: 0
+						}
+					}
+				}
+			)
+		})
 
 		return newClassPeriod
 	},
