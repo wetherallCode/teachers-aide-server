@@ -171,7 +171,7 @@ module.exports = {
 		const studentsInClass = await studentData.find({ period: period }).toArray()
 
 		let studentList = []
-		studensInClass.forEach(student => {
+		studentsInClass.forEach(student => {
 			studentList.push(student.firstName)
 		})
 		console.log(studentList)
