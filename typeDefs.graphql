@@ -40,13 +40,17 @@ type Mutation {
 	addLearningStyle(_id: ID!, learningStyle: String!): Student
 	updateResponsibilityPoints(_id: ID!, responsibilityPoints: Int!): Student!
 	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
-	createLesson(input: LessonInput): Lesson!
+
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
+	removeClassPeriod(_id: ID!): RemoveClassPeriodPayLoad!
+
+	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!, input: LessonInput): Lesson!
 	removeLesson(_id: ID!): RemoveLessonPayLoad!
+
 	createUnit(input: UnitInput): Unit!
 	removeUnit(gradeLevel: GradeLevelEnum!, name: String!): RemoveUnitPayLoad!
-	removeClassPeriod(_id: ID!): RemoveClassPeriodPayLoad!
+
 	markStudentAbsent(_id: ID!, date: Date): Student
 	unduMarkStudentAbsent(_id: ID!, date: Date): Student
 	markStudentLate(_id: ID!, date: Date): Student
@@ -85,7 +89,7 @@ input ClassPeriodInput {
 	assignedLesson: String
 	assignedDate: Date
 	period: periodName
-	# assignedHomework: [AssignedHomeworkInput]
+	assignedHomework: [AssignedHomeworkInput]
 }
 
 input AssignedHomeworkInput {
@@ -167,6 +171,7 @@ enum AssignmentType {
 	OEQ
 	THINKING_GUIDE
 	BLOG
+	TEST
 }
 
 type Assignments {
@@ -239,17 +244,6 @@ type RemoveStudentPayLoad {
 	student: Student!
 }
 
-# input CreateAccountInput {
-# 	id: ID!
-# 	name: String!
-# 	password: String!
-# }
-
-# type LoginPayload {
-# 	user: User
-# 	token: String!
-# }
-
 type User {
 	_id: ID!
 	name: String!
@@ -276,6 +270,7 @@ type Student {
 	learningStyle: String
 	daysAbsent: [Date]
 	daysLate: [Date]
+	hasAssignments: [String]
 }
 
 type SchoolDayInfo {

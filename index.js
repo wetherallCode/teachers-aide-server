@@ -45,10 +45,11 @@ async function start() {
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')
+		let assignmentData = db.collection('assignmentData')
 		let unitData = db.collection('unitData')
 		let classPeriodData = db.collection('classPeriodData')
 
-		return { users, studentData, lessonData, classPeriodData, unitData, db, req }
+		return { users, studentData, lessonData, assignmentData, classPeriodData, unitData, db, req }
 	}
 
 	const server = new ApolloServer({

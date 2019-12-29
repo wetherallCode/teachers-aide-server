@@ -165,9 +165,15 @@ module.exports = {
 
 	async createClassPeriod(
 		_,
-		{ input: { grade, assignedDate, assignedLesson, period } },
-		{ classPeriodData, lessonData }
+		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework } },
+		{ classPeriodData, lessonData, assignmentData }
 	) {
+		assignedHomework.forEach(assignment => {
+			console.log(assignment)
+
+			return null
+		})
+
 		const classPeriodCheck = await classPeriodData.findOne({
 			assignedDate: assignedDate,
 			period: period
@@ -182,8 +188,8 @@ module.exports = {
 			assignedDate,
 			grade,
 			assignedLesson: lessonName,
-			period
-			// assignedHomework
+			period,
+			assignedHomework
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
