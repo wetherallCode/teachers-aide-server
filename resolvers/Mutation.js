@@ -202,11 +202,10 @@ module.exports = {
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
-
-		const addAssignmentsToStudentsAssignmentList = await studentData.updateMany(
-			{ period: period },
-			{ $push: { assignments: assignedHomework } }
-		)
+		console.log(assignedHomework)
+		// assignedHomework.forEach(assignment => {
+		// 	studentData.updateMany({ period: period }, { $push: { assignments: assignedHomework } })
+		// })
 
 		return newClassPeriod
 	},
