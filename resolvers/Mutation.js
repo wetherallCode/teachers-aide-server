@@ -166,9 +166,11 @@ module.exports = {
 	async createClassPeriod(
 		_,
 		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework } },
-		{ classPeriodData, lessonData, assignmentData }
+		{ classPeriodData, lessonData, assignmentData, studentData }
 	) {
-		const studentsInClass = await studentData.findMany
+		const studentsInClass = await studentData.find({ period: period }).toArray()
+		console.log(studentsInClass)
+
 		assignedHomework.forEach(assignment => {
 			console.log(assignment)
 
