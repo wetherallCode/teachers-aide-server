@@ -174,6 +174,7 @@ module.exports = {
 		studensInClass.forEach(student => {
 			studentList.push(student.firstName)
 		})
+		console.log(studentList)
 
 		assignedHomework.forEach(assignment => {
 			console.log(assignment)
