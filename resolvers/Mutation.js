@@ -170,17 +170,17 @@ module.exports = {
 	) {
 		const studentsInClass = await studentData.find({ period: period }).toArray()
 
-		let studentList = []
-		studentsInClass.forEach(student => {
-			studentList.push(student.firstName)
-		})
-		console.log(studentList)
+		// let studentList = []
+		// studentsInClass.forEach(student => {
+		// 	studentList.push(student.firstName)
+		// })
+		// console.log(studentList)
 
-		assignedHomework.forEach(assignment => {
-			console.log(assignment)
+		// assignedHomework.forEach(assignment => {
+		// 	console.log(assignment)
 
-			return null
-		})
+		// 	return null
+		// })
 
 		const classPeriodCheck = await classPeriodData.findOne({
 			assignedDate: assignedDate,
@@ -202,6 +202,11 @@ module.exports = {
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
+
+		const addAssignmentsToStudentsAssignmentList = await studentData.update(
+			{ period: period },
+			{ assignments: assignedHomework }
+		)
 
 		return newClassPeriod
 	},

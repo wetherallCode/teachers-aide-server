@@ -270,7 +270,20 @@ type Student {
 	learningStyle: String
 	daysAbsent: [Date]
 	daysLate: [Date]
-	hasAssignments: [String]
+	hasAssignments: [StudentAssignments]
+}
+
+input StudentAssignmentsInput {
+	assignmentType: AssignmentType!
+	dueDate: Date!
+	score: Int!
+}
+
+type StudentAssignments {
+	_id: ID!
+	assignmentType: AssignmentType!
+	dueDate: Date!
+	score: Int!
 }
 
 type SchoolDayInfo {
