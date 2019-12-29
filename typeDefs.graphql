@@ -275,13 +275,14 @@ type Student {
 
 input StudentAssignmentsInput {
 	assignmentType: AssignmentType!
+	assignedDate: Date!
 	dueDate: Date!
 	score: Int!
 }
 
 type StudentAssignments {
-	_id: ID!
 	assignmentType: AssignmentType!
+	assignedDate: Date!
 	dueDate: Date!
 	score: Int!
 }

@@ -204,7 +204,19 @@ module.exports = {
 		newClassPeriod._id = insertedId
 		// console.log(assignedHomework)
 		assignedHomework.forEach(assignment => {
-			studentData.updateMany({ period: period }, { $push: { assignments: assignment } })
+			studentData.updateMany(
+				{ period: period },
+				{
+					$push: {
+						hasAssignments: {
+							assignmentType: assignment.assignmentType,
+							assignedDate: assignment.assignedDate,
+							dueDate: assignment.dueDate,
+							score: 0
+						}
+					}
+				}
+			)
 		})
 
 		return newClassPeriod
