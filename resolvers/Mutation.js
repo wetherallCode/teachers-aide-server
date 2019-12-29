@@ -193,21 +193,21 @@ module.exports = {
 
 		console.log(lessonName)
 
-		assignedHomework.forEach(assignment => {
-			studentData.updateMany(
-				{ period: period },
-				{
-					$push: {
-						hasAssignments: {
-							assignmentType: assignment.assignmentType,
-							assignedDate: assignment.assignedDate,
-							dueDate: assignment.dueDate,
-							score: 0
-						}
-					}
-				}
-			)
-		})
+		// assignedHomework.forEach(assignment => {
+		// 	studentData.updateMany(
+		// 		{ period: period },
+		// 		{
+		// 			$push: {
+		// 				hasAssignments: {
+		// 					assignmentType: assignment.assignmentType,
+		// 					assignedDate: assignment.assignedDate,
+		// 					dueDate: assignment.dueDate,
+		// 					score: 0
+		// 				}
+		// 			}
+		// 		}
+		// 	)
+		// })
 
 		return newClassPeriod
 	},
