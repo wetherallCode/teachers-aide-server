@@ -237,9 +237,9 @@ module.exports = {
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
 		)
-		console.log(scoredAssignment)
+		const student = studentData.findOne({ _id: ObjectID(_id) })
 
-		return scoredAssignment
+		return student
 	},
 
 	async removeLesson(_, { _id }, { lessonData }) {
