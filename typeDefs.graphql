@@ -78,6 +78,7 @@ input AssignmentScoringInput {
 	missing: Boolean!
 	exempt: Boolean
 	assignmentType: AssignmentType!
+	score: Int!
 }
 
 input UnitInput {
