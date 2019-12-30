@@ -216,15 +216,22 @@ module.exports = {
 		return newClassPeriod
 	},
 
-	
+	async scoreAssignment(
+		_,
+		{ input: { _id, date, responsibilityPoints, missing } },
+		{ studentData }
+	) {
+		const scoredAssignment = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
+			},
 
-	async scoreAssignment(_, { args }, { studentData }) {
-		// const scoredAssignment = await studentData.updateOne(
-		// 	{ _id: ObjectID(_id), hasAssignments: {$elemMatch: {dueDate: args.date}} },
-
-		// 	{ $set: { hasAssignments: [{}],
-		// 	$inc: { responsibilityPoints: args.responsibilityPoints } }
-		// ))
+			{
+				$set: { 'hasAssignments.$.score': score, 'hasAssignments.$.missing': false },
+				$inc: { responsibilityPoints: responsibilityPoints }
+			}
+		)
 
 		return student
 	},

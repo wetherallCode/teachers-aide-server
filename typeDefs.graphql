@@ -76,7 +76,7 @@ input AssignmentScoringInput {
 	date: Date!
 	responsibilityPoints: Int!
 	missing: Boolean!
-	exempt: Boolean!
+	exempt: Boolean
 }
 
 input UnitInput {

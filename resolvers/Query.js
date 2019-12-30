@@ -101,7 +101,7 @@ module.exports = {
 			_id: ObjectID(_id),
 			hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
 		})
-		console.log(student)
+
 		return student
 	}
 }
