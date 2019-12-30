@@ -91,5 +91,13 @@ module.exports = {
 	async findUnitsByGrade(_, { gradeLevel }, { unitData }) {
 		const units = await unitData.find({ gradeLevel: gradeLevel }).toArray()
 		return units
+	},
+	async findAssignmentByStudentAndDate(_, { _id, date }, { studentData }) {
+		const student = await studentData.findOne({
+			_id: ObjectID(_id),
+			hasAssignments: { $elemMatch: { dueDate: date } }
+		})
+		console.log(student)
+		return student
 	}
 }
