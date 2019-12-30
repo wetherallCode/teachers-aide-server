@@ -218,7 +218,7 @@ module.exports = {
 
 	async scoreAssignment(
 		_,
-		{ input: { _id, date, responsibilityPoints, missing, assignmentType } },
+		{ input: { _id, date, responsibilityPoints, missing, exempt, assignmentType } },
 		{ studentData }
 	) {
 		const scoredAssignment = await studentData.updateOne(
@@ -228,7 +228,11 @@ module.exports = {
 			},
 
 			{
-				$set: { 'hasAssignments.$.score': score, 'hasAssignments.$.missing': false },
+				$set: {
+					'hasAssignments.$.score': score,
+					'hasAssignments.$.missing': missing,
+					'hasAssignments.$.exempt': exempt
+				},
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
 		)
