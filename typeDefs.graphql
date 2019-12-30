@@ -9,18 +9,23 @@ type Query {
 	classRoster(period: periodName): [Student!]!
 	student(_id: ID!): Student!
 	lesson(_id: ID!): Lesson!
+
 	findStudentByPeriodAndDesk(period: periodName!, desk: Int!): Student
 	numberOfStudentsInCourse(period: periodName): Int!
+
 	findLesson(_id: ID!): Lesson
 	findLessonByName(name: String!): Lesson
 	findLessonsByUnit(inUnit: String): [Lesson]
 	findAllLessons: [Lesson!]
+
 	findUnit(_id: ID!): Unit!
 	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
+
 	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
 	findClassPeriods: [ClassPeriod]
 	findClassPeriodById(_id: ID!): ClassPeriod!
-	findAssignmentByStudentAndDate(_id: ID!, date: Date): Student!
+
+	findAssignmentByStudentAndDateAndType(input: FindAssignmentByStudentAndDateAndType): Student!
 }
 
 type Mutation {
@@ -58,6 +63,12 @@ type Mutation {
 	unduMarkStudentLate(_id: ID!, date: Date): Student
 
 	scoreAssignment(input: AssignmentScoringInput): Student!
+}
+
+input FindAssignmentByStudentAndDateAndType {
+	_id: ID!
+	date: Date
+	assignmentType: AssignmentType
 }
 
 input AssignmentScoringInput {
