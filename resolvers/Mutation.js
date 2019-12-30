@@ -218,7 +218,7 @@ module.exports = {
 
 	async scoreAssignment(
 		_,
-		{ input: { _id, date, responsibilityPoints, missing } },
+		{ input: { _id, date, responsibilityPoints, missing, assignmentType } },
 		{ studentData }
 	) {
 		const scoredAssignment = await studentData.updateOne(
