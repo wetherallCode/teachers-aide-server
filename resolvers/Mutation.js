@@ -237,8 +237,8 @@ module.exports = {
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
 		)
-		console.log(student)
-		return student
+
+		return scoredAssignment
 	},
 
 	async removeLesson(_, { _id }, { lessonData }) {
