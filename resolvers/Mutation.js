@@ -237,6 +237,7 @@ module.exports = {
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
 		)
+		console.log(scoredAssignment)
 
 		return scoredAssignment
 	},
