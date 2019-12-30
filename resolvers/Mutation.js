@@ -237,7 +237,7 @@ module.exports = {
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
 		)
-
+		console.log(student)
 		return student
 	},
 
