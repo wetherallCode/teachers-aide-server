@@ -56,7 +56,16 @@ type Mutation {
 	markStudentLate(_id: ID!, date: Date): Student
 	unduMarkStudentLate(_id: ID!, date: Date): Student
 
-	scoreAssignment(_id: ID!): Student!
+	findAssignmentByStudentAndDate(_id: ID!, date: Date): Student!
+	scoreAssignment(input: AssignmentScoringInput): Student!
+}
+
+input AssignmentScoringInput {
+	_id: ID!
+	date: Date!
+	responsibilityPoints: Int!
+	missing: Boolean!
+	exempt: Boolean!
 }
 
 input UnitInput {
