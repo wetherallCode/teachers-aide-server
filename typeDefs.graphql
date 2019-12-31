@@ -62,7 +62,12 @@ type Mutation {
 	markStudentLate(_id: ID!, date: Date): Student
 	unduMarkStudentLate(_id: ID!, date: Date): Student
 
-	scoreAssignment(input: AssignmentScoringInput): Student!
+	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
+}
+
+type ScoreAssignmentPayload {
+	student: Student!
+	scored: Boolean!
 }
 
 input FindAssignmentByStudentAndDateAndType {
