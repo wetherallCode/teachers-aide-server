@@ -218,18 +218,7 @@ module.exports = {
 
 	async scoreAssignment(
 		_,
-		{
-			input: {
-				_id,
-				date,
-				responsibilityPoints,
-				missing,
-				exempt,
-				assignmentType,
-				score,
-				previousScore
-			}
-		},
+		{ input: { _id, date, responsibilityPoints, missing, exempt, assignmentType, score } },
 
 		{ studentData }
 	) {
@@ -242,7 +231,6 @@ module.exports = {
 			{
 				$set: {
 					'hasAssignments.$.score': score,
-					'hasAssignments.$.previousScore': previousScore,
 					'hasAssignments.$.missing': missing,
 					'hasAssignments.$.exempt': exempt
 				},
@@ -272,7 +260,6 @@ module.exports = {
 			{
 				$set: {
 					'hasAssignments.$.score': 0,
-					'hasAssignments.$.previousScore': 0,
 					'hasAssignments.$.missing': true,
 					'hasAssignments.$.exempt': false
 				},
@@ -280,10 +267,9 @@ module.exports = {
 			}
 		)
 		let assignnmentScoreReset = true
-		let lastScore = score
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
-		return { assignnmentScoreReset, student, lastScore }
+		return { assignnmentScoreReset, student }
 	},
 
 	async removeLesson(_, { _id }, { lessonData }) {
