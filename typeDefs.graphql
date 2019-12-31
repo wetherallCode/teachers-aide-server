@@ -67,7 +67,7 @@ type Mutation {
 
 type ScoreAssignmentPayload {
 	scored: Boolean!
-
+	lastScore: Int!
 	student: Student!
 }
 
@@ -311,7 +311,7 @@ input StudentAssignmentsInput {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
-	lastScore: Int!
+	# lastScore: Int!
 }
 
 type StudentAssignments {
@@ -323,7 +323,7 @@ type StudentAssignments {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
-	lastScore: Int!
+	# lastScore: Int!
 }
 
 type SchoolDayInfo {
