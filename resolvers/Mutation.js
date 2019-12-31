@@ -218,11 +218,21 @@ module.exports = {
 
 	async scoreAssignment(
 		_,
-		{ input: { _id, date, responsibilityPoints, missing, exempt, assignmentType, score } },
+		{
+			input: {
+				_id,
+				date,
+				responsibilityPoints,
+				missing,
+				exempt,
+				assignmentType,
+				score,
+				previousScore
+			}
+		},
 
 		{ studentData }
 	) {
-		console.log(_id, date, responsibilityPoints, missing, exempt, assignmentType, score)
 		const scoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
@@ -232,7 +242,7 @@ module.exports = {
 			{
 				$set: {
 					'hasAssignments.$.score': score,
-					// 'hasAssignments.$.lastScore': lastScore,
+					'hasAssignments.$.previousScore': previousScore,
 					'hasAssignments.$.missing': missing,
 					'hasAssignments.$.exempt': exempt
 				},
@@ -240,10 +250,40 @@ module.exports = {
 			}
 		)
 		let scored = true
+		let currentScore = score
 		let lastScore = score
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
-		return { scored, student, lastScore }
+		return { scored, student, lastScore, currentScore }
+	},
+
+	async undoScoreAssignment(
+		_,
+		{ input: { _id, date, assignmentType, score } },
+
+		{ studentData }
+	) {
+		const undoScoredAssignment = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
+			},
+
+			{
+				$set: {
+					'hasAssignments.$.score': 0,
+					'hasAssignments.$.previousScore': 0,
+					'hasAssignments.$.missing': true,
+					'hasAssignments.$.exempt': false
+				},
+				$inc: { responsibilityPoints: -score }
+			}
+		)
+		let assignnmentScoreReset = true
+		let lastScore = score
+		const student = studentData.findOne({ _id: ObjectID(_id) })
+
+		return { assignnmentScoreReset, student, lastScore }
 	},
 
 	async removeLesson(_, { _id }, { lessonData }) {

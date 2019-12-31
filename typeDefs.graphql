@@ -63,11 +63,20 @@ type Mutation {
 	unduMarkStudentLate(_id: ID!, date: Date): Student
 
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
+	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
 }
 
 type ScoreAssignmentPayload {
 	scored: Boolean!
 	lastScore: Int!
+	currentScore: Int!
+	student: Student!
+}
+
+type UndoScoreAssignmentPayload {
+	assignnmentScoreReset: Boolean!
+	lastScore: Int!
+	currentScore: Int!
 	student: Student!
 }
 
@@ -83,6 +92,13 @@ input AssignmentScoringInput {
 	responsibilityPoints: Int!
 	missing: Boolean!
 	exempt: Boolean
+	assignmentType: AssignmentType!
+	score: Int!
+}
+
+input UndoAssignmentScoringInput {
+	_id: ID!
+	date: Date!
 	assignmentType: AssignmentType!
 	score: Int!
 }
@@ -311,7 +327,7 @@ input StudentAssignmentsInput {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
-	# lastScore: Int!
+	previousScore: Int!
 }
 
 type StudentAssignments {
@@ -323,7 +339,7 @@ type StudentAssignments {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
-	# lastScore: Int!
+	previousScore: Int!
 }
 
 type SchoolDayInfo {
