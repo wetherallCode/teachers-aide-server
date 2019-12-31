@@ -251,6 +251,7 @@ module.exports = {
 
 		{ studentData }
 	) {
+		console.log(score)
 		const undoScoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
