@@ -267,10 +267,10 @@ module.exports = {
 				$inc: { responsibilityPoints: -score }
 			}
 		)
-		let assignnmentScoreReset = true
+		let assignmentScoreReset = true
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
-		return { assignnmentScoreReset, student }
+		return { assignmentScoreReset, student }
 	},
 
 	async removeLesson(_, { _id }, { lessonData }) {
