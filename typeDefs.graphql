@@ -66,8 +66,8 @@ type Mutation {
 }
 
 type ScoreAssignmentPayload {
-	student: Student!
 	scored: Boolean!
+	student: Student!
 }
 
 input FindAssignmentByStudentAndDateAndType {

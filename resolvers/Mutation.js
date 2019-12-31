@@ -241,7 +241,7 @@ module.exports = {
 		let scored = true
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
-		return { student, scored }
+		return { scored, student }
 	},
 
 	async removeLesson(_, { _id }, { lessonData }) {
