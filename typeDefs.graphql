@@ -67,6 +67,7 @@ type Mutation {
 
 type ScoreAssignmentPayload {
 	scored: Boolean!
+	lastScore: Int!
 	student: Student!
 }
 
