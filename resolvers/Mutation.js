@@ -79,7 +79,7 @@ module.exports = {
 		return updatedStudent
 	},
 
-	async updateResponsibilityPoints(_, { _id, responsibilityPoints }, { studentData }) {
+	async updateResponsibilityPoints(_, { input: { _id, responsibilityPoints } }, { studentData }) {
 		const updateStudentsResponsibilityPoints = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{ $inc: { responsibilityPoints: responsibilityPoints } }

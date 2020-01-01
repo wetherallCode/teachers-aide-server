@@ -43,8 +43,11 @@ type Mutation {
 		period: periodName!
 		teacher: String!
 	): Student!
+
 	addLearningStyle(_id: ID!, learningStyle: String!): Student
-	updateResponsibilityPoints(_id: ID!, responsibilityPoints: Int!): Student!
+
+	updateResponsibilityPoints(input: UpdateResponsibilityPointsInput): Student!
+
 	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
 
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
@@ -64,6 +67,11 @@ type Mutation {
 
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
+}
+
+input UpdateResponsibilityPointsInput {
+	_id: ID!
+	responsibilityPoints: Int!
 }
 
 type ScoreAssignmentPayload {
