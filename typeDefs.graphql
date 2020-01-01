@@ -74,7 +74,7 @@ type ScoreAssignmentPayload {
 }
 
 type UndoScoreAssignmentPayload {
-	assignnmentScoreReset: Boolean!
+	assignmentScoreReset: Boolean!
 	lastScore: Int!
 	currentScore: Int!
 	student: Student!
