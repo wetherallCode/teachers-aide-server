@@ -80,6 +80,7 @@ module.exports = {
 	},
 
 	async updateResponsibilityPoints(_, { input: { _id, responsibilityPoints } }, { studentData }) {
+		console.log(_id, responsibilityPoints)
 		const updateStudentsResponsibilityPoints = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{ $inc: { responsibilityPoints: responsibilityPoints } }
@@ -252,7 +253,6 @@ module.exports = {
 
 		{ studentData }
 	) {
-		console.log(_id, date, assignmentType, score)
 		const undoScoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
