@@ -51,7 +51,7 @@ type Mutation {
 	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
 
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
-	removeClassPeriod(_id: ID!): RemoveClassPeriodPayLoad!
+	removeClassPeriod(_id: ID!, date: Date!, withAssignments: Boolean): RemoveClassPeriodPayLoad!
 
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!, input: LessonInput): Lesson!

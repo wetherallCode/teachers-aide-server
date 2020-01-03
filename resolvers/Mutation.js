@@ -80,7 +80,6 @@ module.exports = {
 	},
 
 	async updateResponsibilityPoints(_, { input: { _id, responsibilityPoints } }, { studentData }) {
-		console.log(_id, responsibilityPoints)
 		const updateStudentsResponsibilityPoints = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{ $inc: { responsibilityPoints: responsibilityPoints } }
@@ -297,7 +296,7 @@ module.exports = {
 		return { removed, unit }
 	},
 
-	async removeClassPeriod(_, { _id }, { classPeriodData }) {
+	async removeClassPeriod(_, { _id, date, withAssignments }, { classPeriodData }) {
 		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
 		let removed = false
 
@@ -305,6 +304,20 @@ module.exports = {
 			classPeriodData.deleteOne(classPeriod)
 			removed = true
 		}
+
+		if (withAssignments) {
+			studentData.updateMany(
+				{
+					period: period
+				},
+				{
+					$pull: {
+						hasAssignments: { assignedDate: date }
+					}
+				}
+			)
+		}
+
 		return { removed, classPeriod }
 	},
 
