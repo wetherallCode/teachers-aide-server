@@ -51,7 +51,7 @@ type Mutation {
 	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
 
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
-	removeClassPeriod(_id: ID!, date: Date!, withAssignments: Boolean): RemoveClassPeriodPayLoad!
+	removeClassPeriod(input: RemoveClassPeriodInput!): RemoveClassPeriodPayLoad!
 
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!, input: LessonInput): Lesson!
@@ -67,6 +67,13 @@ type Mutation {
 
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
+}
+
+input RemoveClassPeriodInput {
+	_id: ID!
+	date: Date!
+	withAssignments: Boolean
+	period: periodName
 }
 
 input UpdateResponsibilityPointsInput {
