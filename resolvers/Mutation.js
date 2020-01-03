@@ -299,7 +299,7 @@ module.exports = {
 	async removeClassPeriod(
 		_,
 		{ input: { _id, date, period, withAssignments } },
-		{ classPeriodData }
+		{ classPeriodData, studentData }
 	) {
 		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
 		let removed = false
