@@ -224,7 +224,6 @@ input AssignmentsInput {
 	type: AssignmentType!
 	readingPages: String
 	readingSections: String
-	dueDate: Date
 }
 
 enum AssignmentType {
@@ -236,7 +235,6 @@ enum AssignmentType {
 
 type Assignments {
 	type: AssignmentType!
-	dueDate: Date!
 	readingPages: String
 	readingSections: String
 }
