@@ -305,6 +305,7 @@ module.exports = {
 		{ input: { _id, date, period, withAssignments } },
 		{ classPeriodData, studentData }
 	) {
+		console.log(period)
 		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
 		let removed = false
 
