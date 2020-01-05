@@ -116,7 +116,6 @@ module.exports = {
 	},
 
 	async createLesson(_, args, { lessonData, unitData }) {
-		console.log(args)
 		const unitName = await unitData.findOne({ name: args.input.inUnit })
 
 		let newLesson = {
@@ -219,11 +218,13 @@ module.exports = {
 
 	async scoreAssignment(
 		_,
-		{ input: { _id, date, responsibilityPoints, missing, exempt, assignmentType, score } },
+		{
+			input: { _id, date, responsibilityPoints, missing, exempt, assignmentType, score, comments }
+		},
 
 		{ studentData }
 	) {
-		console.log(_id, date, responsibilityPoints, missing, exempt, assignmentType, score)
+		console.log(_id, date, responsibilityPoints, missing, exempt, assignmentType, score, comments)
 		const scoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
@@ -234,7 +235,8 @@ module.exports = {
 				$set: {
 					'hasAssignments.$.score': score,
 					'hasAssignments.$.missing': missing,
-					'hasAssignments.$.exempt': exempt
+					'hasAssignments.$.exempt': exempt,
+					'hasAssignments.$.comments': comments
 				},
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
