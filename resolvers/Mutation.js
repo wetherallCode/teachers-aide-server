@@ -168,6 +168,7 @@ module.exports = {
 		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework } },
 		{ classPeriodData, lessonData, assignmentData, studentData }
 	) {
+		console.log(period)
 		const studentsInClass = await studentData.find({ period: period }).toArray()
 
 		const classPeriodCheck = await classPeriodData.findOne({
