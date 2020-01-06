@@ -191,8 +191,6 @@ module.exports = {
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
 
-		console.log(assignedHomework)
-
 		assignedHomework.forEach(assignment => {
 			studentData.updateMany(
 				{ period: period },
@@ -212,6 +210,7 @@ module.exports = {
 				}
 			)
 		})
+		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
 	},
@@ -224,7 +223,6 @@ module.exports = {
 
 		{ studentData }
 	) {
-		console.log(_id, date, responsibilityPoints, missing, exempt, assignmentType, score, comments)
 		const scoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
@@ -305,7 +303,6 @@ module.exports = {
 		{ input: { _id, date, period, withAssignments } },
 		{ classPeriodData, studentData }
 	) {
-		console.log(period)
 		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
 		let removed = false
 
@@ -322,7 +319,8 @@ module.exports = {
 				{
 					$pull: {
 						hasAssignments: { assignedDate: date }
-					}
+					},
+					$inc: { responsibilityPoints: 2 }
 				}
 			)
 		}
