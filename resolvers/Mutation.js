@@ -267,7 +267,7 @@ module.exports = {
 					'hasAssignments.$.exempt': false,
 					'hasAssignments.$.comments': []
 				},
-				$inc: { responsibilityPoints: -score }
+				$inc: { responsibilityPoints: -score - 2 }
 			}
 		)
 		let assignmentScoreReset = true
