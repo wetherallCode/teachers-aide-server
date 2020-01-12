@@ -341,7 +341,7 @@ input StudentAssignmentsInput {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
-	previousScore: Int!
+	comments: [String]
 }
 
 type StudentAssignments {
@@ -353,7 +353,7 @@ type StudentAssignments {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
-	previousScore: Int!
+	comments: [String]
 }
 
 type SchoolDayInfo {
