@@ -266,7 +266,7 @@ module.exports = {
 					'hasAssignments.$.score': 0,
 					'hasAssignments.$.missing': true,
 					'hasAssignments.$.exempt': false,
-					'hasAssignments.$.comments': []
+					'hasAssignments.$.comments': ['Missing']
 				},
 				$inc: { responsibilityPoints: -score - 2 }
 			}
