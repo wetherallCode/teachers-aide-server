@@ -205,7 +205,8 @@ module.exports = {
 							readingSections: assignment.readingSections,
 							missing: true,
 							exempt: false,
-							score: 0
+							score: 0,
+							comments: ['Missing']
 						}
 					}
 				}
