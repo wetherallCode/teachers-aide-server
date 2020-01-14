@@ -219,7 +219,17 @@ module.exports = {
 	async scoreAssignment(
 		_,
 		{
-			input: { _id, date, responsibilityPoints, missing, exempt, assignmentType, score, comments }
+			input: {
+				_id,
+				date,
+				responsibilityPoints,
+				missing,
+				exempt,
+				assignmentType,
+				score,
+				comments,
+				late
+			}
 		},
 
 		{ studentData }
@@ -235,17 +245,18 @@ module.exports = {
 					'hasAssignments.$.score': score,
 					'hasAssignments.$.missing': missing,
 					'hasAssignments.$.exempt': exempt,
-					'hasAssignments.$.comments': comments
+					'hasAssignments.$.comments': comments,
+					'hasAssignments.$.late': late
 				},
 				$inc: { responsibilityPoints: responsibilityPoints }
 			}
 		)
+
 		let scored = true
-		let currentScore = score
-		let lastScore = score
+
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
-		return { scored, student, lastScore, currentScore }
+		return { scored, student }
 	},
 
 	async undoScoreAssignment(
@@ -265,7 +276,8 @@ module.exports = {
 					'hasAssignments.$.score': 0,
 					'hasAssignments.$.missing': true,
 					'hasAssignments.$.exempt': false,
-					'hasAssignments.$.comments': ['Missing']
+					'hasAssignments.$.comments': ['Missing'],
+					'hasAssignments.$.late': 'false'
 				},
 				$inc: { responsibilityPoints: -score - 2 }
 			}

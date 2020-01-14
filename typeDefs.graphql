@@ -83,15 +83,11 @@ input UpdateResponsibilityPointsInput {
 
 type ScoreAssignmentPayload {
 	scored: Boolean!
-	lastScore: Int!
-	currentScore: Int!
 	student: Student!
 }
 
 type UndoScoreAssignmentPayload {
 	assignmentScoreReset: Boolean!
-	lastScore: Int!
-	currentScore: Int!
 	student: Student!
 }
 
@@ -110,6 +106,7 @@ input AssignmentScoringInput {
 	assignmentType: AssignmentType!
 	score: Int!
 	comments: [String]
+	late: Boolean!
 }
 
 input UndoAssignmentScoringInput {
@@ -341,6 +338,7 @@ input StudentAssignmentsInput {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
+	late: Boolean!
 	comments: [String]
 }
 
@@ -354,6 +352,7 @@ type StudentAssignments {
 	exempt: Boolean!
 	score: Int!
 	comments: [String]
+	late: Boolean!
 }
 
 type SchoolDayInfo {
