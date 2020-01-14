@@ -234,6 +234,8 @@ module.exports = {
 
 		{ studentData }
 	) {
+		console.log('Late: ' + late)
+		console.log('Score: ' + score)
 		const scoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
