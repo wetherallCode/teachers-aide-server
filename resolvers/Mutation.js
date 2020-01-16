@@ -153,7 +153,6 @@ module.exports = {
 	},
 
 	async createUnit(_, args, { unitData }) {
-		console.log(args)
 		let newUnit = {
 			...args.input
 		}
@@ -200,6 +199,7 @@ module.exports = {
 							assignmentType: assignment.assignmentType,
 							assignedDate: assignment.assignedDate,
 							dueDate: assignment.dueDate,
+							markingPeriod: assignment.markingPeriod,
 							readingPages: assignment.readingPages,
 							readingSections: assignment.readingSections,
 							missing: true,
