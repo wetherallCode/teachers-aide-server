@@ -154,6 +154,7 @@ input AssignedHomeworkInput {
 	assignedDate: Date!
 	dueDate: Date!
 	markingPeriod: MarkingPeriodEnum!
+	lesson: String!
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
@@ -164,6 +165,7 @@ type AssignedHomework {
 	assignedDate: Date!
 	dueDate: Date!
 	markingPeriod: MarkingPeriodEnum!
+	lesson: String!
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
