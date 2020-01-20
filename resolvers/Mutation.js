@@ -199,7 +199,6 @@ module.exports = {
 							assignmentType: assignment.assignmentType,
 							assignedDate: assignment.assignedDate,
 							dueDate: assignment.dueDate,
-							lesson: lessonName,
 							markingPeriod: assignment.markingPeriod,
 							readingPages: assignment.readingPages,
 							readingSections: assignment.readingSections,
