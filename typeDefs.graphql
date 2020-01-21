@@ -157,6 +157,7 @@ input AssignedHomeworkInput {
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
+	maxScore: Int!
 }
 
 type AssignedHomework {
