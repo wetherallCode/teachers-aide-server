@@ -340,6 +340,7 @@ input StudentAssignmentsInput {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
+	# earnedPoints: Int!
 	late: Boolean!
 	comments: [String]
 }
@@ -353,6 +354,7 @@ type StudentAssignments {
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
+	# earnedPoints: Int!
 	comments: [String]
 	late: Boolean!
 }
@@ -406,6 +408,7 @@ input StudentDetails {
 	desk: Int!
 	teacher: String!
 	isHiddenFromRoster: Boolean!
+	hasAssignments: [StudentAssignmentsInput]
 }
 
 type Teacher {

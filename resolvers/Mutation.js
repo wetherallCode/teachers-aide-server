@@ -234,8 +234,6 @@ module.exports = {
 
 		{ studentData }
 	) {
-		console.log('Late: ' + late)
-		console.log('Score: ' + score)
 		const scoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
@@ -255,18 +253,12 @@ module.exports = {
 		)
 
 		let scored = true
-
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
 		return { scored, student }
 	},
 
-	async undoScoreAssignment(
-		_,
-		{ input: { _id, date, assignmentType, score } },
-
-		{ studentData }
-	) {
+	async undoScoreAssignment(_, { input: { _id, date, assignmentType, score } }, { studentData }) {
 		const undoScoredAssignment = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
