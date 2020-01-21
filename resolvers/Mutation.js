@@ -205,6 +205,7 @@ module.exports = {
 							missing: true,
 							exempt: false,
 							score: 0,
+							maxScore: assignment.maxScore,
 							comments: ['Missing']
 						}
 					}
@@ -215,6 +216,8 @@ module.exports = {
 
 		return newClassPeriod
 	},
+
+	// async assignMaxScore
 
 	async scoreAssignment(
 		_,
