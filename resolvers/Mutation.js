@@ -57,7 +57,7 @@ module.exports = {
 	},
 
 	async updateStudent(parent, { _id, ...args }, { studentData }) {
-		const { firstName, lastName, responsibilityPoints, period, desk, teacher } = args
+		const { firstName, lastName, responsibilityPoints, period, desk, teacher, daysAbsent } = args
 
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
@@ -69,7 +69,8 @@ module.exports = {
 					responsibilityPoints: responsibilityPoints,
 					period: period,
 					desk: desk,
-					teacher: teacher
+					teacher: teacher,
+					daysAbsent: daysAbsent
 				}
 			}
 		)

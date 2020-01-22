@@ -42,6 +42,7 @@ type Mutation {
 		desk: Int!
 		period: periodName!
 		teacher: String!
+		daysAbsent: [Date]
 	): Student!
 
 	addLearningStyle(_id: ID!, learningStyle: String!): Student
