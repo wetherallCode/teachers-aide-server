@@ -34,16 +34,7 @@ type Mutation {
 	logout: Boolean
 	addStudent(input: StudentDetails!): Student!
 	removeStudent(_id: ID!): RemoveStudentPayLoad!
-	updateStudent(
-		_id: ID!
-		firstName: String!
-		lastName: String!
-		responsibilityPoints: Int!
-		desk: Int!
-		period: periodName!
-		teacher: String!
-		daysAbsent: [Date]
-	): Student!
+	updateStudent(input: UpdateStudentInput!): Student!
 
 	addLearningStyle(_id: ID!, learningStyle: String!): Student
 
@@ -402,6 +393,16 @@ enum MarkingPeriodEnum {
 	SECOND
 	THIRD
 	FOURTH
+}
+input UpdateStudentInput {
+	_id: ID!
+	firstName: String!
+	lastName: String!
+	responsibilityPoints: Int!
+	desk: Int!
+	period: periodName!
+	teacher: String!
+	daysAbsent: [Date]
 }
 
 input StudentDetails {
