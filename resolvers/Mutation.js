@@ -56,7 +56,7 @@ module.exports = {
 		return newStudent
 	},
 
-	async updateStudent(parent, { _id, ...args }, { studentData }) {
+	async updateStudent(parent, { input: { ...args } }, { studentData }) {
 		const { firstName, lastName, responsibilityPoints, period, desk, teacher, daysAbsent } = args
 
 		const updateStudent = await studentData.updateOne(
