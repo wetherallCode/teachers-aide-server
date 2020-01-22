@@ -57,7 +57,16 @@ module.exports = {
 	},
 
 	async updateStudent(parent, { input: { ...args } }, { studentData }) {
-		const { firstName, lastName, responsibilityPoints, period, desk, teacher, daysAbsent } = args
+		const {
+			_id,
+			firstName,
+			lastName,
+			responsibilityPoints,
+			period,
+			desk,
+			teacher,
+			daysAbsent
+		} = args
 
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
