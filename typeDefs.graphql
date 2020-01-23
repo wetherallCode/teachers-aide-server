@@ -59,6 +59,7 @@ type Mutation {
 
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
+	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
 }
 
 input RemoveClassPeriodInput {
@@ -77,6 +78,9 @@ type ScoreAssignmentPayload {
 	scored: Boolean!
 	student: Student!
 }
+type UpdateAssignmentPayload {
+	students: [Student]
+}
 
 type UndoScoreAssignmentPayload {
 	assignmentScoreReset: Boolean!
@@ -87,6 +91,18 @@ input FindAssignmentByStudentAndDateAndType {
 	_id: ID!
 	date: Date
 	assignmentType: AssignmentType
+}
+
+input UpdateAssignmentInput {
+	period: periodName!
+	date: Date!
+	assignedDate: Date!
+	dueDate: Date!
+	markingPeriod: MarkingPeriodEnum!
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
+	maxScore: Int!
 }
 
 input AssignmentScoringInput {
@@ -160,6 +176,7 @@ type AssignedHomework {
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
+	maxScore: Int!
 }
 
 type RemoveLessonPayLoad {

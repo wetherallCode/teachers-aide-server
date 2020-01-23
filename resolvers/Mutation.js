@@ -227,7 +227,44 @@ module.exports = {
 		return newClassPeriod
 	},
 
-	// async assignMaxScore
+	async updateAssignment(
+		_,
+		{
+			input: {
+				period,
+				assignmentType,
+				date,
+				assignedDate,
+				dueDate,
+				markingPeriod,
+				readingPages,
+				readingSections,
+				maxScore
+			}
+		},
+		{ studentData }
+	) {
+		const updatedAssignment = await studentData.updateMany(
+			{
+				period: period,
+				hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
+			},
+			{
+				$set: {
+					'hasAssignments.$.markingPeriod': markingPeriod,
+					'hasAssignments.$.assignedDate': assignedDate,
+					'hasAssignments.$.dueDate': dueDate,
+					'hasAssignments.$.readingPages': readingPages,
+					'hasAssignments.$.readingSections': readingSections,
+					'hasAssignments.$.assignmentType': assignmentType,
+					'hasAssignments.$.maxScore': maxScore
+				}
+			}
+		)
+		const students = await studentData.find({ period: period })
+
+		return students
+	},
 
 	async scoreAssignment(
 		_,
