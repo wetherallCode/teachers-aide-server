@@ -233,7 +233,6 @@ module.exports = {
 			input: {
 				period,
 				assignmentType,
-				date,
 				assignedDate,
 				dueDate,
 				markingPeriod,
@@ -247,7 +246,9 @@ module.exports = {
 		const updatedAssignment = await studentData.updateMany(
 			{
 				period: period,
-				hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
+				hasAssignments: {
+					$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+				}
 			},
 			{
 				$set: {

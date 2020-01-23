@@ -95,7 +95,6 @@ input FindAssignmentByStudentAndDateAndType {
 
 input UpdateAssignmentInput {
 	period: periodName!
-	date: Date!
 	assignedDate: Date!
 	dueDate: Date!
 	markingPeriod: MarkingPeriodEnum!
