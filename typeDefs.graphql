@@ -58,6 +58,7 @@ type Mutation {
 	unduMarkStudentLate(_id: ID!, date: Date): Student
 
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
+
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
 	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
 }
