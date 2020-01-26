@@ -287,26 +287,24 @@ module.exports = {
 
 		{ studentData }
 	) {
-		if (assignmentType === 'THINKING_GUIDE') {
-			const scoredAssignment = await studentData.updateOne(
-				{
-					_id: ObjectID(_id),
-					hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
-				},
+		const scoredAssignment = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
+			},
 
-				{
-					$set: {
-						'hasAssignments.$.score': score,
-						'hasAssignments.$.earnedPoints': earnedPoints,
-						'hasAssignments.$.missing': missing,
-						'hasAssignments.$.exempt': exempt,
-						'hasAssignments.$.comments': comments,
-						'hasAssignments.$.late': late
-					},
-					$inc: { responsibilityPoints: earnedPoints }
-				}
-			)
-		}
+			{
+				$set: {
+					'hasAssignments.$.score': score,
+					'hasAssignments.$.earnedPoints': earnedPoints,
+					'hasAssignments.$.missing': missing,
+					'hasAssignments.$.exempt': exempt,
+					'hasAssignments.$.comments': comments,
+					'hasAssignments.$.late': late
+				},
+				$inc: { responsibilityPoints: earnedPoints }
+			}
+		)
 
 		let scored = true
 		const student = studentData.findOne({ _id: ObjectID(_id) })
@@ -319,28 +317,25 @@ module.exports = {
 		{ input: { _id, date, assignmentType, score, earnedPoints } },
 		{ studentData }
 	) {
-		console.log(earnedPoints)
-		console.log(typeof earnedPoints)
-		if (assignmentType === 'THINKING_GUIDE') {
-			const undoScoredAssignment = await studentData.updateOne(
-				{
-					_id: ObjectID(_id),
-					hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
-				},
+		const undoScoredAssignment = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasAssignments: { $elemMatch: { dueDate: date, assignmentType: assignmentType } }
+			},
 
-				{
-					$set: {
-						'hasAssignments.$.score': 0,
-						'hasAssignments.$.earnedPoints': 0,
-						'hasAssignments.$.missing': true,
-						'hasAssignments.$.exempt': false,
-						'hasAssignments.$.comments': ['Missing'],
-						'hasAssignments.$.late': 'false'
-					},
-					$inc: { responsibilityPoints: -earnedPoints }
-				}
-			)
-		}
+			{
+				$set: {
+					'hasAssignments.$.score': 0,
+					'hasAssignments.$.earnedPoints': 0,
+					'hasAssignments.$.missing': true,
+					'hasAssignments.$.exempt': false,
+					'hasAssignments.$.comments': ['Missing'],
+					'hasAssignments.$.late': 'false'
+				},
+				$inc: { responsibilityPoints: -earnedPoints }
+			}
+		)
+
 		let assignmentScoreReset = true
 		const student = studentData.findOne({ _id: ObjectID(_id) })
 
