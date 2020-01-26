@@ -113,6 +113,7 @@ input AssignmentScoringInput {
 	exempt: Boolean
 	assignmentType: AssignmentType!
 	score: Int!
+	earnedPoints: Int
 	comments: [String]
 	late: Boolean!
 }
@@ -351,7 +352,7 @@ input StudentAssignmentsInput {
 	exempt: Boolean!
 	score: Int!
 	maxScore: Int
-	# earnedPoints: Int!
+	earnedPoints: Int
 	late: Boolean!
 	comments: [String]
 }
@@ -366,7 +367,7 @@ type StudentAssignments {
 	exempt: Boolean!
 	score: Int!
 	maxScore: Int
-	# earnedPoints: Int!
+	earnedPoints: Int
 	comments: [String]
 	late: Boolean!
 }

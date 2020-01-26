@@ -214,6 +214,7 @@ module.exports = {
 							readingSections: assignment.readingSections,
 							missing: true,
 							exempt: false,
+							late: true,
 							score: 0,
 							maxScore: assignment.maxScore,
 							comments: ['Missing']
@@ -278,6 +279,7 @@ module.exports = {
 				exempt,
 				assignmentType,
 				score,
+				earnedPoints,
 				comments,
 				late
 			}
@@ -295,12 +297,13 @@ module.exports = {
 				{
 					$set: {
 						'hasAssignments.$.score': score,
+						'hasAssignments.$.earnedPoints': earnedPoints,
 						'hasAssignments.$.missing': missing,
 						'hasAssignments.$.exempt': exempt,
 						'hasAssignments.$.comments': comments,
 						'hasAssignments.$.late': late
 					},
-					$inc: { responsibilityPoints: responsibilityPoints }
+					$inc: { responsibilityPoints: earnedPoints }
 				}
 			)
 		}
@@ -311,7 +314,11 @@ module.exports = {
 		return { scored, student }
 	},
 
-	async undoScoreAssignment(_, { input: { _id, date, assignmentType, score } }, { studentData }) {
+	async undoScoreAssignment(
+		_,
+		{ input: { _id, date, assignmentType, score, earnedPoints } },
+		{ studentData }
+	) {
 		if (assignmentType === 'THINKING_GUIDE') {
 			const undoScoredAssignment = await studentData.updateOne(
 				{
@@ -327,7 +334,7 @@ module.exports = {
 						'hasAssignments.$.comments': ['Missing'],
 						'hasAssignments.$.late': 'false'
 					},
-					$inc: { responsibilityPoints: -score - 2 }
+					$inc: { responsibilityPoints: -earnedPoints - 2 }
 				}
 			)
 		}
