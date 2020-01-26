@@ -319,6 +319,7 @@ module.exports = {
 		{ input: { _id, date, assignmentType, score, earnedPoints } },
 		{ studentData }
 	) {
+		console.log(typeof earnedPoints)
 		if (assignmentType === 'THINKING_GUIDE') {
 			const undoScoredAssignment = await studentData.updateOne(
 				{
