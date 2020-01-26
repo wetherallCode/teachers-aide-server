@@ -123,6 +123,7 @@ input UndoAssignmentScoringInput {
 	date: Date!
 	assignmentType: AssignmentType!
 	score: Int!
+	earnedPoints: Int
 }
 
 input UnitInput {
