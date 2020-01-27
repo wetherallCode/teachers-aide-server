@@ -243,6 +243,8 @@ enum AssignmentType {
 	THINKING_GUIDE
 	BLOG
 	TEST
+	EXTRA_CREDIT
+	PARENT_CONTACT
 }
 
 type Assignments {
