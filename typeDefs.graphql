@@ -98,7 +98,7 @@ input UpdateAssignmentInput {
 	period: periodName!
 	assignedDate: Date!
 	dueDate: Date!
-	markingPeriod: MarkingPeriodEnum!
+	markingPeriod: MarkingPeriodEnum
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
@@ -163,7 +163,7 @@ input ClassPeriodInput {
 input AssignedHomeworkInput {
 	assignedDate: Date!
 	dueDate: Date!
-	markingPeriod: MarkingPeriodEnum!
+	markingPeriod: MarkingPeriodEnum
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
@@ -174,7 +174,7 @@ type AssignedHomework {
 	_id: ID!
 	assignedDate: Date!
 	dueDate: Date!
-	markingPeriod: MarkingPeriodEnum!
+	markingPeriod: MarkingPeriodEnum
 	readingPages: String!
 	readingSections: String!
 	assignmentType: AssignmentType
