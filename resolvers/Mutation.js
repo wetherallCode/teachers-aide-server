@@ -263,8 +263,9 @@ module.exports = {
 				}
 			}
 		)
-		const students = await studentData.find({ period: period })
 
+		const students = await studentData.find({ period: period })
+		console.log(students)
 		return students
 	},
 
