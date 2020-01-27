@@ -285,8 +285,11 @@ module.exports = {
 		)
 
 		const students = await studentData.find({ period: period }).toArray()
-
-		return students
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+		return { students, classPeriod }
 	},
 
 	async scoreAssignment(
