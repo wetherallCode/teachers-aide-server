@@ -273,13 +273,13 @@ module.exports = {
 			},
 			{
 				$set: {
-					'hasAssignments.$.markingPeriod': markingPeriod,
-					'hasAssignments.$.assignedDate': assignedDate,
-					'hasAssignments.$.dueDate': dueDate,
-					'hasAssignments.$.readingPages': readingPages,
-					'hasAssignments.$.readingSections': readingSections,
-					'hasAssignments.$.assignmentType': assignmentType,
-					'hasAssignments.$.maxScore': maxScore
+					'assignedHomework.$.markingPeriod': markingPeriod,
+					'assignedHomework.$.assignedDate': assignedDate,
+					'assignedHomework.$.dueDate': dueDate,
+					'assignedHomework.$.readingPages': readingPages,
+					'assignedHomework.$.readingSections': readingSections,
+					'assignedHomework.$.assignmentType': assignmentType,
+					'assignedHomework.$.maxScore': maxScore
 				}
 			}
 		)
