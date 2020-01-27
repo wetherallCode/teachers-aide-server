@@ -330,7 +330,7 @@ module.exports = {
 					'hasAssignments.$.missing': true,
 					'hasAssignments.$.exempt': false,
 					'hasAssignments.$.comments': ['Missing'],
-					'hasAssignments.$.late': 'false'
+					'hasAssignments.$.late': false
 				},
 				$inc: { responsibilityPoints: -earnedPoints }
 			}
