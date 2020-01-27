@@ -242,7 +242,7 @@ module.exports = {
 				maxScore
 			}
 		},
-		{ studentData }
+		{ studentData, classPeriodData }
 	) {
 		const updatedAssignment = await studentData.updateMany(
 			{
@@ -264,8 +264,28 @@ module.exports = {
 			}
 		)
 
+		const updatedClasPeriod = await classPeriodData.updateMany(
+			{
+				period: period,
+				assignedHomework: {
+					$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+				}
+			},
+			{
+				$set: {
+					'hasAssignments.$.markingPeriod': markingPeriod,
+					'hasAssignments.$.assignedDate': assignedDate,
+					'hasAssignments.$.dueDate': dueDate,
+					'hasAssignments.$.readingPages': readingPages,
+					'hasAssignments.$.readingSections': readingSections,
+					'hasAssignments.$.assignmentType': assignmentType,
+					'hasAssignments.$.maxScore': maxScore
+				}
+			}
+		)
+
 		const students = await studentData.find({ period: period }).toArray()
-		console.log(students)
+
 		return students
 	},
 

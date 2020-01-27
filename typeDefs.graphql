@@ -81,6 +81,7 @@ type ScoreAssignmentPayload {
 }
 type UpdateAssignmentPayload {
 	students: [Student]
+	classPeriod: ClassPeriod
 }
 
 type UndoScoreAssignmentPayload {
