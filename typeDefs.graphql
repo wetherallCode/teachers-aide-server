@@ -364,6 +364,7 @@ type StudentAssignments {
 	assignmentType: AssignmentType!
 	readingPages: String!
 	readingSections: String!
+	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	dueDate: Date!
 	missing: Boolean!
