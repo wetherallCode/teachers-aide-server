@@ -177,6 +177,7 @@ module.exports = {
 		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework, assignedTest } },
 		{ classPeriodData, lessonData, assignmentData, studentData }
 	) {
+		console.log(assignedTest)
 		const studentsInClass = await studentData.find({ period: period }).toArray()
 
 		const classPeriodCheck = await classPeriodData.findOne({
@@ -225,25 +226,25 @@ module.exports = {
 			)
 		})
 
-		const addTest = await studentData.updateMany(
-			{ period: period },
-			{
-				$push: {
-					hasTests: {
-						assignmentType: 'TEST',
-						assignedDate: assignedTest.assignedDate,
-						dueDate: assignedTest.dueDate,
-						markingPeriod: assignedTest.markingPeriod,
-						readingPages: assignedTest.readingPages,
-						readingSections: assignedTest.readingSections,
-						missing: true,
-						exempt: false,
-						score: 0,
-						maxScore: assignedTest.maxScore
-					}
-				}
-			}
-		)
+		// const addTest = await studentData.updateMany(
+		// 	{ period: period },
+		// 	{
+		// 		$push: {
+		// 			hasTests: {
+		// 				assignmentType: 'TEST',
+		// 				assignedDate: assignedDate,
+		// 				dueDate: assignedTest.dueDate,
+		// 				markingPeriod: assignedTest.markingPeriod,
+		// 				readingPages: assignedTest.readingPages,
+		// 				readingSections: assignedTest.readingSections,
+		// 				missing: true,
+		// 				exempt: false,
+		// 				score: 0,
+		// 				maxScore: assignedTest.maxScore
+		// 			}
+		// 		}
+		// 	}
+		// )
 		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
@@ -265,45 +266,87 @@ module.exports = {
 		},
 		{ studentData, classPeriodData }
 	) {
-		const updatedAssignment = await studentData.updateMany(
-			{
-				period: period,
-				hasAssignments: {
-					$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+		if (assignmentType !== 'TEST') {
+			const updatedAssignment = await studentData.updateMany(
+				{
+					period: period,
+					hasAssignments: {
+						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+					}
+				},
+				{
+					$set: {
+						'hasAssignments.$.markingPeriod': markingPeriod,
+						'hasAssignments.$.assignedDate': assignedDate,
+						'hasAssignments.$.dueDate': dueDate,
+						'hasAssignments.$.readingPages': readingPages,
+						'hasAssignments.$.readingSections': readingSections,
+						'hasAssignments.$.assignmentType': assignmentType,
+						'hasAssignments.$.maxScore': maxScore
+					}
 				}
-			},
-			{
-				$set: {
-					'hasAssignments.$.markingPeriod': markingPeriod,
-					'hasAssignments.$.assignedDate': assignedDate,
-					'hasAssignments.$.dueDate': dueDate,
-					'hasAssignments.$.readingPages': readingPages,
-					'hasAssignments.$.readingSections': readingSections,
-					'hasAssignments.$.assignmentType': assignmentType,
-					'hasAssignments.$.maxScore': maxScore
-				}
-			}
-		)
+			)
 
-		const updatedClassPeriod = await classPeriodData.updateMany(
-			{
-				period: period,
-				assignedHomework: {
-					$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+			const updatedClassPeriod = await classPeriodData.updateMany(
+				{
+					period: period,
+					assignedHomework: {
+						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+					}
+				},
+				{
+					$set: {
+						'assignedHomework.$.markingPeriod': markingPeriod,
+						'assignedHomework.$.assignedDate': assignedDate,
+						'assignedHomework.$.dueDate': dueDate,
+						'assignedHomework.$.readingPages': readingPages,
+						'assignedHomework.$.readingSections': readingSections,
+						'assignedHomework.$.assignmentType': assignmentType,
+						'assignedHomework.$.maxScore': maxScore
+					}
 				}
-			},
-			{
-				$set: {
-					'assignedHomework.$.markingPeriod': markingPeriod,
-					'assignedHomework.$.assignedDate': assignedDate,
-					'assignedHomework.$.dueDate': dueDate,
-					'assignedHomework.$.readingPages': readingPages,
-					'assignedHomework.$.readingSections': readingSections,
-					'assignedHomework.$.assignmentType': assignmentType,
-					'assignedHomework.$.maxScore': maxScore
+			)
+		}
+		if (assignmentType === 'TEST') {
+			const updatedTest = await studentData.updateMany(
+				{
+					period: period,
+					hasTests: {
+						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+					}
+				},
+				{
+					$set: {
+						'hasTests.$.markingPeriod': markingPeriod,
+						'hasTests.$.assignedDate': assignedDate,
+						'hasTests.$.dueDate': dueDate,
+						'hasTests.$.readingPages': readingPages,
+						'hasTests.$.readingSections': readingSections,
+						'hasTests.$.assignmentType': assignmentType,
+						'hasTests.$.maxScore': maxScore
+					}
 				}
-			}
-		)
+			)
+			const updatedClassPeriodTest = await classPeriodData.updateMany(
+				{
+					period: period,
+					assignedTest: {
+						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+					}
+				},
+				{
+					$set: {
+						'assignedTest.$.markingPeriod': markingPeriod,
+						'assignedTest.$.assignedDate': assignedDate,
+						'assignedTest.$.dueDate': dueDate,
+						'assignedTest.$.readingPages': readingPages,
+						'assignedTest.$.readingSections': readingSections,
+						'assignedTest.$.assignmentType': assignmentType,
+						'assignedTest.$.maxScore': maxScore
+					}
+				}
+			)
+		}
 
 		const students = await studentData.find({ period: period }).toArray()
 		const classPeriod = await classPeriodData.findOne({
@@ -412,7 +455,7 @@ module.exports = {
 
 	async removeClassPeriod(
 		_,
-		{ input: { _id, date, period, withAssignments } },
+		{ input: { _id, date, period, withAssignments, withTest } },
 		{ classPeriodData, studentData }
 	) {
 		const classPeriod = await classPeriodData.findOne({ _id: ObjectID(_id) })
@@ -433,6 +476,18 @@ module.exports = {
 						hasAssignments: { assignedDate: date }
 					},
 					$inc: { responsibilityPoints: 2 }
+				}
+			)
+		}
+		if (withTest) {
+			studentData.updateMany(
+				{
+					period: period
+				},
+				{
+					$pull: {
+						hasTests: { assignedDate: date }
+					}
 				}
 			)
 		}

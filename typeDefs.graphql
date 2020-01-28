@@ -67,6 +67,7 @@ input RemoveClassPeriodInput {
 	_id: ID!
 	date: Date!
 	withAssignments: Boolean
+	withTest: Boolean
 	period: periodName
 }
 
