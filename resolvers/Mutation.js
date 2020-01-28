@@ -224,34 +224,37 @@ module.exports = {
 				}
 			)
 		})
-		console.log(
-			assignedTest.assignedDate,
-			assignedTest.dueDate,
-			assignedTest.markingPeriod,
-			assignedTest.readingPages,
-			assignedTest.readingSections,
-			assignedTest.maxScore
-		)
 
-		// const addTest = await studentData.updateMany(
-		// 	{ period: period },
-		// 	{
-		// 		$push: {
-		// 			hasTests: {
-		// 				assignmentType: 'TEST',
-		// 				assignedDate: assignedTest.assignedDate,
-		// 				dueDate: assignedTest.dueDate,
-		// 				markingPeriod: assignedTest.markingPeriod,
-		// 				readingPages: assignedTest.readingPages,
-		// 				readingSections: assignedTest.readingSections,
-		// 				missing: true,
-		// 				exempt: false,
-		// 				score: 0,
-		// 				maxScore: assignedTest.maxScore
-		// 			}
-		// 		}
-		// 	}
+		// console.log(
+		// 	assignedTest.assignedDate,
+		// 	assignedTest.dueDate,
+		// 	assignedTest.markingPeriod,
+		// 	assignedTest.readingPages,
+		// 	assignedTest.readingSections,
+		// 	assignedTest.maxScore
 		// )
+
+		assignedTest.forEach(test =>
+			studentData.updateMany(
+				{ period: period },
+				{
+					$push: {
+						hasTests: {
+							assignmentType: 'TEST',
+							assignedDate: test.assignedDate,
+							dueDate: test.dueDate,
+							markingPeriod: test.markingPeriod,
+							readingPages: test.readingPages,
+							readingSections: test.readingSections,
+							missing: true,
+							exempt: false,
+							score: 0,
+							maxScore: test.maxScore
+						}
+					}
+				}
+			)
+		)
 		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
