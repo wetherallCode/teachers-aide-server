@@ -174,7 +174,7 @@ module.exports = {
 
 	async createClassPeriod(
 		_,
-		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework } },
+		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework, assignedTest } },
 		{ classPeriodData, lessonData, assignmentData, studentData }
 	) {
 		const studentsInClass = await studentData.find({ period: period }).toArray()
@@ -194,7 +194,8 @@ module.exports = {
 			grade,
 			assignedLesson: lessonName,
 			period,
-			assignedHomework
+			assignedHomework,
+			assignedTest
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
@@ -223,6 +224,26 @@ module.exports = {
 				}
 			)
 		})
+
+		const addTest = await studentData.updateMany(
+			{ period: period },
+			{
+				$push: {
+					hasTests: {
+						assignmentType: 'TEST',
+						assignedDate: assignedTest.assignedDate,
+						dueDate: assignedTest.dueDate,
+						markingPeriod: assignedTest.markingPeriod,
+						readingPages: assignedTest.readingPages,
+						readingSections: assignedTest.readingSections,
+						missing: true,
+						exempt: false,
+						score: 0,
+						maxScore: assignedTest.maxScore
+					}
+				}
+			}
+		)
 		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
@@ -264,7 +285,7 @@ module.exports = {
 			}
 		)
 
-		const updatedClasPeriod = await classPeriodData.updateMany(
+		const updatedClassPeriod = await classPeriodData.updateMany(
 			{
 				period: period,
 				assignedHomework: {

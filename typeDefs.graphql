@@ -151,6 +151,7 @@ type ClassPeriod {
 	period: periodName
 	absentStudents: [Student]
 	assignedHomework: [AssignedHomework]
+	assignedTest: [AssignedTest]
 }
 
 input ClassPeriodInput {
@@ -159,6 +160,27 @@ input ClassPeriodInput {
 	assignedDate: Date
 	period: periodName
 	assignedHomework: [AssignedHomeworkInput]
+	assignedTest: [AssignedTestInput]
+}
+
+input AssignedTestInput {
+	assignedDate: Date!
+	dueDate: Date!
+	markingPeriod: MarkingPeriodEnum
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
+	maxScore: Int
+}
+
+type AssignedTest {
+	assignedDate: Date!
+	dueDate: Date!
+	markingPeriod: MarkingPeriodEnum
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
+	maxScore: Int
 }
 
 input AssignedHomeworkInput {
@@ -344,6 +366,47 @@ type Student {
 	daysAbsent: [Date]
 	daysLate: [Date]
 	hasAssignments: [StudentAssignments]
+	hasTests: [StudentTests]
+}
+
+input StudentDetails {
+	firstName: String!
+	lastName: String!
+	responsibilityPoints: Int!
+	period: periodName!
+	desk: Int!
+	teacher: String!
+	isHiddenFromRoster: Boolean!
+	hasAssignments: [StudentAssignmentsInput]
+	hasTests: [StudentTestsInput]
+}
+
+input StudentTestsInput {
+	assignmentType: AssignmentType!
+	readingPages: String!
+	readingSections: String!
+	assignedDate: Date!
+	dueDate: Date!
+	missing: Boolean!
+	exempt: Boolean!
+	score: Int!
+	maxScore: Int
+	earnedPoints: Int
+	studyTime: Int
+}
+
+type StudentTests {
+	assignmentType: AssignmentType!
+	readingPages: String!
+	readingSections: String!
+	assignedDate: Date!
+	dueDate: Date!
+	missing: Boolean!
+	exempt: Boolean!
+	score: Int!
+	maxScore: Int
+	earnedPoints: Int
+	studyTime: Int
 }
 
 input StudentAssignmentsInput {
@@ -426,17 +489,6 @@ input UpdateStudentInput {
 	period: periodName!
 	teacher: String!
 	daysAbsent: [Date]
-}
-
-input StudentDetails {
-	firstName: String!
-	lastName: String!
-	responsibilityPoints: Int!
-	period: periodName!
-	desk: Int!
-	teacher: String!
-	isHiddenFromRoster: Boolean!
-	hasAssignments: [StudentAssignmentsInput]
 }
 
 type Teacher {
