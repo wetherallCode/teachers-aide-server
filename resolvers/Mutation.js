@@ -177,7 +177,6 @@ module.exports = {
 		{ input: { grade, assignedDate, assignedLesson, period, assignedHomework, assignedTest } },
 		{ classPeriodData, lessonData, assignmentData, studentData }
 	) {
-		console.log(assignedTest)
 		const studentsInClass = await studentData.find({ period: period }).toArray()
 
 		const classPeriodCheck = await classPeriodData.findOne({
@@ -225,6 +224,14 @@ module.exports = {
 				}
 			)
 		})
+		console.log(
+			assignedTest.assignedDate,
+			assignedTest.dueDate,
+			assignedTest.markingPeriod,
+			assignedTest.readingPages,
+			assignedTest.readingSections,
+			assignedTest.maxScore
+		)
 
 		// const addTest = await studentData.updateMany(
 		// 	{ period: period },
@@ -232,7 +239,7 @@ module.exports = {
 		// 		$push: {
 		// 			hasTests: {
 		// 				assignmentType: 'TEST',
-		// 				assignedDate: assignedDate,
+		// 				assignedDate: assignedTest.assignedDate,
 		// 				dueDate: assignedTest.dueDate,
 		// 				markingPeriod: assignedTest.markingPeriod,
 		// 				readingPages: assignedTest.readingPages,
