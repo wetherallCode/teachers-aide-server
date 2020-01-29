@@ -80,6 +80,7 @@ module.exports = {
 					period: period,
 					desk: desk,
 					teacher: teacher,
+					learningStyle: learningStyle,
 					daysAbsent: daysAbsent
 				}
 			}

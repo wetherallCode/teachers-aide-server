@@ -405,7 +405,6 @@ input StudentDetails {
 	desk: Int!
 	teacher: String!
 	isHiddenFromRoster: Boolean!
-	learningStyle: String
 	hasAssignments: [StudentAssignmentsInput]
 	hasTests: [StudentTestsInput]
 }
@@ -517,6 +516,7 @@ input UpdateStudentInput {
 	desk: Int!
 	period: periodName!
 	teacher: String!
+	learningStyle: String!
 	daysAbsent: [Date]
 }
 
