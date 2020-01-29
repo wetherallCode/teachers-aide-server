@@ -65,7 +65,8 @@ module.exports = {
 			period,
 			desk,
 			teacher,
-			daysAbsent
+			daysAbsent,
+			learningStyle
 		} = args
 
 		const updateStudent = await studentData.updateOne(

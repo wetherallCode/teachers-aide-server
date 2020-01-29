@@ -405,6 +405,7 @@ input StudentDetails {
 	desk: Int!
 	teacher: String!
 	isHiddenFromRoster: Boolean!
+	learningStyle: String
 	hasAssignments: [StudentAssignmentsInput]
 	hasTests: [StudentTestsInput]
 }
