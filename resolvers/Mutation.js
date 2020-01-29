@@ -65,7 +65,7 @@ module.exports = {
 			period,
 			desk,
 			teacher,
-			daysAbsent,
+
 			learningStyle
 		} = args
 
@@ -80,8 +80,7 @@ module.exports = {
 					period: period,
 					desk: desk,
 					teacher: teacher,
-					learningStyle: learningStyle,
-					daysAbsent: daysAbsent
+					learningStyle: learningStyle
 				}
 			}
 		)
