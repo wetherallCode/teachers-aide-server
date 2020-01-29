@@ -197,7 +197,7 @@ module.exports = {
 			assignedHomework,
 			assignedTest
 		}
-
+		console.log(assignedTest)
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
 
