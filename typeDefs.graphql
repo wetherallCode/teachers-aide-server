@@ -161,7 +161,7 @@ input ClassPeriodInput {
 	assignedDate: Date
 	period: periodName
 	assignedHomework: [AssignedHomeworkInput]
-	assignedTest: [AssignedTestInput]
+	assignedTest: AssignedTestInput
 }
 
 input AssignedTestInput {
