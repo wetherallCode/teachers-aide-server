@@ -267,7 +267,7 @@ module.exports = {
 		{ studentData, classPeriodData }
 	) {
 		if (assignmentType !== 'TEST') {
-			'not a test'
+			console.log('not a test')
 			// const updatedAssignment = await studentData.updateMany(
 			// 	{
 			// 		period: period,
@@ -287,27 +287,26 @@ module.exports = {
 			// 		}
 			// 	}
 			// )
-
-		// 	const updatedClassPeriod = await classPeriodData.updateMany(
-		// 		{
-		// 			period: period,
-		// 			assignedHomework: {
-		// 				$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
-		// 			}
-		// 		},
-		// 		{
-		// 			$set: {
-		// 				'assignedHomework.$.markingPeriod': markingPeriod,
-		// 				'assignedHomework.$.assignedDate': assignedDate,
-		// 				'assignedHomework.$.dueDate': dueDate,
-		// 				'assignedHomework.$.readingPages': readingPages,
-		// 				'assignedHomework.$.readingSections': readingSections,
-		// 				'assignedHomework.$.assignmentType': assignmentType,
-		// 				'assignedHomework.$.maxScore': maxScore
-		// 			}
-		// 		}
-		// 	)
-		// }
+			// const updatedClassPeriod = await classPeriodData.updateMany(
+			// 	{
+			// 		period: period,
+			// 		assignedHomework: {
+			// 			$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+			// 		}
+			// 	},
+			// 	{
+			// 		$set: {
+			// 			'assignedHomework.$.markingPeriod': markingPeriod,
+			// 			'assignedHomework.$.assignedDate': assignedDate,
+			// 			'assignedHomework.$.dueDate': dueDate,
+			// 			'assignedHomework.$.readingPages': readingPages,
+			// 			'assignedHomework.$.readingSections': readingSections,
+			// 			'assignedHomework.$.assignmentType': assignmentType,
+			// 			'assignedHomework.$.maxScore': maxScore
+			// 		}
+			// 	}
+			// )
+		}
 		if (assignmentType === 'TEST') {
 			const updatedTest = await studentData.updateMany(
 				{
