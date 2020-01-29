@@ -197,7 +197,7 @@ module.exports = {
 			assignedHomework,
 			assignedTest
 		}
-		console.log(assignedTest)
+
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
 		newClassPeriod._id = insertedId
 
@@ -267,46 +267,47 @@ module.exports = {
 		{ studentData, classPeriodData }
 	) {
 		if (assignmentType !== 'TEST') {
-			const updatedAssignment = await studentData.updateMany(
-				{
-					period: period,
-					hasAssignments: {
-						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
-					}
-				},
-				{
-					$set: {
-						'hasAssignments.$.markingPeriod': markingPeriod,
-						'hasAssignments.$.assignedDate': assignedDate,
-						'hasAssignments.$.dueDate': dueDate,
-						'hasAssignments.$.readingPages': readingPages,
-						'hasAssignments.$.readingSections': readingSections,
-						'hasAssignments.$.assignmentType': assignmentType,
-						'hasAssignments.$.maxScore': maxScore
-					}
-				}
-			)
+			'not a test'
+			// const updatedAssignment = await studentData.updateMany(
+			// 	{
+			// 		period: period,
+			// 		hasAssignments: {
+			// 			$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+			// 		}
+			// 	},
+			// 	{
+			// 		$set: {
+			// 			'hasAssignments.$.markingPeriod': markingPeriod,
+			// 			'hasAssignments.$.assignedDate': assignedDate,
+			// 			'hasAssignments.$.dueDate': dueDate,
+			// 			'hasAssignments.$.readingPages': readingPages,
+			// 			'hasAssignments.$.readingSections': readingSections,
+			// 			'hasAssignments.$.assignmentType': assignmentType,
+			// 			'hasAssignments.$.maxScore': maxScore
+			// 		}
+			// 	}
+			// )
 
-			const updatedClassPeriod = await classPeriodData.updateMany(
-				{
-					period: period,
-					assignedHomework: {
-						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
-					}
-				},
-				{
-					$set: {
-						'assignedHomework.$.markingPeriod': markingPeriod,
-						'assignedHomework.$.assignedDate': assignedDate,
-						'assignedHomework.$.dueDate': dueDate,
-						'assignedHomework.$.readingPages': readingPages,
-						'assignedHomework.$.readingSections': readingSections,
-						'assignedHomework.$.assignmentType': assignmentType,
-						'assignedHomework.$.maxScore': maxScore
-					}
-				}
-			)
-		}
+		// 	const updatedClassPeriod = await classPeriodData.updateMany(
+		// 		{
+		// 			period: period,
+		// 			assignedHomework: {
+		// 				$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+		// 			}
+		// 		},
+		// 		{
+		// 			$set: {
+		// 				'assignedHomework.$.markingPeriod': markingPeriod,
+		// 				'assignedHomework.$.assignedDate': assignedDate,
+		// 				'assignedHomework.$.dueDate': dueDate,
+		// 				'assignedHomework.$.readingPages': readingPages,
+		// 				'assignedHomework.$.readingSections': readingSections,
+		// 				'assignedHomework.$.assignmentType': assignmentType,
+		// 				'assignedHomework.$.maxScore': maxScore
+		// 			}
+		// 		}
+		// 	)
+		// }
 		if (assignmentType === 'TEST') {
 			const updatedTest = await studentData.updateMany(
 				{
@@ -354,6 +355,12 @@ module.exports = {
 			assignedDate: assignedDate
 		})
 		return { students, classPeriod }
+	},
+
+	async scoreTest(_, { input: { _id, dueDate, missing, exempt, score, earnedPoints, studyTime } }) {
+		_id.forEach(student => {
+			studentData.updateOne({ _id: ObjectID(_id), hasTests: { $elemMatch: { dueDate: date } } })
+		})
 	},
 
 	async scoreAssignment(

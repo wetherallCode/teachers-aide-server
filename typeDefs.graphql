@@ -61,7 +61,33 @@ type Mutation {
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
 	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
 
-	# removeTest()
+	removeTest(input: RemoveTestInput): RemoveTestPayload!
+	scoreTest(input: TestScoringInput): ScoreTestPayload!
+}
+
+input TestScoringInput {
+	_id: [ID!]
+	dueDate: Date!
+	missing: Boolean!
+	exempt: Boolean
+	score: Int!
+	earnedPoints: Int!
+	studyTime: Int!
+}
+
+type ScoreTestPayload {
+	scored: Boolean
+	student: Student
+}
+input RemoveTestInput {
+	assignedDate: Date!
+	period: periodName
+}
+
+type RemoveTestPayload {
+	removed: Boolean
+	classPeriod: ClassPeriod
+	students: [Student]
 }
 
 input RemoveClassPeriodInput {
