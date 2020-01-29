@@ -410,28 +410,28 @@ input StudentDetails {
 }
 
 input StudentTestsInput {
-	assignmentType: AssignmentType!
-	readingPages: String!
-	readingSections: String!
-	assignedDate: Date!
-	dueDate: Date!
-	missing: Boolean!
-	exempt: Boolean!
-	score: Int!
+	assignmentType: AssignmentType
+	readingPages: String
+	readingSections: String
+	assignedDate: Date
+	dueDate: Date
+	missing: Boolean
+	exempt: Boolean
+	score: Int
 	maxScore: Int
 	earnedPoints: Int
 	studyTime: Int
 }
 
 type StudentTests {
-	assignmentType: AssignmentType!
-	readingPages: String!
-	readingSections: String!
-	assignedDate: Date!
+	assignmentType: AssignmentType
+	readingPages: String
+	readingSections: String
+	assignedDate: Date
 	dueDate: Date
-	missing: Boolean!
-	exempt: Boolean!
-	score: Int!
+	missing: Boolean
+	exempt: Boolean
+	score: Int
 	maxScore: Int
 	earnedPoints: Int
 	studyTime: Int
