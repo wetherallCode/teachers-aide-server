@@ -428,7 +428,7 @@ type StudentTests {
 	readingPages: String!
 	readingSections: String!
 	assignedDate: Date!
-	dueDate: Date!
+	dueDate: Date
 	missing: Boolean!
 	exempt: Boolean!
 	score: Int!
