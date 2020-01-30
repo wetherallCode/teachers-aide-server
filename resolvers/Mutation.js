@@ -357,10 +357,53 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
-	async scoreTest(_, { input: { _id, dueDate, missing, exempt, score, earnedPoints, studyTime } }) {
+	async scoreMultipleTests(
+		_,
+		{ input: { _id, period, dueDate, missing, exempt, score, earnedPoints, studyTime } },
+		{ studentData }
+	) {
 		_id.forEach(student => {
-			studentData.updateOne({ _id: ObjectID(_id), hasTests: { $elemMatch: { dueDate: date } } })
+			studentData.updateOne(
+				{ _id: ObjectID(_id), hasTests: { $elemMatch: { dueDate: dueDate } } },
+				{
+					$set: {
+						'hasTests.$.score': score,
+						'hasTests.$.missing': missing,
+						'hasTests.$.exempt': exempt,
+						'hasTests.$.earnedPoints': earnedPoints,
+						'hasTests.$.studyTime': studyTime
+					},
+					$inc: { responsibilityPoints: earnedPoints }
+				}
+			)
 		})
+		let scored = true
+		const students = await studentData.find({ period: period }).toArray()
+		return { scored, students }
+	},
+
+	async undoScoreTest(_, { input: { _id, dueDate, earnedPoints } }, { studentData }) {
+		const undoTestScore = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasTests: { $elemMatch: { dueDate: dueDate } }
+			},
+			{
+				$set: {
+					'hasTests.$.score': 0,
+					'hasTests.$.missing': true,
+					'hasTests.$.exempt': false,
+					'hasTests.$.earnedPoints': 0,
+					'hasTests.$.studyTime': 0
+				},
+				$inc: { responsibilityPoints: -earnedPoints }
+			}
+		)
+
+		let testScoreReset = true
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+
+		return { testScoreReset, student }
 	},
 
 	async scoreAssignment(
