@@ -358,7 +358,7 @@ module.exports = {
 	},
 
 	async scoreMultipleTests(_, { input: { period, scoredTests } }, { studentData }) {
-		console.log(period)
+		console.log(scored)
 		scoredTests.forEach(test => {
 			studentData.updateOne(
 				{ _id: ObjectID(test._id), hasTests: { $elemMatch: { dueDate: test.dueDate } } },
@@ -376,6 +376,7 @@ module.exports = {
 		})
 		let scored = true
 		const students = await studentData.find({ period: period }).toArray()
+		console.log(students)
 		return { scored, students }
 	},
 
