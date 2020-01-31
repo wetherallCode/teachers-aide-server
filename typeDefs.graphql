@@ -94,7 +94,7 @@ type UndoScoreTestPayload {
 }
 
 type MultipleScoreTestPayload {
-	scored: Boolean
+	# scored: Boolean
 	students: [Student]
 }
 input RemoveTestInput {
