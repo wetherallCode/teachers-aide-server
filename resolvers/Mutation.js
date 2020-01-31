@@ -357,11 +357,7 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
-	async scoreMultipleTests(
-		_,
-		{ input: { _id, period, dueDate, missing, exempt, score, earnedPoints, studyTime } },
-		{ studentData }
-	) {
+	async scoreMultipleTests(_, { input: { ScoredTestInput } }, { studentData }) {
 		_id.forEach(student => {
 			studentData.updateOne(
 				{ _id: ObjectID(_id), hasTests: { $elemMatch: { dueDate: dueDate } } },
