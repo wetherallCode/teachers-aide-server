@@ -24,6 +24,7 @@ type Query {
 	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
 	findClassPeriods: [ClassPeriod]
 	findClassPeriodById(_id: ID!): ClassPeriod!
+	findClassPeriodByTestDueDate(period: periodName, dueDate: Date): ClassPeriod
 
 	findAssignmentByStudentAndDateAndType(input: FindAssignmentByStudentAndDateAndType): Student!
 }

@@ -71,6 +71,12 @@ module.exports = {
 		return classPeriod
 	},
 
+	async findClassPeriodByTestDueDate(_, { dueDate, period }, { classPeriodData }) {
+		const classPeriod = await classPeriodData.findOne({ 'assignedTest.dueDate': dueDate, period })
+
+		return classPeriod
+	},
+
 	async findClassPeriods(_, __, { classPeriodData }) {
 		const classPeriods = await classPeriodData.find().toArray()
 
