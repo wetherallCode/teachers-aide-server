@@ -69,6 +69,7 @@ type Mutation {
 
 input MultipleTestScoringInput {
 	period: periodName
+	dueDate: Date
 	scoredTests: [ScoredTestInput]
 }
 
@@ -228,6 +229,7 @@ type AssignedTest {
 	readingSections: String!
 	assignmentType: AssignmentType
 	maxScore: Int
+	scored: Boolean
 }
 
 input AssignedHomeworkInput {
