@@ -385,8 +385,8 @@ module.exports = {
 				// assignedTest: { $elemMatch: { dueDate: dueDate } }
 				'assignedTest.dueDate': dueDate
 			},
-			{ $set: { assignedTest: { scored: true } } }
-			// {$set: {"assignedTest.scored": true}}
+			// { $set: { assignedTest: { scored: true } } }
+			{ $set: { 'assignedTest.scored': true } }
 		)
 		// let scored = true
 		const students = await studentData.find({ period: period }).toArray()
