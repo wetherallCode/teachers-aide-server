@@ -388,8 +388,11 @@ module.exports = {
 		)
 		// let scored = true
 		const students = await studentData.find({ period: period }).toArray()
-
-		return { students }
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedTest: { $elemMatch: { dueDate: dueDate } }
+		})
+		return { students, classPeriod }
 	},
 
 	async undoScoreTest(_, { input: { _id, dueDate, earnedPoints } }, { studentData }) {

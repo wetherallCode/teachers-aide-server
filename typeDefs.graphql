@@ -98,6 +98,7 @@ type UndoScoreTestPayload {
 type MultipleScoreTestPayload {
 	# scored: Boolean
 	students: [Student]
+	classPeriod: ClassPeriod
 }
 input RemoveTestInput {
 	assignedDate: Date!
