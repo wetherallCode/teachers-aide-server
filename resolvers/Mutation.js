@@ -381,8 +381,8 @@ module.exports = {
 		})
 		const updateTestForClassPeriod = await classPeriodData.updateOne(
 			{
-				'assignedTest.dueDate': dueDate,
-				period: period
+				period: period,
+				assignedTest: { $elemMatch: { dueDate: dueDate } }
 			},
 			{ $set: { 'assignedTest.$.scored': true } }
 		)
