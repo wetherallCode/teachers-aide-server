@@ -56,7 +56,7 @@ module.exports = {
 
 		return CurrentMarkingPeriod
 	},
-	async setCurrentMarkingPeriod(_, { _id, markingPeriod }, { generalInfo }) {
+	async createMarkingPeriod(_, { _id, markingPeriod }, { generalInfo }) {
 		let markingPeriod = {
 			markingPeriod
 		}
