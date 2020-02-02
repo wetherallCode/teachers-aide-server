@@ -60,7 +60,7 @@ module.exports = {
 		let newMarkingPeriodEntry = {
 			markingPeriod
 		}
-		const { insertedId } = await studentData.insertOne(newStudent)
+		const { insertedId } = await generalInfo.insertOne(newStudent)
 		newMarkingPeriodEntry._id = insertedId
 
 		return newMarkingPeriodEntry
