@@ -7,7 +7,7 @@ module.exports = {
 
 	findCurrentMarkingPeriod: (_, { _id }, { generalInfo }) => {
 		const markingPeriod = findCurrentMarkingPeriod.findOne({ _id: ObjectID(_id) })
-
+		console.log(markingPeriod)
 		return markingPeriod
 	},
 
