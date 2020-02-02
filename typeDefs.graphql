@@ -35,6 +35,7 @@ type Mutation {
 	login(name: String!, password: String!): User
 	logout: Boolean
 	setCurrentMarkingPeriod(_id: ID!, markingPeriod: MarkingPeriodEnum): CurrentMarkingPeriod
+	createMarkingPeriod(markingPeriod: MarkingPeriodEnum): CurrentMarkingPeriod
 	addStudent(input: StudentDetails!): Student!
 	removeStudent(_id: ID!): RemoveStudentPayLoad!
 	updateStudent(input: UpdateStudentInput!): Student!
