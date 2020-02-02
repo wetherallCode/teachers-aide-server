@@ -57,13 +57,13 @@ module.exports = {
 		return CurrentMarkingPeriod
 	},
 	async createMarkingPeriod(_, { _id, markingPeriod }, { generalInfo }) {
-		let markingPeriod = {
+		let newMarkingPeriodEntry = {
 			markingPeriod
 		}
 		const { insertedId } = await studentData.insertOne(newStudent)
-		markingPeriod._id = insertedId
+		newMarkingPeriodEntry._id = insertedId
 
-		return markingPeriod
+		return newMarkingPeriodEntry
 	},
 
 	async addStudent(parent, args, { studentData }) {
