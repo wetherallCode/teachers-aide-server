@@ -53,6 +53,7 @@ module.exports = {
 		)
 
 		const CurrentMarkingPeriod = generalInfo.findOne({ _id: ObjectID(_id) })
+		console.log(CurrentMarkingPeriod)
 
 		return CurrentMarkingPeriod
 	},
