@@ -47,12 +47,12 @@ module.exports = {
 	},
 
 	async setCurrentMarkingPeriod(_, { _id, markingPeriod }, { generalInfo }) {
-		const changeMarkingPeriod = generalInfo.updateOne(
+		const changeMarkingPeriod = await generalInfo.updateOne(
 			{ _id: ObjectID(_id) },
 			{ $set: { markingPeriod: markingPeriod } }
 		)
 
-		const CurrentMarkingPeriod = generalInfo.findOne({ _id: ObjectID(_id) })
+		const CurrentMarkingPeriod = await generalInfo.findOne({ _id: ObjectID(_id) })
 		console.log(CurrentMarkingPeriod)
 
 		return CurrentMarkingPeriod
