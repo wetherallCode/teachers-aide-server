@@ -2,6 +2,7 @@ scalar Date
 
 type Query {
 	me: User
+	findCurrentMarkingPeriod(_id: ID!): CurrentMarkingPeriod!
 	totalStudents: Int!
 	allStudents: [Student!]!
 	totalUsers: Int!
@@ -33,6 +34,7 @@ type Mutation {
 	createAccount(name: String!, password: String!): User!
 	login(name: String!, password: String!): User
 	logout: Boolean
+	setCurrentMarkingPeriod(_id: ID!, markingPeriod: MarkingPeriodEnum): CurrentMarkingPeriod
 	addStudent(input: StudentDetails!): Student!
 	removeStudent(_id: ID!): RemoveStudentPayLoad!
 	updateStudent(input: UpdateStudentInput!): Student!
@@ -65,6 +67,9 @@ type Mutation {
 	removeTest(input: RemoveTestInput): RemoveTestPayload!
 	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
 	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
+}
+type CurrentMarkingPeriod {
+	markingPeriod: MarkingPeriodEnum!
 }
 
 input MultipleTestScoringInput {

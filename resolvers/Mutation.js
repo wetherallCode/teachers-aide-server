@@ -46,6 +46,17 @@ module.exports = {
 		}
 	},
 
+	async setCurrentMarkingPeriod(_, { _id, markingPeriod }, { generalInfo }) {
+		const changeMarkingPeriod = generalInfo.updateOne(
+			{ _id: ObjectID(_id) },
+			{ $set: { markingPeriod: markingPeriod } }
+		)
+
+		const CurrentMarkingPeriod = generalInfo.findOne({ _id: ObjectID(_id) })
+
+		return CurrentMarkingPeriod
+	},
+
 	async addStudent(parent, args, { studentData }) {
 		let newStudent = {
 			...args.input

@@ -4,6 +4,8 @@ module.exports = {
 	totalStudents: (_, __, { studentData }) => studentData.estimatedDocumentCount(),
 
 	allStudents: (_, __, { studentData }) => studentData.find().toArray(),
+	findCurrentMarkingPeriod: (_, { _id }, { generalInfo }) =>
+		findCurrentMarkingPeriod.findOne({ _id: ObjectID(_id) }),
 
 	totalUsers: (_, __, { users }) => users.estimatedDocumentCount(),
 
