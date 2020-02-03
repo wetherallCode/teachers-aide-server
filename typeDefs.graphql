@@ -445,6 +445,7 @@ input StudentTestsInput {
 	readingSections: String
 	assignedDate: Date
 	dueDate: Date
+	markingPeriod: MarkingPeriodEnum
 	missing: Boolean
 	exempt: Boolean
 	score: Int
@@ -459,6 +460,7 @@ type StudentTests {
 	readingSections: String
 	assignedDate: Date
 	dueDate: Date
+	markingPeriod: MarkingPeriodEnum
 	missing: Boolean
 	exempt: Boolean
 	score: Int

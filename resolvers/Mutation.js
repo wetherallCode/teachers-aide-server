@@ -53,7 +53,6 @@ module.exports = {
 		)
 
 		const CurrentMarkingPeriod = await generalInfo.findOne({ _id: ObjectID(_id) })
-		console.log(CurrentMarkingPeriod)
 
 		return CurrentMarkingPeriod
 	},
