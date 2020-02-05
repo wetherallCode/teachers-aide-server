@@ -364,7 +364,7 @@ module.exports = {
 				{
 					period: period,
 					assignedTest: {
-						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+						$elemMatch: { assignedDate: assignedDate }
 					}
 				},
 				{
