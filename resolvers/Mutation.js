@@ -287,16 +287,6 @@ module.exports = {
 		},
 		{ studentData, classPeriodData }
 	) {
-		console.log(
-			period,
-			assignmentType,
-			assignedDate,
-			dueDate,
-			markingPeriod,
-			readingPages,
-			readingSections,
-			maxScore
-		)
 		if (assignmentType !== 'TEST') {
 			console.log('updating homework')
 			const updatedAssignment = await studentData.updateMany(
@@ -340,26 +330,25 @@ module.exports = {
 			)
 		}
 		if (assignmentType === 'TEST') {
-			console.log('updating test')
-			// const updatedTest = await studentData.updateMany(
-			// 	{
-			// 		period: period,
-			// 		hasTests: {
-			// 			$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
-			// 		}
-			// 	},
-			// 	{
-			// 		$set: {
-			// 			'hasTests.$.markingPeriod': markingPeriod,
-			// 			'hasTests.$.assignedDate': assignedDate,
-			// 			'hasTests.$.dueDate': dueDate,
-			// 			'hasTests.$.readingPages': readingPages,
-			// 			'hasTests.$.readingSections': readingSections,
-			// 			'hasTests.$.assignmentType': assignmentType,
-			// 			'hasTests.$.maxScore': maxScore
-			// 		}
-			// 	}
-			// )
+			const updatedTest = await studentData.updateMany(
+				{
+					period: period,
+					hasTests: {
+						$elemMatch: { assignedDate: assignedDate, assignmentType: assignmentType }
+					}
+				},
+				{
+					$set: {
+						'hasTests.$.markingPeriod': markingPeriod,
+						'hasTests.$.assignedDate': assignedDate,
+						'hasTests.$.dueDate': dueDate,
+						'hasTests.$.readingPages': readingPages,
+						'hasTests.$.readingSections': readingSections,
+						'hasTests.$.assignmentType': assignmentType,
+						'hasTests.$.maxScore': maxScore
+					}
+				}
+			)
 			const updatedClassPeriodTest = await classPeriodData.updateMany(
 				{
 					period: period,
