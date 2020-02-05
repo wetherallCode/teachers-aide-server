@@ -287,6 +287,16 @@ module.exports = {
 		},
 		{ studentData, classPeriodData }
 	) {
+		console.log(
+			period,
+			assignmentType,
+			assignedDate,
+			dueDate,
+			markingPeriod,
+			readingPages,
+			readingSections,
+			maxScore
+		)
 		if (assignmentType !== 'TEST') {
 			const updatedAssignment = await studentData.updateMany(
 				{
