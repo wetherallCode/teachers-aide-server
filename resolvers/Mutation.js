@@ -339,6 +339,7 @@ module.exports = {
 			)
 		}
 		if (assignmentType === 'TEST') {
+			console.log('updating test')
 			const updatedTest = await studentData.updateMany(
 				{
 					period: period,
