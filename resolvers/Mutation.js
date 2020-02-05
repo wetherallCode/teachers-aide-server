@@ -363,7 +363,7 @@ module.exports = {
 			const updatedClassPeriodTest = await classPeriodData.updateMany(
 				{
 					period: period,
-					'assignedTest.assignedDate': assignedDate
+					assignedDate: assignedDate
 				},
 				{
 					$set: {
