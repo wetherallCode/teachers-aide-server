@@ -298,6 +298,7 @@ module.exports = {
 			maxScore
 		)
 		if (assignmentType !== 'TEST') {
+			console.log('updating homework')
 			const updatedAssignment = await studentData.updateMany(
 				{
 					period: period,
