@@ -328,13 +328,13 @@ module.exports = {
 				},
 				{
 					$set: {
-						'assignedHomework.markingPeriod': markingPeriod,
-						'assignedHomework.assignedDate': assignedDate,
-						'assignedHomework.dueDate': dueDate,
-						'assignedHomework.readingPages': readingPages,
-						'assignedHomework.readingSections': readingSections,
-						'assignedHomework.assignmentType': assignmentType,
-						'assignedHomework.maxScore': maxScore
+						'assignedHomework.$.markingPeriod': markingPeriod,
+						'assignedHomework.$.assignedDate': assignedDate,
+						'assignedHomework.$.dueDate': dueDate,
+						'assignedHomework.$.readingPages': readingPages,
+						'assignedHomework.$.readingSections': readingSections,
+						'assignedHomework.$.assignmentType': assignmentType,
+						'assignedHomework.$.maxScore': maxScore
 					}
 				}
 			)
@@ -367,13 +367,13 @@ module.exports = {
 				},
 				{
 					$set: {
-						'assignedTest.$.markingPeriod': markingPeriod,
-						'assignedTest.$.assignedDate': assignedDate,
-						'assignedTest.$.dueDate': dueDate,
-						'assignedTest.$.readingPages': readingPages,
-						'assignedTest.$.readingSections': readingSections,
-						'assignedTest.$.assignmentType': assignmentType,
-						'assignedTest.$.maxScore': maxScore
+						'assignedTest.markingPeriod': markingPeriod,
+						'assignedTest.assignedDate': assignedDate,
+						'assignedTest.dueDate': dueDate,
+						'assignedTest.readingPages': readingPages,
+						'assignedTest.readingSections': readingSections,
+						'assignedTest.assignmentType': assignmentType,
+						'assignedTest.maxScore': maxScore
 					}
 				}
 			)
