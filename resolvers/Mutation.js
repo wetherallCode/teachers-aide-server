@@ -328,13 +328,13 @@ module.exports = {
 				},
 				{
 					$set: {
-						'assignedHomework.$.markingPeriod': markingPeriod,
-						'assignedHomework.$.assignedDate': assignedDate,
-						'assignedHomework.$.dueDate': dueDate,
-						'assignedHomework.$.readingPages': readingPages,
-						'assignedHomework.$.readingSections': readingSections,
-						'assignedHomework.$.assignmentType': assignmentType,
-						'assignedHomework.$.maxScore': maxScore
+						'assignedHomework.markingPeriod': markingPeriod,
+						'assignedHomework.assignedDate': assignedDate,
+						'assignedHomework.dueDate': dueDate,
+						'assignedHomework.readingPages': readingPages,
+						'assignedHomework.readingSections': readingSections,
+						'assignedHomework.assignmentType': assignmentType,
+						'assignedHomework.maxScore': maxScore
 					}
 				}
 			)
