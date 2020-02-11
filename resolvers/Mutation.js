@@ -88,7 +88,7 @@ module.exports = {
 				desk,
 				teacher,
 				nickName,
-				studentID,
+				schoolID,
 				learningStyle
 			}
 		},
@@ -99,7 +99,7 @@ module.exports = {
 			{
 				$set: {
 					_id: ObjectID(_id),
-					studentID: studentID,
+					schoolID: schoolID,
 					firstName: firstName,
 					lastName: lastName,
 					nickName: nickName,

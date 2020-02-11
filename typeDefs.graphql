@@ -413,7 +413,7 @@ enum periodName {
 
 type Student {
 	_id: ID!
-	schoolId: String
+	schoolID: String
 	firstName: String!
 	lastName: String!
 	nickName: String
@@ -433,7 +433,7 @@ input StudentDetails {
 	firstName: String!
 	lastName: String!
 	nickName: String
-	schoolId: String
+	schoolID: String
 	responsibilityPoints: Int!
 	period: periodName!
 	desk: Int!
@@ -548,7 +548,7 @@ enum MarkingPeriodEnum {
 input UpdateStudentInput {
 	_id: ID!
 	nickName: String
-	schoolId: String
+	schoolID: String
 	firstName: String!
 	lastName: String!
 	responsibilityPoints: Int!
