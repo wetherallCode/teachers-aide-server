@@ -76,26 +76,33 @@ module.exports = {
 		return newStudent
 	},
 
-	async updateStudent(parent, { input: { ...args } }, { studentData }) {
-		const {
-			_id,
-			firstName,
-			lastName,
-			responsibilityPoints,
-			period,
-			desk,
-			teacher,
-
-			learningStyle
-		} = args
-
+	async updateStudent(
+		parent,
+		{
+			input: {
+				_id,
+				firstName,
+				lastName,
+				responsibilityPoints,
+				period,
+				desk,
+				teacher,
+				nickName,
+				studentID,
+				learningStyle
+			}
+		},
+		{ studentData }
+	) {
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
 				$set: {
 					_id: ObjectID(_id),
+					studentID: studentID,
 					firstName: firstName,
 					lastName: lastName,
+					nickName: nickName,
 					responsibilityPoints: responsibilityPoints,
 					period: period,
 					desk: desk,

@@ -3,10 +3,11 @@ scalar Date
 type Query {
 	me: User
 	findCurrentMarkingPeriod(_id: ID!): CurrentMarkingPeriod!
-	totalStudents: Int!
-	allStudents: [Student!]!
 	totalUsers: Int!
 	allUsers: [User!]!
+
+	totalStudents: Int!
+	allStudents: [Student!]!
 	classRoster(period: periodName): [Student!]!
 	student(_id: ID!): Student!
 	lesson(_id: ID!): Lesson!
@@ -412,8 +413,10 @@ enum periodName {
 
 type Student {
 	_id: ID!
+	schoolId: String
 	firstName: String!
 	lastName: String!
+	nickName: String
 	responsibilityPoints: Int!
 	period: periodName!
 	desk: Int!
@@ -429,6 +432,8 @@ type Student {
 input StudentDetails {
 	firstName: String!
 	lastName: String!
+	nickName: String
+	schoolId: String
 	responsibilityPoints: Int!
 	period: periodName!
 	desk: Int!
@@ -542,6 +547,8 @@ enum MarkingPeriodEnum {
 }
 input UpdateStudentInput {
 	_id: ID!
+	nickName: String
+	schoolId: String
 	firstName: String!
 	lastName: String!
 	responsibilityPoints: Int!
