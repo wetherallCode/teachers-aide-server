@@ -448,6 +448,31 @@ module.exports = {
 		return { testScoreReset, student }
 	},
 
+	async removeTest(_, { input: { assignedDate, period } }, { studentData, classPeriodData }) {
+		const testToRemoveFromStudents = await studentData.updateMany(
+			{ period: period },
+			{ $pull: { hasTests: { assignedDate: assignedDate } } }
+		)
+
+		const testToRemoveFromClassPeriod = await classPeriodData.updateOne(
+			{
+				assignedDate: assignedDate,
+				period: period
+			},
+			{ $unset: assignedTest }
+		)
+
+		const removed = true
+
+		const students = await studentData.findMany({ period: period }).toArray()
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+
+		return { students, classPeriod, removed }
+	},
+
 	async scoreAssignment(
 		_,
 		{

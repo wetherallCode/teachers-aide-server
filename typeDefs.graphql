@@ -107,6 +107,7 @@ type MultipleScoreTestPayload {
 	students: [Student]
 	classPeriod: ClassPeriod
 }
+
 input RemoveTestInput {
 	assignedDate: Date!
 	period: periodName
