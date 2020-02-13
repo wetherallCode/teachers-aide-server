@@ -464,7 +464,7 @@ module.exports = {
 
 		const removed = true
 
-		const students = await studentData.findMany({ period: period }).toArray()
+		const students = await studentData.find({ period: period }).toArray()
 		const classPeriod = await classPeriodData.findOne({
 			period: period,
 			assignedDate: assignedDate
