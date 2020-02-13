@@ -459,7 +459,7 @@ module.exports = {
 				assignedDate: assignedDate,
 				period: period
 			},
-			{ $unset: assignedTest }
+			{ $unset: { assignedTest: '' } }
 		)
 
 		const removed = true
