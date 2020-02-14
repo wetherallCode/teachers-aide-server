@@ -90,6 +90,7 @@ module.exports = {
 	},
 	async findClassPeriodsForCourse(_, { period }, { classPeriodData }) {
 		const classPeriods = await classPeriodData.find({ period }).toArray()
+		return classPeriods
 	},
 
 	async findClassPeriodById(_, { _id }, { classPeriodData }) {
