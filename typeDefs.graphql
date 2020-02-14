@@ -24,6 +24,7 @@ type Query {
 	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
 
 	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
+	findClassPeriodsForCourse(period: periodName): [ClassPeriod]
 	findClassPeriods: [ClassPeriod]
 	findClassPeriodById(_id: ID!): ClassPeriod!
 	findClassPeriodByTestDueDate(period: periodName, dueDate: Date): ClassPeriod
