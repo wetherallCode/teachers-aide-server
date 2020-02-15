@@ -234,7 +234,7 @@ input AssignedTestInput {
 
 type AssignedTest {
 	assignedDate: Date!
-	dueDate: Date!
+	dueDate: Date
 	markingPeriod: MarkingPeriodEnum
 	readingPages: String!
 	readingSections: String!
