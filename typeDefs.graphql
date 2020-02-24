@@ -466,6 +466,11 @@ interface Protocol {
 type SocraticQuestionProtocol implements Protocol {
 	socraticQuestion: String
 	readingSections: String
+	score: Int
+	maxScore: Int
+	earnedPoints: Int
+	markingPeriod: MarkingPeriodEnum
+	isActive: Boolean
 }
 
 input StudentTestsInput {
