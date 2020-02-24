@@ -38,7 +38,10 @@ async function start() {
 	)
 
 	const MONGO_DB = process.env.DB_HOST
-	const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true })
+	const client = await MongoClient.connect(MONGO_DB, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	})
 	const db = client.db()
 
 	const context = async ({ req }) => {

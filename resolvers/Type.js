@@ -8,4 +8,7 @@ module.exports = {
 		parseValue: value => new Date(value).toISOString().substring(0, 10),
 		parseLiteral: literal => new Date(literal.value).toISOString().substring(0, 10)
 	})
+	Protocol: {__resolveType: parent=> {
+		if (parent.socraticQuestion) {return 'SocraticQuestionProtocol'}
+	}}
 }
