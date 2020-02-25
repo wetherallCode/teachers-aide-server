@@ -424,7 +424,12 @@ module.exports = {
 				}
 			)
 		})
-		return null
+		let students = []
+		studentList.forEach(student => {
+			const student = studentData.findOne({ _id: student._id })
+			students.push(student)
+		})
+		return students
 	},
 
 	async scoreMultipleTests(
