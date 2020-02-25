@@ -401,7 +401,20 @@ module.exports = {
 		},
 		{ studentData }
 	) {
+		console.log(
+			studentList,
+			socraticQuestion,
+			readingSections,
+			thinkPairScore,
+			thinkPairEarnedPoints,
+			shareScore,
+			shareEarnedPoints,
+			markingPeriod,
+			assignedDate,
+			isActive
+		)
 		studentList.forEach(student => {
+			console.log(student._id)
 			studentData.updateOne(
 				{
 					_id: student._id
