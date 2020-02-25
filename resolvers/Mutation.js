@@ -383,12 +383,55 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
+	async createSocraticQuestionProtocol(
+		parent,
+		{
+			input: {
+				studentList,
+				socraticQuestion,
+				readingSections,
+				thinkPairScore,
+				thinkPairEarnedPoints,
+				shareScore,
+				shareEarnedPoints,
+				markingPeriod,
+				assignedDate,
+				isActive
+			}
+		},
+		{ studentData }
+	) {
+		studentList.forEach(student => {
+			studentData.updateOne(
+				{
+					_id: student._id
+					// hasProtocols: { $elemMatch: { socraticQuestion: student.socraticQuestion } }
+				},
+				{
+					$push: {
+						hasProtocols: {
+							socraticQuestion,
+							readingSections,
+							thinkPairScore,
+							thinkPairEarnedPoints,
+							shareScore,
+							shareEarnedPoints,
+							markingPeriod,
+							assignedDate,
+							isActive
+						}
+					}
+				}
+			)
+		})
+		return null
+	},
+
 	async scoreMultipleTests(
 		_,
 		{ input: { period, dueDate, scoredTests } },
 		{ studentData, classPeriodData }
 	) {
-		console.log(period)
 		const studentsInClass = await studentData.find({ period: period }).toArray()
 
 		scoredTests.forEach(test => {

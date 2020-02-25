@@ -70,7 +70,15 @@ type Mutation {
 	removeTest(input: RemoveTestInput): RemoveTestPayload!
 	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
 	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
+
+	createSocraticQuestionProtocol(
+		input: SocraticQuestionProtocolInput
+	): SocraticQuestionProtocolPayload
+	updateSocraticQuestionProtocol(
+		input: UpdateSocraticQuestionInput
+	): UpdatedSocraticQuestionProtocolPayload
 }
+
 type CurrentMarkingPeriod {
 	markingPeriod: MarkingPeriodEnum!
 }
@@ -210,7 +218,6 @@ type ClassPeriod {
 	absentStudents: [Student]
 	assignedHomework: [AssignedHomework]
 	assignedTest: AssignedTest
-	# assignedProtocols: [ClassPeriodProtocol]
 }
 
 input ClassPeriodInput {
@@ -222,14 +229,6 @@ input ClassPeriodInput {
 	assignedTest: AssignedTestInput
 }
 
-# type ClassPeriodProtocol {
-# 	protocolType: protocolTypeEnum
-# 	activity: String
-# }
-
-# enum protocolTypeEnum {
-# 	THINK_PAIR_SHARE
-# }
 input AssignedTestInput {
 	assignedDate: Date!
 	dueDate: Date!
@@ -438,6 +437,7 @@ type Student {
 	daysLate: [Date]
 	hasAssignments: [StudentAssignments]
 	hasTests: [StudentTests]
+	hasProtocols: [Protocol]
 }
 
 input StudentDetails {
@@ -456,21 +456,57 @@ input StudentDetails {
 }
 
 interface Protocol {
-	score: Int
-	maxScore: Int
-	earnedPoints: Int
+	studentList: [ID]
 	markingPeriod: MarkingPeriodEnum
+	assignedDate: Date!
 	isActive: Boolean
 }
 
 type SocraticQuestionProtocol implements Protocol {
 	socraticQuestion: String
 	readingSections: String
-	score: Int
-	maxScore: Int
-	earnedPoints: Int
+	thinkPairScore: Int
+	thinkPairEarnedPoints: Int
+	shareScore: Int
+	shareEarnedPoints: Int
+	studentList: [ID]
 	markingPeriod: MarkingPeriodEnum
+	assignedDate: Date!
 	isActive: Boolean
+}
+
+input UpdateSocraticQuestionInput {
+	socraticQuestion: String
+	readingSections: String
+	thinkPairScore: Int
+	thinkPairEarnedPoints: Int
+	shareScore: Int
+	shareEarnedPoints: Int
+	studentList: [ID]
+	markingPeriod: MarkingPeriodEnum
+	assignedDate: Date!
+	isActive: Boolean
+}
+
+input SocraticQuestionProtocolInput {
+	socraticQuestion: String
+	readingSections: String
+	thinkPairScore: Int
+	thinkPairEarnedPoints: Int
+	shareScore: Int
+	shareEarnedPoints: Int
+	studentList: [ID]
+	markingPeriod: MarkingPeriodEnum
+	assignedDate: Date!
+	isActive: Boolean
+}
+
+type UpdatedSocraticQuestionProtocolPayload {
+	students: [Student]
+}
+
+type SocraticQuestionProtocolPayload {
+	students: [Student]
 }
 
 input StudentTestsInput {
