@@ -426,7 +426,7 @@ module.exports = {
 		})
 		let students = []
 		studentList.forEach(student => {
-			const student = studentData.findOne({ _id: student._id })
+			student = studentData.findOne({ _id: student._id })
 			students.push(student)
 		})
 		return students
