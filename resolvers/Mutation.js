@@ -414,7 +414,7 @@ module.exports = {
 			isActive
 		)
 		studentList.forEach(student => {
-			console.log(student._id)
+			console.log(_id)
 			studentData.updateOne(
 				{
 					_id: student._id
