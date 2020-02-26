@@ -387,7 +387,7 @@ module.exports = {
 		parent,
 		{
 			input: {
-				studentList,
+				period,
 				socraticQuestion,
 				readingSections,
 				thinkPairScore,
