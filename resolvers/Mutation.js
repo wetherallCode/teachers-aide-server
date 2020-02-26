@@ -413,46 +413,44 @@ module.exports = {
 		// 	assignedDate,
 		// 	isActive
 		// )
-		studentList.forEach(student => {
-			studentData.updateOne(
-				{
-					_id: student
-					// hasProtocols: { $elemMatch: { socraticQuestion: student.socraticQuestion } }
-				},
-				{
-					$push: {
-						hasProtocols: {
-							socraticQuestion: socraticQuestion,
-							readingSections: readingSections,
-							thinkPairScore: thinkPairScore,
-							thinkPairEarnedPoints: thinkPairEarnedPoints,
-							shareScore: shareScore,
-							shareEarnedPoints: shareEarnedPoints,
-							markingPeriod: markingPeriod,
-							assignedDate: assignedDate,
-							isActive: isActive
-						}
+
+		const updatedStudents = await studentData.updateMany(
+			{
+				period: period
+				// hasProtocols: { $elemMatch: { socraticQuestion: student.socraticQuestion } }
+			},
+			{
+				$push: {
+					hasProtocols: {
+						socraticQuestion: socraticQuestion,
+						readingSections: readingSections,
+						thinkPairScore: thinkPairScore,
+						thinkPairEarnedPoints: thinkPairEarnedPoints,
+						shareScore: shareScore,
+						shareEarnedPoints: shareEarnedPoints,
+						markingPeriod: markingPeriod,
+						assignedDate: assignedDate,
+						isActive: isActive
 					}
 				}
-			)
-		})
-		let students = []
-		// console.log(students)
-		studentList.forEach(async student => {
-			console.log(student)
-			const updatedStudent = await studentData.findOne({ _id: student })
-			console.log(updatedStudent)
-			students.push(updatedStudent)
-		})
+			}
+		)
+		const students = await studentData.find({ period: period }).toArray()
+		return students
+	},
 
-		// let studentIds = studentList.map(function(_id) {
-		// 	return ObjectID(_id)
-		// })
-		// let students = await studentData.find({ _id: { $in: studentIds } })
-		// console.log(students)
-		// const student = await studentData.findOne({ _id: ObjectID(studentList[0]) })
-		// console.log(student)
-		return null
+	async deleteSocraticQuestionProtocol(
+		_,
+		{ input: { period, socraticQuestion } },
+		{ studentData }
+	) {
+		const deletedSocraticQuestionProtocol = await studentData.updateMany(
+			{ period: period },
+			{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
+		)
+
+		const students = await studentData.find({ period: period }).toArray()
+		return students
 	},
 
 	async scoreMultipleTests(
