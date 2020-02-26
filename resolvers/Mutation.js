@@ -437,6 +437,7 @@ module.exports = {
 			)
 		})
 		let students = []
+		console.log(students)
 		studentList.forEach(student => {
 			updatedStudent = studentData.findOne({ _id: student })
 			students.push(updatedStudent)
