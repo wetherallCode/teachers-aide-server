@@ -384,7 +384,7 @@ module.exports = {
 	},
 
 	async createSocraticQuestionProtocol(
-		parent,
+		_,
 		{
 			input: {
 				period,

@@ -440,7 +440,7 @@ type Student {
 	daysLate: [Date]
 	hasAssignments: [StudentAssignments]
 	hasTests: [StudentTests]
-	hasProtocols: [Protocol]
+	hasProtocols: [SocraticQuestionProtocol]
 }
 
 input StudentDetails {
@@ -458,14 +458,14 @@ input StudentDetails {
 	hasTests: [StudentTestsInput]
 }
 
-interface Protocol {
-	period: periodName
-	markingPeriod: MarkingPeriodEnum
-	assignedDate: Date!
-	isActive: Boolean
-}
+# interface Protocol {
+# 	period: periodName
+# 	markingPeriod: MarkingPeriodEnum
+# 	assignedDate: Date!
+# 	isActive: Boolean
+# }
 
-type SocraticQuestionProtocol implements Protocol {
+type SocraticQuestionProtocol {
 	socraticQuestion: String
 	readingSections: String
 	thinkPairScore: Int
