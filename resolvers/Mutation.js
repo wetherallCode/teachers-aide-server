@@ -439,7 +439,7 @@ module.exports = {
 		})
 		let students = []
 		studentList.forEach(student => {
-			student = studentData.findOne({ _id: student._id })
+			student = studentData.findOne({ _id: student })
 			students.push(student)
 		})
 		return students
