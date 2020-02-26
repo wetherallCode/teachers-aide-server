@@ -437,11 +437,13 @@ module.exports = {
 				}
 			)
 		})
-		let students = []
-		studentList.forEach(student => {
-			student = studentData.findOne({ _id: student })
-			students.push(student)
-		})
+		// let students = []
+		// studentList.forEach(student => {
+		// 	student = studentData.findOne({ _id: student })
+		// 	students.push(student)
+		// })
+		let studentIds = studentList.map(_id => ObjectID(_id))
+		let students = await studentData.find({ _id: { $in: studentIds } })
 		return students
 	},
 
