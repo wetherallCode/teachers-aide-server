@@ -436,13 +436,13 @@ module.exports = {
 				}
 			)
 		})
-		// let students = []
+		let students = []
 		// console.log(students)
-		// studentList.forEach(async student => {
-		// 	updatedStudent = await studentData.findOne({ _id: student })
-		// 	console.log(updatedStudent)
-		// 	students.push(updatedStudent)
-		// })
+		studentList.forEach(async student => {
+			const updatedStudent = await studentData.findOne({ _id: student })
+			console.log(updatedStudent)
+			students.push(updatedStudent)
+		})
 
 		// let studentIds = studentList.map(function(_id) {
 		// 	return ObjectID(_id)
