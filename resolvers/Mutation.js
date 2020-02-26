@@ -438,8 +438,8 @@ module.exports = {
 		})
 		let students = []
 		console.log(students)
-		studentList.forEach(student => {
-			updatedStudent = studentData.findOne({ _id: student })
+		studentList.forEach(async student => {
+			updatedStudent = await studentData.findOne({ _id: student })
 			students.push(updatedStudent)
 		})
 
