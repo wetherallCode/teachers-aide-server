@@ -401,20 +401,19 @@ module.exports = {
 		},
 		{ studentData }
 	) {
-		console.log(
-			studentList,
-			socraticQuestion,
-			readingSections,
-			thinkPairScore,
-			thinkPairEarnedPoints,
-			shareScore,
-			shareEarnedPoints,
-			markingPeriod,
-			assignedDate,
-			isActive
-		)
+		// console.log(
+		// 	studentList,
+		// 	socraticQuestion,
+		// 	readingSections,
+		// 	thinkPairScore,
+		// 	thinkPairEarnedPoints,
+		// 	shareScore,
+		// 	shareEarnedPoints,
+		// 	markingPeriod,
+		// 	assignedDate,
+		// 	isActive
+		// )
 		studentList.forEach(student => {
-			console.log(student)
 			studentData.updateOne(
 				{
 					_id: student
@@ -442,7 +441,9 @@ module.exports = {
 		// 	student = studentData.findOne({ _id: student })
 		// 	students.push(student)
 		// })
-		let studentIds = studentList.map(_id => ObjectID(_id))
+		let studentIds = studentList.map(function(_id) {
+			return ObjectId(_id)
+		})
 		console.log(studentIds)
 		let students = await studentData.find({ _id: { $in: studentIds } })
 		// console.log(students)
