@@ -417,7 +417,7 @@ module.exports = {
 			console.log(student)
 			studentData.updateOne(
 				{
-					_id: student._id
+					_id: student
 					// hasProtocols: { $elemMatch: { socraticQuestion: student.socraticQuestion } }
 				},
 				{
