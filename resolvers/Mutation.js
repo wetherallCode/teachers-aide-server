@@ -422,30 +422,31 @@ module.exports = {
 				{
 					$push: {
 						hasProtocols: {
-							socraticQuestion,
-							readingSections,
-							thinkPairScore,
-							thinkPairEarnedPoints,
-							shareScore,
-							shareEarnedPoints,
-							markingPeriod,
-							assignedDate,
-							isActive
+							socraticQuestion: socraticQuestion,
+							readingSections: readingSections,
+							thinkPairScore: thinkPairScore,
+							thinkPairEarnedPoints: thinkPairEarnedPoints,
+							shareScore: shareScore,
+							shareEarnedPoints: shareEarnedPoints,
+							markingPeriod: markingPeriod,
+							assignedDate: assignedDate,
+							isActive: isActive
 						}
 					}
 				}
 			)
 		})
-		// let students = []
-		// studentList.forEach(student => {
-		// 	student = studentData.findOne({ _id: student })
-		// 	students.push(student)
-		// })
-		let studentIds = studentList.map(function(_id) {
-			return ObjectID(_id)
+		let students = []
+		studentList.forEach(student => {
+			updatedStudent = studentData.findOne({ _id: student })
+			students.push(updatedStudent)
 		})
-		let students = await studentData.find({ _id: { $in: studentIds } })
-		console.log(students)
+
+		// let studentIds = studentList.map(function(_id) {
+		// 	return ObjectID(_id)
+		// })
+		// let students = await studentData.find({ _id: { $in: studentIds } })
+		// console.log(students)
 		return students
 	},
 
