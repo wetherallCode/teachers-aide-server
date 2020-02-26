@@ -442,7 +442,7 @@ module.exports = {
 		// 	students.push(student)
 		// })
 		let studentIds = studentList.map(function(_id) {
-			return ObjectId(_id)
+			return ObjectID(_id)
 		})
 		console.log(studentIds)
 		let students = await studentData.find({ _id: { $in: studentIds } })
