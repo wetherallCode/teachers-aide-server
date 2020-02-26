@@ -449,9 +449,9 @@ module.exports = {
 		// })
 		// let students = await studentData.find({ _id: { $in: studentIds } })
 		// console.log(students)
-		const student = studentData.findOne({ _id: ObjectID(studentList[0]) })
+		const student = await studentData.findOne({ _id: ObjectID(studentList[0]) })
 		console.log(student)
-		return students
+		return null
 	},
 
 	async scoreMultipleTests(
