@@ -477,6 +477,7 @@ interface Protocol {
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
+	isPresent: Boolean
 }
 
 type SocraticQuestionProtocol implements Protocol {
@@ -490,6 +491,7 @@ type SocraticQuestionProtocol implements Protocol {
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
+	isPresent: Boolean
 }
 
 input DeleteSocraticQuestionProtocolInput {
@@ -512,6 +514,7 @@ input UpdateSocraticQuestionInput {
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
+	isPresent: Boolean
 }
 
 input SocraticQuestionProtocolInput {
@@ -525,6 +528,7 @@ input SocraticQuestionProtocolInput {
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
+	isPresent: Boolean
 }
 
 type UpdatedSocraticQuestionProtocolPayload {
