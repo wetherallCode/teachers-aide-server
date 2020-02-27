@@ -479,7 +479,7 @@ interface Protocol {
 	isActive: Boolean
 }
 
-type SocraticQuestionProtocol {
+type SocraticQuestionProtocol implements Protocol {
 	socraticQuestion: String
 	readingSections: String
 	thinkPairScore: Int
