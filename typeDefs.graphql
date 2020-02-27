@@ -424,6 +424,21 @@ enum periodName {
 	B_67
 }
 
+input StudentDetails {
+	firstName: String!
+	lastName: String!
+	nickName: String
+	schoolID: String
+	responsibilityPoints: Int!
+	period: periodName!
+	desk: Int!
+	teacher: String!
+	isHiddenFromRoster: Boolean!
+	daysAbsent: [Date]
+	hasAssignments: [StudentAssignmentsInput]
+	hasTests: [StudentTestsInput]
+}
+
 type Student {
 	_id: ID!
 	schoolID: String
@@ -440,30 +455,15 @@ type Student {
 	daysLate: [Date]
 	hasAssignments: [StudentAssignments]
 	hasTests: [StudentTests]
-	hasProtocols: [SocraticQuestionProtocol]
+	hasProtocols: [Protocol]
 }
 
-input StudentDetails {
-	firstName: String!
-	lastName: String!
-	nickName: String
-	schoolID: String
-	responsibilityPoints: Int!
-	period: periodName!
-	desk: Int!
-	teacher: String!
-	isHiddenFromRoster: Boolean!
-	daysAbsent: [Date]
-	hasAssignments: [StudentAssignmentsInput]
-	hasTests: [StudentTestsInput]
+interface Protocol {
+	period: periodName
+	markingPeriod: MarkingPeriodEnum
+	assignedDate: Date!
+	isActive: Boolean
 }
-
-# interface Protocol {
-# 	period: periodName
-# 	markingPeriod: MarkingPeriodEnum
-# 	assignedDate: Date!
-# 	isActive: Boolean
-# }
 
 type SocraticQuestionProtocol {
 	socraticQuestion: String
