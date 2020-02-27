@@ -501,13 +501,13 @@ input UpdateSocraticQuestionInput {
 }
 
 input SocraticQuestionProtocolInput {
+	period: periodName
 	socraticQuestion: String
 	readingSections: String
 	thinkPairScore: Int
 	thinkPairEarnedPoints: Int
 	shareScore: Int
 	shareEarnedPoints: Int
-	period: periodName
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
