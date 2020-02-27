@@ -66,20 +66,34 @@ type Mutation {
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
 	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
+	addAssignment(input: AddAssignmentInput): AddAssignmentPayload!
 
 	removeTest(input: RemoveTestInput): RemoveTestPayload!
 	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
 	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
 
-	createSocraticQuestionProtocol(
-		input: SocraticQuestionProtocolInput
-	): SocraticQuestionProtocolPayload
+	createSocraticQuestionProtocol(input: SocraticQuestionProtocolInput): [Student!]
 	updateSocraticQuestionProtocol(
 		input: UpdateSocraticQuestionInput
 	): UpdatedSocraticQuestionProtocolPayload
 	deleteSocraticQuestionProtocol(
 		input: DeleteSocraticQuestionProtocolInput
 	): DeletedSocraticQuestionProtocolPayload
+}
+
+input AddAssignmentInput {
+	period: periodName!
+	assignedDate: Date!
+	dueDate: Date!
+	markingPeriod: MarkingPeriodEnum
+	readingPages: String!
+	readingSections: String!
+	assignmentType: AssignmentType
+	maxScore: Int!
+}
+
+type AddAssignmentPayload {
+	students: [Student]
 }
 
 type CurrentMarkingPeriod {

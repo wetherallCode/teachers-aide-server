@@ -401,23 +401,9 @@ module.exports = {
 		},
 		{ studentData }
 	) {
-		// console.log(
-		// 	studentList,
-		// 	socraticQuestion,
-		// 	readingSections,
-		// 	thinkPairScore,
-		// 	thinkPairEarnedPoints,
-		// 	shareScore,
-		// 	shareEarnedPoints,
-		// 	markingPeriod,
-		// 	assignedDate,
-		// 	isActive
-		// )
-
 		const updatedStudents = await studentData.updateMany(
 			{
 				period: period
-				// hasProtocols: { $elemMatch: { socraticQuestion: student.socraticQuestion } }
 			},
 			{
 				$push: {
