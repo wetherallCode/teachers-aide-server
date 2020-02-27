@@ -396,7 +396,8 @@ module.exports = {
 				shareEarnedPoints,
 				markingPeriod,
 				assignedDate,
-				isActive
+				isActive,
+				isPresent
 			}
 		},
 		{ studentData }
@@ -416,7 +417,8 @@ module.exports = {
 						shareEarnedPoints: shareEarnedPoints,
 						markingPeriod: markingPeriod,
 						assignedDate: assignedDate,
-						isActive: isActive
+						isActive: isActive,
+						isPresent: isPresent
 					}
 				}
 			}
