@@ -76,9 +76,7 @@ type Mutation {
 	updateSocraticQuestionProtocol(
 		input: UpdateSocraticQuestionInput
 	): UpdatedSocraticQuestionProtocolPayload
-	deleteSocraticQuestionProtocol(
-		input: DeleteSocraticQuestionProtocolInput
-	): DeletedSocraticQuestionProtocolPayload
+	deleteSocraticQuestionProtocol(input: DeleteSocraticQuestionProtocolInput): [Student]
 }
 
 input AddAssignmentInput {
