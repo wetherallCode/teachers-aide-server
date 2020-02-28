@@ -428,6 +428,37 @@ module.exports = {
 		return students
 	},
 
+	async scoreSocraticQuestionProtocol(
+		_,
+		{
+			input: {
+				_id,
+				socraticQuestion,
+				thinkPairScore,
+				thinkPairEarnedPoints,
+				shareScore,
+				shareEarnedPoints,
+				isActive,
+				isPresent
+			}
+		},
+		{ studentData }
+	) {
+		const scoreSocraticQuestionProtocol = await studentData(
+			{ _id: ObjectID(_id), hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } } },
+			{
+				$set: {
+					thinkPairScore: thinkPairScore,
+					thinkPairEarnedPoints: thinkPairEarnedPoints,
+					shareScore: shareScore,
+					shareEarnedPoints: shareEarnedPoints
+				}
+			}
+		)
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		return student
+	},
+
 	async deleteSocraticQuestionProtocol(
 		_,
 		{ input: { period, socraticQuestion } },
