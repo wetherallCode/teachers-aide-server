@@ -383,6 +383,49 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
+	async addTest(
+		_,
+		{ period, readingPages, readingSections, assignedDate, maxScore, dueDate, markingPeriod },
+		{ studentData, classPeriodData }
+	) {
+		const test = await studentData.updateMany(
+			{ period: period },
+			{
+				$push: {
+					hasTests: {
+						assignmentType: 'TEST',
+						assignedDate: assignedDate,
+						dueDate: dueDate,
+						markingPeriod: markingPeriod,
+						readingPages: readingPages,
+						readingSections: readingSections,
+						missing: true,
+						exempt: false,
+						score: 0,
+						maxScore: maxScore
+					}
+				}
+			}
+		)
+
+		const updatedClassPeriodTest = await classPeriodData.updateMany(
+			{
+				period: period,
+				assignedDate: assignedDate
+			},
+			{
+				$set: {
+					'assignedTest.markingPeriod': markingPeriod,
+					'assignedTest.assignedDate': assignedDate,
+					'assignedTest.dueDate': dueDate,
+					'assignedTest.readingPages': readingPages,
+					'assignedTest.readingSections': readingSections,
+					'assignedTest.assignmentType': assignmentType,
+					'assignedTest.maxScore': maxScore
+				}
+			}
+		)
+	},
 	async createSocraticQuestionProtocol(
 		_,
 		{

@@ -71,6 +71,7 @@ type Mutation {
 	removeTest(input: RemoveTestInput): RemoveTestPayload!
 	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
 	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
+	addTest(input: AddTestInput): AddTestPayload!
 
 	createSocraticQuestionProtocol(input: SocraticQuestionProtocolInput): [Student!]
 	updateSocraticQuestionProtocol(
@@ -78,6 +79,21 @@ type Mutation {
 	): UpdatedSocraticQuestionProtocolPayload
 	scoreSocraticQuestionProtocol(input: ScoreSocraticQuestionProtocolInput): Student
 	deleteSocraticQuestionProtocol(input: DeleteSocraticQuestionProtocolInput): [Student]
+}
+
+input AddTestInput {
+	period: periodName
+	readingPages: String
+	readingSections: String
+	assignedDate: Date
+	dueDate: Date
+	markingPeriod: MarkingPeriodEnum
+	maxScore: Int
+}
+
+type AddTestPayload {
+	classPeriod: ClassPeriod
+	students: [Student]
 }
 
 input AddAssignmentInput {
