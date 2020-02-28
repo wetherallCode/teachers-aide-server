@@ -396,7 +396,8 @@ module.exports = {
 				assignmentType,
 				maxScore
 			}
-		}
+		},
+		{ studentData, classPeriodData }
 	) {
 		const newAssignment = await studentData.updateMany(
 			{ period: period },
@@ -448,7 +449,16 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
-	async deleteAssignment() {},
+	async deleteAssignment(
+		_,
+		{ input: { period, assignmentType, assignedDate } },
+		{ studentData, classPeriodData }
+	) {
+		const assignmentToDelete = await studentData.updateMany(
+			{ period: period },
+			{ $pull: { hasAssignments: { assignmentType: assignmentType, assignedDate: assignedDate } } }
+		)
+	},
 
 	async addTest(
 		_,
