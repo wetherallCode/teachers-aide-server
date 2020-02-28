@@ -388,6 +388,15 @@ module.exports = {
 		{ period, readingPages, readingSections, assignedDate, maxScore, dueDate, markingPeriod },
 		{ studentData, classPeriodData }
 	) {
+		console.log(
+			period,
+			readingPages,
+			readingSections,
+			assignedDate,
+			maxScore,
+			dueDate,
+			markingPeriod
+		)
 		const test = await studentData.updateMany(
 			{ period: period },
 			{
