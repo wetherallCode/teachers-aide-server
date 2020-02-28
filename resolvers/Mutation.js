@@ -420,7 +420,7 @@ module.exports = {
 					'assignedTest.dueDate': dueDate,
 					'assignedTest.readingPages': readingPages,
 					'assignedTest.readingSections': readingSections,
-					'assignedTest.assignmentType': assignmentType,
+					'assignedTest.assignmentType': 'TEST',
 					'assignedTest.maxScore': maxScore
 				}
 			}
