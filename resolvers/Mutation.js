@@ -385,7 +385,17 @@ module.exports = {
 
 	async addTest(
 		_,
-		{ period, readingPages, readingSections, assignedDate, maxScore, dueDate, markingPeriod },
+		{
+			input: {
+				period,
+				readingPages,
+				readingSections,
+				assignedDate,
+				maxScore,
+				dueDate,
+				markingPeriod
+			}
+		},
 		{ studentData, classPeriodData }
 	) {
 		console.log(
