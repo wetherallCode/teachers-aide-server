@@ -425,7 +425,14 @@ module.exports = {
 				}
 			}
 		)
+		const students = await studentData.find({ period: period }).toArray()
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+		return { students, classPeriod }
 	},
+
 	async createSocraticQuestionProtocol(
 		_,
 		{
