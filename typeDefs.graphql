@@ -63,15 +63,16 @@ type Mutation {
 	markStudentLate(_id: ID!, date: Date): Student
 	unduMarkStudentLate(_id: ID!, date: Date): Student
 
+	addAssignment(input: AddAssignmentInput): AddAssignmentPayload!
+	deleteAssignment(input: DeleteAssignmentInput): DeleteAssignmentPayload!
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
 	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
-	addAssignment(input: AddAssignmentInput): AddAssignmentPayload!
 
+	addTest(input: AddTestInput): AddTestPayload!
 	removeTest(input: RemoveTestInput): RemoveTestPayload!
 	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
 	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
-	addTest(input: AddTestInput): AddTestPayload!
 
 	createSocraticQuestionProtocol(input: SocraticQuestionProtocolInput): [Student!]
 	updateSocraticQuestionProtocol(
@@ -79,6 +80,17 @@ type Mutation {
 	): UpdatedSocraticQuestionProtocolPayload
 	scoreSocraticQuestionProtocol(input: ScoreSocraticQuestionProtocolInput): Student
 	deleteSocraticQuestionProtocol(input: DeleteSocraticQuestionProtocolInput): [Student]
+}
+
+input DeleteAssignmentInput {
+	period: periodName
+	assignmentType: AssignmentType
+	assignedDate: Date
+}
+
+type DeleteAssignmentPayload {
+	classPeriod: ClassPeriod
+	students: [Student]
 }
 
 input AddTestInput {
@@ -108,6 +120,7 @@ input AddAssignmentInput {
 }
 
 type AddAssignmentPayload {
+	classPeriod: ClassPeriod
 	students: [Student]
 }
 

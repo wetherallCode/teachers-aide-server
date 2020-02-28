@@ -383,6 +383,73 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
+	async addAssignment(
+		_,
+		{
+			input: {
+				period,
+				assignedDate,
+				dueDate,
+				markingPeriod,
+				readingPages,
+				readingSections,
+				assignmentType,
+				maxScore
+			}
+		}
+	) {
+		const newAssignment = await studentData.updateMany(
+			{ period: period },
+			{
+				$push: {
+					hasAssignments: {
+						assignmentType: assignmentType,
+						assignedDate: assignedDate,
+						dueDate: dueDate,
+						markingPeriod: markingPeriod,
+						readingPages: readingPages,
+						readingSections: readingSections,
+						missing: true,
+						exempt: false,
+						late: true,
+						score: 0,
+						maxScore: maxScore,
+						comments: ['Missing']
+					}
+				}
+			}
+		)
+
+		const newAssignmentInClassPeriod = await classPeriodData.updateOne(
+			{
+				period: period,
+				assignedDate: assignedDate
+			},
+
+			{
+				$push: {
+					assignedHomework: {
+						assignedDate: assignedDate,
+						dueDate: dueDate,
+						markingPeriod: markingPeriod,
+						readingPages: readingPages,
+						readingSections: readingSections,
+						assignmentType: assignmentType,
+						maxScore: maxScore
+					}
+				}
+			}
+		)
+		const students = await studentData.find({ period: period }).toArray()
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+		return { students, classPeriod }
+	},
+
+	async deleteAssignment() {},
+
 	async addTest(
 		_,
 		{
@@ -398,15 +465,6 @@ module.exports = {
 		},
 		{ studentData, classPeriodData }
 	) {
-		console.log(
-			period,
-			readingPages,
-			readingSections,
-			assignedDate,
-			maxScore,
-			dueDate,
-			markingPeriod
-		)
 		const test = await studentData.updateMany(
 			{ period: period },
 			{
