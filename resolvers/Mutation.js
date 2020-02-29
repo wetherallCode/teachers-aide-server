@@ -454,10 +454,26 @@ module.exports = {
 		{ input: { period, assignmentType, assignedDate } },
 		{ studentData, classPeriodData }
 	) {
+		// this mutation only works if there are singular documents of a certain assignment type
 		const assignmentToDelete = await studentData.updateMany(
 			{ period: period },
 			{ $pull: { hasAssignments: { assignmentType: assignmentType, assignedDate: assignedDate } } }
 		)
+		const assignmentToDeleteInClassPeriod = await classPeriodData.updateOne(
+			{ assignedDate: assignedDate, period: period },
+			{
+				$pull: {
+					assignedHomework: { assignmentType: assignmentType }
+				}
+			}
+		)
+
+		const students = await studentData.find({ period: period }).toArray()
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+		return { students, classPeriod }
 	},
 
 	async addTest(
