@@ -581,6 +581,26 @@ module.exports = {
 		return students
 	},
 
+	async updateSocraticQuestionProtocol(
+		_,
+		{ period, markingPeriod, socraticQuestion, assignedDate, readingSections, isActive },
+		{ studentData }
+	) {
+		const updatedStudent = await studentData.updateMany(
+			{ period: period },
+			{
+				$set: {
+					period: period,
+					markingPeriod: markingPeriod,
+					socraticQuestion: socraticQuestion,
+					assignedDate: assignedDate,
+					readingSections: readingSections,
+					isActive: isActive
+				}
+			}
+		)
+	},
+
 	async scoreSocraticQuestionProtocol(
 		_,
 		{
