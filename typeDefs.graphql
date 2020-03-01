@@ -511,6 +511,7 @@ interface Protocol {
 
 type SocraticQuestionProtocol implements Protocol {
 	socraticQuestion: String
+	socraticQuestionType: socraticQuestionsTypeEnum
 	readingSections: String
 	thinkPairScore: Int
 	thinkPairEarnedPoints: Int
@@ -548,6 +549,7 @@ input UpdateSocraticQuestionInput {
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	socraticQuestion: String
+	socraticQuestionType: socraticQuestionsTypeEnum
 	readingSections: String
 	isActive: Boolean
 }
@@ -555,6 +557,7 @@ input UpdateSocraticQuestionInput {
 input SocraticQuestionProtocolInput {
 	period: periodName
 	socraticQuestion: String
+	socraticQuestionType: socraticQuestionsTypeEnum
 	readingSections: String
 	thinkPairScore: Int
 	thinkPairEarnedPoints: Int

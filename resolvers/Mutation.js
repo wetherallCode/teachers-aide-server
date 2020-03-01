@@ -542,6 +542,7 @@ module.exports = {
 			input: {
 				period,
 				socraticQuestion,
+				socraticQuestionType,
 				readingSections,
 				thinkPairScore,
 				thinkPairEarnedPoints,
@@ -563,6 +564,7 @@ module.exports = {
 				$push: {
 					hasProtocols: {
 						socraticQuestion: socraticQuestion,
+						socraticQuestionType: socraticQuestionType,
 						readingSections: readingSections,
 						thinkPairScore: thinkPairScore,
 						thinkPairEarnedPoints: thinkPairEarnedPoints,
@@ -583,7 +585,15 @@ module.exports = {
 
 	async updateSocraticQuestionProtocol(
 		_,
-		{ period, markingPeriod, socraticQuestion, assignedDate, readingSections, isActive },
+		{
+			period,
+			markingPeriod,
+			socraticQuestion,
+			socraticQuestionType,
+			assignedDate,
+			readingSections,
+			isActive
+		},
 		{ studentData }
 	) {
 		const updatedStudent = await studentData.updateMany(
@@ -593,6 +603,7 @@ module.exports = {
 					period: period,
 					markingPeriod: markingPeriod,
 					socraticQuestion: socraticQuestion,
+					socraticQuestionType: socraticQuestionType,
 					assignedDate: assignedDate,
 					readingSections: readingSections,
 					isActive: isActive
