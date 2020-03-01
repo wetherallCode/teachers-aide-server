@@ -302,11 +302,11 @@ type AssignedTest {
 }
 
 input AssignedHomeworkInput {
-	assignedDate: Date!
-	dueDate: Date!
+	assignedDate: Date
+	dueDate: Date
 	markingPeriod: MarkingPeriodEnum
-	readingPages: String!
-	readingSections: String!
+	readingPages: String
+	readingSections: String
 	assignmentType: AssignmentType
 	maxScore: Int
 }
