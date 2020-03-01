@@ -559,10 +559,6 @@ input SocraticQuestionProtocolInput {
 	socraticQuestion: String
 	socraticQuestionType: socraticQuestionsTypeEnum
 	readingSections: String
-	thinkPairScore: Int
-	thinkPairEarnedPoints: Int
-	shareScore: Int
-	shareEarnedPoints: Int
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
