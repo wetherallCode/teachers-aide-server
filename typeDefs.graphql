@@ -67,6 +67,7 @@ type Mutation {
 	deleteAssignment(input: DeleteAssignmentInput): DeleteAssignmentPayload!
 	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
 	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
+	# acceptParentContact(input: AcceptParentContactInput): Student
 	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
 
 	addTest(input: AddTestInput): AddTestPayload!
@@ -81,6 +82,10 @@ type Mutation {
 	scoreSocraticQuestionProtocol(input: ScoreSocraticQuestionProtocolInput): Student
 	deleteSocraticQuestionProtocol(input: DeleteSocraticQuestionProtocolInput): [Student]
 }
+
+# input AcceptParentContactInput {
+
+# }
 
 input DeleteAssignmentInput {
 	period: periodName
@@ -275,11 +280,11 @@ input ClassPeriodInput {
 }
 
 input AssignedTestInput {
-	assignedDate: Date!
-	dueDate: Date!
+	assignedDate: Date
+	dueDate: Date
 	markingPeriod: MarkingPeriodEnum
-	readingPages: String!
-	readingSections: String!
+	readingPages: String
+	readingSections: String
 	assignmentType: AssignmentType
 	maxScore: Int
 	scored: Boolean
