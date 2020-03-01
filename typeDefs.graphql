@@ -562,7 +562,6 @@ input SocraticQuestionProtocolInput {
 	markingPeriod: MarkingPeriodEnum
 	assignedDate: Date!
 	isActive: Boolean
-	isPresent: Boolean
 }
 
 type UpdatedSocraticQuestionProtocolPayload {

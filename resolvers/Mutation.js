@@ -546,8 +546,7 @@ module.exports = {
 				readingSections,
 				markingPeriod,
 				assignedDate,
-				isActive,
-				isPresent
+				isActive
 			}
 		},
 		{ studentData }
@@ -568,8 +567,7 @@ module.exports = {
 						shareEarnedPoints: 0,
 						markingPeriod: markingPeriod,
 						assignedDate: assignedDate,
-						isActive: isActive,
-						isPresent: isPresent
+						isActive: isActive
 					}
 				}
 			}
@@ -634,7 +632,8 @@ module.exports = {
 					thinkPairEarnedPoints: thinkPairEarnedPoints,
 					shareScore: shareScore,
 					shareEarnedPoints: shareEarnedPoints
-				}
+				},
+				$inc: { responsibilityPoints: thinkPairEarnedPoints + shareEarnedPoints }
 			}
 		)
 		const student = await studentData.findOne({ _id: ObjectID(_id) })
