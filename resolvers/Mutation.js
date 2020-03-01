@@ -599,6 +599,8 @@ module.exports = {
 				}
 			}
 		)
+		const students = await studentData.find({ period: period }).toArray()
+		return students
 	},
 
 	async scoreSocraticQuestionProtocol(
