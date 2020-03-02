@@ -74,7 +74,9 @@ type Mutation {
 	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
 	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
 
-	createSocraticQuestionProtocol(input: SocraticQuestionProtocolInput): [Student!]
+	createSocraticQuestionProtocol(
+		input: SocraticQuestionProtocolInput
+	): SocraticQuestionProtocolPayload
 	updateSocraticQuestionProtocol(
 		input: UpdateSocraticQuestionInput
 	): UpdatedSocraticQuestionProtocolPayload
@@ -263,8 +265,23 @@ type ClassPeriod {
 	absentStudents: [Student]
 	assignedHomework: [AssignedHomework]
 	assignedTest: AssignedTest
+	assignedProtocols: [ClassProtocols]
 }
 
+interface ClassProtocols {
+	isActive: Boolean
+}
+
+type SocraticQuestionProtocolForClassPeriod implements ClassProtocols {
+	socraticQuestion: String
+	socraticQuestionType: socraticQuestionsTypeEnum
+	isActive: Boolean
+}
+
+# input ClassProtocolInput {
+# 	question: String
+# 	isActive: Boolean
+# }
 input ClassPeriodInput {
 	grade: GradeLevelEnum
 	assignedLesson: String
@@ -538,9 +555,11 @@ input ScoreSocraticQuestionProtocolInput {
 input DeleteSocraticQuestionProtocolInput {
 	period: periodName
 	socraticQuestion: String
+	assignedDate: Date
 }
 
 type DeletedSocraticQuestionProtocolPayload {
+	# classPeriod: ClassPeriod
 	students: [Student]
 }
 
@@ -569,6 +588,7 @@ type UpdatedSocraticQuestionProtocolPayload {
 }
 
 type SocraticQuestionProtocolPayload {
+	classPeriod: ClassPeriod
 	students: [Student]
 }
 

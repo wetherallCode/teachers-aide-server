@@ -14,5 +14,12 @@ module.exports = {
 				return 'SocraticQuestionProtocol'
 			}
 		}
+	},
+	ClassProtocols: {
+		__resolveType: parent => {
+			if (parent.socraticQuestion) {
+				return 'SocraticQuestionProtocolForClassPeriod'
+			}
+		}
 	}
 }

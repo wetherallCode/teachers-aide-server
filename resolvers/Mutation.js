@@ -549,7 +549,7 @@ module.exports = {
 				isActive
 			}
 		},
-		{ studentData }
+		{ studentData, classPeriodData }
 	) {
 		const updatedStudents = await studentData.updateMany(
 			{
@@ -572,9 +572,24 @@ module.exports = {
 				}
 			}
 		)
+		const updatedClassPeriod = await classPeriodData.updateOne(
+			{ assignedDate: assignedDate, period: period },
+			{
+				$push: {
+					assignedProtocols: {
+						socraticQuestion: socraticQuestion,
+						socraticQuestionType: socraticQuestionType,
+						isActive: true
+					}
+				}
+			}
+		)
 		const students = await studentData.find({ period: period }).toArray()
-
-		return students
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+		return { students, classPeriod }
 	},
 
 	async updateSocraticQuestionProtocol(
@@ -642,14 +657,17 @@ module.exports = {
 
 	async deleteSocraticQuestionProtocol(
 		_,
-		{ input: { period, socraticQuestion } },
-		{ studentData }
+		{ input: { period, socraticQuestion, assignedDate } },
+		{ studentData, classPeriodData }
 	) {
 		const deletedSocraticQuestionProtocol = await studentData.updateMany(
 			{ period: period },
 			{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
 		)
-
+		const deletedSocraticQuestionProtocolForClass = await classPeriodData.updateOne({
+			assignedDate: assignedDate,
+			period: period
+		})
 		const students = await studentData.find({ period: period }).toArray()
 		return students
 	},
