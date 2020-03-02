@@ -592,35 +592,34 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
-	async updateSocraticQuestionProtocol(
+	async setProtcolIsActive(
 		_,
-		{
-			period,
-			markingPeriod,
-			socraticQuestion,
-			socraticQuestionType,
-			assignedDate,
-			readingSections,
-			isActive
-		},
-		{ studentData }
+		{ period, socraticQuestion, assignedDate, isActive },
+		{ studentData, classPeriodData }
 	) {
 		const updatedStudent = await studentData.updateMany(
-			{ period: period },
+			{ period: period, hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } } },
 			{
 				$set: {
-					period: period,
-					markingPeriod: markingPeriod,
-					socraticQuestion: socraticQuestion,
-					socraticQuestionType: socraticQuestionType,
-					assignedDate: assignedDate,
-					readingSections: readingSections,
-					isActive: isActive
+					'hasProtocols.$.isActive': isActive
 				}
 			}
 		)
+		const updatedClassPeriod = await classPeriodData.updateOne(
+			{
+				period: period,
+				assignedProtocols: {
+					$elemMatch: { assignedDate: assignedDate, socraticQuestion: socraticQuestion }
+				}
+			},
+			{ $set: { 'assignedProtocols.$.isActive': isActive } }
+		)
 		const students = await studentData.find({ period: period }).toArray()
-		return students
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+		return { students, classPeriod }
 	},
 
 	async scoreSocraticQuestionProtocol(
