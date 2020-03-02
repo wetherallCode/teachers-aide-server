@@ -592,7 +592,7 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
-	async setProtcolIsActive(
+	async setSocraticQuestionProtcolIsActive(
 		_,
 		{ period, socraticQuestion, assignedDate, isActive },
 		{ studentData, classPeriodData }

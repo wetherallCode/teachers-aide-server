@@ -77,7 +77,9 @@ type Mutation {
 	createSocraticQuestionProtocol(
 		input: SocraticQuestionProtocolInput
 	): SocraticQuestionProtocolPayload
-	setProtcolIsActive(input: SetProtocolIsActiveInput): SetProtcolIsActivePayLoad
+	setSocraticQuestionProtcolIsActive(
+		input: SetSocraticQuestionProtocolIsActiveInput
+	): SetSocraticQuestionProtcolIsActivePayLoad
 	scoreSocraticQuestionProtocol(input: ScoreSocraticQuestionProtocolInput): Student
 	deleteSocraticQuestionProtocol(input: DeleteSocraticQuestionProtocolInput): [Student]
 }
@@ -561,7 +563,7 @@ type DeletedSocraticQuestionProtocolPayload {
 	students: [Student]
 }
 
-input SetProtocolIsActiveInput {
+input SetSocraticQuestionProtocolIsActiveInput {
 	period: periodName
 	assignedDate: Date!
 	socraticQuestion: String
@@ -578,7 +580,7 @@ input SocraticQuestionProtocolInput {
 	isActive: Boolean
 }
 
-type SetProtcolIsActivePayLoad {
+type SetSocraticQuestionProtcolIsActivePayLoad {
 	classPeriod: ClassPeriod
 	students: [Student]
 }
