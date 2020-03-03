@@ -223,7 +223,8 @@ module.exports = {
 			assignedLesson: lessonName,
 			period,
 			assignedHomework,
-			assignedTest
+			assignedTest,
+			assignedProtocols: []
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
