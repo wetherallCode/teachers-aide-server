@@ -551,6 +551,16 @@ module.exports = {
 		},
 		{ studentData, classPeriodData }
 	) {
+		const socraticQuestionCheck = await classPeriodData.findOne({
+			period: period,
+			assignedProtocols: {
+				$elemMatch: { assignedDate: assignedDate, socraticQuestion: socraticQuestion }
+			}
+		})
+		if (socraticQuestion.socraticQuestion === socraticQuestion) {
+			throw new Error('Question has already been asked')
+		}
+
 		const updatedStudents = await studentData.updateMany(
 			{
 				period: period
