@@ -671,10 +671,11 @@ module.exports = {
 		{ input: { period, socraticQuestion, assignedDate } },
 		{ studentData, classPeriodData }
 	) {
-		const deletedSocraticQuestionProtocol = await studentData.updateMany(
-			{ period: period },
-			{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
-		)
+		console.log(period, socraticQuestion, assignedDate)
+		// const deletedSocraticQuestionProtocol = await studentData.updateMany(
+		// 	{ period: period },
+		// 	{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
+		// )
 		const deletedSocraticQuestionProtocolForClass = await classPeriodData.updateOne({
 			assignedDate: assignedDate,
 			period: period
