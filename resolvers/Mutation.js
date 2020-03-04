@@ -676,10 +676,17 @@ module.exports = {
 		// 	{ period: period },
 		// 	{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
 		// )
-		const deletedSocraticQuestionProtocolForClass = await classPeriodData.updateOne({
-			assignedDate: assignedDate,
-			period: period
-		})
+		const deletedSocraticQuestionProtocolForClass = await classPeriodData.updateOne(
+			{
+				assignedDate: assignedDate,
+				period: period
+			},
+			{
+				$pull: {
+					assignedProtocols: { socraticQuestion: socraticQuestion }
+				}
+			}
+		)
 		const students = await studentData.find({ period: period }).toArray()
 		const classPeriod = await classPeriodData.findOne({
 			period: period,
