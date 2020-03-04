@@ -559,7 +559,7 @@ input DeleteSocraticQuestionProtocolInput {
 }
 
 type DeletedSocraticQuestionProtocolPayload {
-	# classPeriod: ClassPeriod
+	classPeriod: ClassPeriod
 	students: [Student]
 }
 
