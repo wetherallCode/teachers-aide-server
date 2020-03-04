@@ -558,31 +558,32 @@ module.exports = {
 				$elemMatch: { assignedDate: assignedDate, socraticQuestion: socraticQuestion }
 			}
 		})
-		if (socraticQuestion.socraticQuestion === socraticQuestion) {
+
+		if (socraticQuestion.socraticQuestion === socraticQuestionCheck) {
 			throw new Error('Question has already been asked')
 		}
 
-		const updatedStudents = await studentData.updateMany(
-			{
-				period: period
-			},
-			{
-				$push: {
-					hasProtocols: {
-						socraticQuestion: socraticQuestion,
-						socraticQuestionType: socraticQuestionType,
-						readingSections: readingSections,
-						thinkPairScore: 0,
-						thinkPairEarnedPoints: 0,
-						shareScore: 0,
-						shareEarnedPoints: 0,
-						markingPeriod: markingPeriod,
-						assignedDate: assignedDate,
-						isActive: isActive
-					}
-				}
-			}
-		)
+		// const updatedStudents = await studentData.updateMany(
+		// 	{
+		// 		period: period
+		// 	},
+		// 	{
+		// 		$push: {
+		// 			hasProtocols: {
+		// 				socraticQuestion: socraticQuestion,
+		// 				socraticQuestionType: socraticQuestionType,
+		// 				readingSections: readingSections,
+		// 				thinkPairScore: 0,
+		// 				thinkPairEarnedPoints: 0,
+		// 				shareScore: 0,
+		// 				shareEarnedPoints: 0,
+		// 				markingPeriod: markingPeriod,
+		// 				assignedDate: assignedDate,
+		// 				isActive: isActive
+		// 			}
+		// 		}
+		// 	}
+		// )
 		const updatedClassPeriod = await classPeriodData.updateOne(
 			{ assignedDate: assignedDate, period: period },
 			{
