@@ -563,27 +563,27 @@ module.exports = {
 			throw new Error('Question has already been asked')
 		}
 
-		// const updatedStudents = await studentData.updateMany(
-		// 	{
-		// 		period: period
-		// 	},
-		// 	{
-		// 		$push: {
-		// 			hasProtocols: {
-		// 				socraticQuestion: socraticQuestion,
-		// 				socraticQuestionType: socraticQuestionType,
-		// 				readingSections: readingSections,
-		// 				thinkPairScore: 0,
-		// 				thinkPairEarnedPoints: 0,
-		// 				shareScore: 0,
-		// 				shareEarnedPoints: 0,
-		// 				markingPeriod: markingPeriod,
-		// 				assignedDate: assignedDate,
-		// 				isActive: isActive
-		// 			}
-		// 		}
-		// 	}
-		// )
+		const updatedStudents = await studentData.updateMany(
+			{
+				period: period
+			},
+			{
+				$push: {
+					hasProtocols: {
+						socraticQuestion: socraticQuestion,
+						socraticQuestionType: socraticQuestionType,
+						readingSections: readingSections,
+						thinkPairScore: 0,
+						thinkPairEarnedPoints: 0,
+						shareScore: 0,
+						shareEarnedPoints: 0,
+						markingPeriod: markingPeriod,
+						assignedDate: assignedDate,
+						isActive: isActive
+					}
+				}
+			}
+		)
 		const updatedClassPeriod = await classPeriodData.updateOne(
 			{ assignedDate: assignedDate, period: period },
 			{
@@ -671,11 +671,10 @@ module.exports = {
 		{ input: { period, socraticQuestion, assignedDate } },
 		{ studentData, classPeriodData }
 	) {
-		console.log(period, socraticQuestion, assignedDate)
-		// const deletedSocraticQuestionProtocol = await studentData.updateMany(
-		// 	{ period: period },
-		// 	{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
-		// )
+		const deletedSocraticQuestionProtocol = await studentData.updateMany(
+			{ period: period },
+			{ $pull: { hasProtocols: { socraticQuestion: socraticQuestion } } }
+		)
 		const deletedSocraticQuestionProtocolForClass = await classPeriodData.updateOne(
 			{
 				assignedDate: assignedDate,
