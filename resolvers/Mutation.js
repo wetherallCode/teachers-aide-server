@@ -622,10 +622,10 @@ module.exports = {
 		const updatedClassPeriod = await classPeriodData.updateOne(
 			{
 				period: period,
-				assignedDate: assignedDate
-				// assignedProtocols: {
-				// 	$elemMatch: { socraticQuestion: socraticQuestion }
-				// }
+				assignedDate: assignedDate,
+				assignedProtocols: {
+					$elemMatch: { socraticQuestion: socraticQuestion }
+				}
 			},
 			{ $set: { 'assignedProtocols.$.isActive': isActive } }
 		)
