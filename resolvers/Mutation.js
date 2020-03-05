@@ -611,6 +611,7 @@ module.exports = {
 		{ period, socraticQuestion, assignedDate, isActive },
 		{ studentData, classPeriodData }
 	) {
+		console.log(period, socraticQuestion, assignedDate, isActive)
 		const updatedStudent = await studentData.updateMany(
 			{ period: period, hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } } },
 			{
