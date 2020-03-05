@@ -552,40 +552,43 @@ module.exports = {
 		},
 		{ studentData, classPeriodData }
 	) {
-		const socraticQuestionCheck = await classPeriodData.findOne({
+		const classPeriodInfo = await classPeriodData.findOne({
 			period: period,
 			assignedDate: assignedDate
 			// assignedProtocols: {
 			// 	$elemMatch: { socraticQuestion: socraticQuestion }
 			// }
 		})
-		console.log(socraticQuestionCheck.hasProtocols)
-
-		// if (socraticQuestionCheck.hasProtocols.includes()) {
+		// console.log(classPeriodInfo.hasProtocols)
+		const socraticQuestionCheck = classPeriodInfo.hasProtocols.some(
+			protocol => protocol.socraticQuestion === socraticQuestion
+		)
+		console.log(socraticQuestionCheck)
+		// if () {
 		// 	throw new Error('Question has already been asked')
 		// }
 
-		const updatedStudents = await studentData.updateMany(
-			{
-				period: period
-			},
-			{
-				$push: {
-					hasProtocols: {
-						socraticQuestion: socraticQuestion,
-						socraticQuestionType: socraticQuestionType,
-						readingSections: readingSections,
-						thinkPairScore: 0,
-						thinkPairEarnedPoints: 0,
-						shareScore: 0,
-						shareEarnedPoints: 0,
-						markingPeriod: markingPeriod,
-						assignedDate: assignedDate,
-						isActive: isActive
-					}
-				}
-			}
-		)
+		// const updatedStudents = await studentData.updateMany(
+		// 	{
+		// 		period: period
+		// 	},
+		// 	{
+		// 		$push: {
+		// 			hasProtocols: {
+		// 				socraticQuestion: socraticQuestion,
+		// 				socraticQuestionType: socraticQuestionType,
+		// 				readingSections: readingSections,
+		// 				thinkPairScore: 0,
+		// 				thinkPairEarnedPoints: 0,
+		// 				shareScore: 0,
+		// 				shareEarnedPoints: 0,
+		// 				markingPeriod: markingPeriod,
+		// 				assignedDate: assignedDate,
+		// 				isActive: isActive
+		// 			}
+		// 		}
+		// 	}
+		// )
 		const updatedClassPeriod = await classPeriodData.updateOne(
 			{ assignedDate: assignedDate, period: period },
 			{
@@ -611,7 +614,6 @@ module.exports = {
 		{ input: { period, socraticQuestion, assignedDate, isActive } },
 		{ studentData, classPeriodData }
 	) {
-		console.log(period, socraticQuestion, assignedDate, isActive)
 		const updatedStudent = await studentData.updateMany(
 			{ period: period, hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } } },
 			{
