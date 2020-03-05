@@ -563,10 +563,10 @@ module.exports = {
 		const socraticQuestionCheck = classPeriodInfo.assignedProtocols.some(
 			protocol => protocol.socraticQuestion === socraticQuestion
 		)
-		console.log(socraticQuestionCheck)
-		// if () {
-		// 	throw new Error('Question has already been asked')
-		// }
+
+		if (socraticQuestionCheck) {
+			throw new Error('Question has already been asked')
+		}
 
 		// const updatedStudents = await studentData.updateMany(
 		// 	{
