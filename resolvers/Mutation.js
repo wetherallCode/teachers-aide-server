@@ -608,7 +608,7 @@ module.exports = {
 
 	async setSocraticQuestionProtcolIsActive(
 		_,
-		{ period, socraticQuestion, assignedDate, isActive },
+		{ input: { period, socraticQuestion, assignedDate, isActive } },
 		{ studentData, classPeriodData }
 	) {
 		console.log(period, socraticQuestion, assignedDate, isActive)
