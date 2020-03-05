@@ -560,7 +560,7 @@ module.exports = {
 			// }
 		})
 		// console.log(classPeriodInfo.hasProtocols)
-		const socraticQuestionCheck = classPeriodInfo.hasProtocols.some(
+		const socraticQuestionCheck = classPeriodInfo.assignedProtocols.some(
 			protocol => protocol.socraticQuestion === socraticQuestion
 		)
 		console.log(socraticQuestionCheck)
