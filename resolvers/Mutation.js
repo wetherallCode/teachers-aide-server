@@ -554,14 +554,16 @@ module.exports = {
 	) {
 		const socraticQuestionCheck = await classPeriodData.findOne({
 			period: period,
-			assignedProtocols: {
-				$elemMatch: { assignedDate: assignedDate, socraticQuestion: socraticQuestion }
-			}
+			assignedDate: assignedDate
+			// assignedProtocols: {
+			// 	$elemMatch: { socraticQuestion: socraticQuestion }
+			// }
 		})
+		console.log(socraticQuestionCheck.hasProtocols)
 
-		if (socraticQuestion.socraticQuestion === socraticQuestionCheck) {
-			throw new Error('Question has already been asked')
-		}
+		// if (socraticQuestionCheck.hasProtocols.includes()) {
+		// 	throw new Error('Question has already been asked')
+		// }
 
 		const updatedStudents = await studentData.updateMany(
 			{
@@ -620,9 +622,10 @@ module.exports = {
 		const updatedClassPeriod = await classPeriodData.updateOne(
 			{
 				period: period,
-				assignedProtocols: {
-					$elemMatch: { assignedDate: assignedDate, socraticQuestion: socraticQuestion }
-				}
+				assignedDate: assignedDate
+				// assignedProtocols: {
+				// 	$elemMatch: { socraticQuestion: socraticQuestion }
+				// }
 			},
 			{ $set: { 'assignedProtocols.$.isActive': isActive } }
 		)
