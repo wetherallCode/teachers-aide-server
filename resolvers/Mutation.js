@@ -636,32 +636,84 @@ module.exports = {
 		return { students, classPeriod }
 	},
 
-	async scoreSocraticQuestionProtocol(
+	async scoreSocraticQuestionProtocolThinkPairGrade(
 		_,
-		{
-			input: {
-				_id,
-				socraticQuestion,
-				thinkPairScore,
-				thinkPairEarnedPoints,
-				shareScore,
-				shareEarnedPoints,
-				isActive,
-				isPresent
-			}
-		},
+		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints, isActive } },
 		{ studentData }
 	) {
-		const scoreSocraticQuestionProtocol = await studentData(
-			{ _id: ObjectID(_id), hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } } },
+		const scoreSocraticQuestionProtocol = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+			},
 			{
 				$set: {
 					thinkPairScore: thinkPairScore,
-					thinkPairEarnedPoints: thinkPairEarnedPoints,
+					thinkPairEarnedPoints: thinkPairEarnedPoints
+				},
+				$inc: { responsibilityPoints: thinkPairEarnedPoints }
+			}
+		)
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		return student
+	},
+
+	async scoreSocraticQuestionProtocolShareGrade(
+		_,
+		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints, isActive } },
+		{ studentData }
+	) {
+		const scoreSocraticQuestionProtocol = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+			},
+			{
+				$set: {
 					shareScore: shareScore,
 					shareEarnedPoints: shareEarnedPoints
 				},
-				$inc: { responsibilityPoints: thinkPairEarnedPoints + shareEarnedPoints }
+				$inc: { responsibilityPoints: shareEarnedPoints }
+			}
+		)
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		return student
+	},
+
+	async setSocraticQuestionProtocolIsPresent(
+		_,
+		{ input: { _id, socraticQuestion, isActive, isPresent } },
+		{ studentData }
+	) {
+		const scoreSocraticQuestionProtocol = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+			},
+			{
+				$set: {
+					'hasProtocols.&.isPresent': isPresent
+				}
+			}
+		)
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		return student
+	},
+
+	async undoSetSocraticQuestionProtocolIsPresent(
+		_,
+		{ input: { _id, socraticQuestion, isActive } },
+		{ studentData }
+	) {
+		const scoreSocraticQuestionProtocol = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+			},
+			{
+				$set: {
+					'hasProtocols.&.isPresent': true
+				}
 			}
 		)
 		const student = await studentData.findOne({ _id: ObjectID(_id) })
