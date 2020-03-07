@@ -589,7 +589,8 @@ module.exports = {
 						shareEarnedPoints: 0,
 						markingPeriod: markingPeriod,
 						assignedDate: assignedDate,
-						isActive: isActive
+						isActive: isActive,
+						isPresent: false
 					}
 				}
 			}
@@ -698,11 +699,11 @@ module.exports = {
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
-				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
 			},
 			{
 				$set: {
-					'hasProtocols.&.isPresent': isPresent
+					'hasProtocols.$.isPresent': isPresent
 				}
 			}
 		)
