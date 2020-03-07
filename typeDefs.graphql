@@ -505,7 +505,7 @@ input StudentDetails {
 	daysAbsent: [Date]
 	hasAssignments: [StudentAssignmentsInput]
 	hasTests: [StudentTestsInput]
-	# hasProtocols: []
+	hasProtocols: [ProtocolInput]
 }
 
 type Student {
@@ -533,6 +533,12 @@ interface Protocol {
 	assignedDate: Date!
 	isActive: Boolean
 	isPresent: Boolean
+}
+input ProtocolInput {
+	period: periodName
+	markingPeriod: MarkingPeriodEnum
+	assignedDate: Date!
+	isActive: Boolean
 }
 
 type SocraticQuestionProtocol implements Protocol {
