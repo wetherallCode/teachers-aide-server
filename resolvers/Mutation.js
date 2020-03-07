@@ -555,11 +555,7 @@ module.exports = {
 		const classPeriodInfo = await classPeriodData.findOne({
 			period: period,
 			assignedDate: assignedDate
-			// assignedProtocols: {
-			// 	$elemMatch: { socraticQuestion: socraticQuestion }
-			// }
 		})
-		// console.log(classPeriodInfo.hasProtocols)
 		const socraticQuestionCheck = classPeriodInfo.assignedProtocols.some(
 			protocol => protocol.socraticQuestion === socraticQuestion
 		)
@@ -568,27 +564,27 @@ module.exports = {
 			throw new Error('Question has already been asked')
 		}
 
-		// const updatedStudents = await studentData.updateMany(
-		// 	{
-		// 		period: period
-		// 	},
-		// 	{
-		// 		$push: {
-		// 			hasProtocols: {
-		// 				socraticQuestion: socraticQuestion,
-		// 				socraticQuestionType: socraticQuestionType,
-		// 				readingSections: readingSections,
-		// 				thinkPairScore: 0,
-		// 				thinkPairEarnedPoints: 0,
-		// 				shareScore: 0,
-		// 				shareEarnedPoints: 0,
-		// 				markingPeriod: markingPeriod,
-		// 				assignedDate: assignedDate,
-		// 				isActive: isActive
-		// 			}
-		// 		}
-		// 	}
-		// )
+		const updatedStudents = await studentData.updateMany(
+			{
+				period: period
+			},
+			{
+				$push: {
+					hasProtocols: {
+						socraticQuestion: socraticQuestion,
+						socraticQuestionType: socraticQuestionType,
+						readingSections: readingSections,
+						thinkPairScore: 0,
+						thinkPairEarnedPoints: 0,
+						shareScore: 0,
+						shareEarnedPoints: 0,
+						markingPeriod: markingPeriod,
+						assignedDate: assignedDate,
+						isActive: isActive
+					}
+				}
+			}
+		)
 		const updatedClassPeriod = await classPeriodData.updateOne(
 			{ assignedDate: assignedDate, period: period },
 			{
