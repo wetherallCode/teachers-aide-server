@@ -503,6 +503,7 @@ input StudentDetails {
 	teacher: String!
 	isHiddenFromRoster: Boolean!
 	daysAbsent: [Date]
+	daysLate: [Date]
 	hasAssignments: [StudentAssignmentsInput]
 	hasTests: [StudentTestsInput]
 	hasProtocols: [ProtocolInput]

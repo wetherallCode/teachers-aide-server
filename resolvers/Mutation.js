@@ -67,7 +67,7 @@ module.exports = {
 	},
 
 	async addStudent(parent, args, { studentData }) {
-		console.log(args)
+		console.log(args.input)
 		let newStudent = {
 			...args.input
 		}
