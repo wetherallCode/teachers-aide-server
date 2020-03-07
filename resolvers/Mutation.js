@@ -81,6 +81,8 @@ module.exports = {
 			{ _id: ObjectID(_id) },
 			{ $push: { daysAbsent: [] } }
 		)
+		const student = await studentData.findOone({ _id: ObjectID(_id) })
+		return student
 	},
 
 	async updateStudent(
