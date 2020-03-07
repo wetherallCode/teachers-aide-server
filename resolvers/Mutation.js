@@ -67,7 +67,6 @@ module.exports = {
 	},
 
 	async addStudent(parent, args, { studentData }) {
-		console.log(args.input)
 		let newStudent = {
 			...args.input
 		}
@@ -695,6 +694,7 @@ module.exports = {
 		{ input: { _id, socraticQuestion, isActive, isPresent } },
 		{ studentData }
 	) {
+		console.log(_id, socraticQuestion, isActive, isPresent)
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
