@@ -41,7 +41,7 @@ type Mutation {
 	addStudent(input: StudentDetails!): Student!
 	removeStudent(_id: ID!): RemoveStudentPayLoad!
 	updateStudent(input: UpdateStudentInput!): Student!
-
+	createDaysAbsentArray(_id: ID!): Student
 	addLearningStyle(_id: ID!, learningStyle: String!): Student
 
 	updateResponsibilityPoints(input: UpdateResponsibilityPointsInput): Student!

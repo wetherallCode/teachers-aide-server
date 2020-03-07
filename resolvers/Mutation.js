@@ -76,6 +76,13 @@ module.exports = {
 		return newStudent
 	},
 
+	async createDaysAbsentArray(_, { _id }, { studentData }) {
+		const studentToUpdate = await studentData.updateOne(
+			{ _id: ObjectID(_id) },
+			{ $push: { daysAbsent: [] } }
+		)
+	},
+
 	async updateStudent(
 		parent,
 		{
