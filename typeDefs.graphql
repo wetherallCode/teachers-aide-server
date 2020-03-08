@@ -490,6 +490,7 @@ enum periodName {
 	B_34
 	A_67
 	B_67
+	Reserved
 }
 
 input StudentDetails {
