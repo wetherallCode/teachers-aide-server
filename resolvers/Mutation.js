@@ -661,9 +661,9 @@ module.exports = {
 			},
 			{
 				$set: {
-					thinkPairScore: thinkPairScore,
-					thinkPairEarnedPoints: thinkPairEarnedPoints,
-					thinkPairComments: thinkPairComments
+					'hasProtocols.$.thinkPairScore': thinkPairScore,
+					'hasProtocols.$.thinkPairEarnedPoints': thinkPairEarnedPoints,
+					'hasProtocols.$.thinkPairComments': thinkPairComments
 				},
 				$inc: { responsibilityPoints: thinkPairEarnedPoints }
 			}
@@ -684,9 +684,9 @@ module.exports = {
 			},
 			{
 				$set: {
-					thinkPairScore: 0,
-					thinkPairEarnedPoints: 0,
-					thinkPairComments: []
+					'hasProtocols.$.thinkPairScore': 0,
+					'hasProtocols.$.thinkPairEarnedPoints': 0,
+					'hasProtocols.$.thinkPairComments': []
 				},
 				$inc: { responsibilityPoints: -thinkPairEarnedPoints }
 			}
