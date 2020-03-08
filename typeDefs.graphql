@@ -77,17 +77,28 @@ type Mutation {
 	createSocraticQuestionProtocol(
 		input: SocraticQuestionProtocolInput
 	): SocraticQuestionProtocolPayload
+
 	setSocraticQuestionProtcolIsActive(
 		input: SetSocraticQuestionProtocolIsActiveInput
 	): SetSocraticQuestionProtcolIsActivePayLoad
 	setSocraticQuestionProtocolIsPresent(input: SetSocraticQuestionProtcolIsPresentInput): Student
+
 	undoSetSocraticQuestionProtocolIsPresent(
 		input: UndoSetSocraticQuestionProtcolIsPresentInput
 	): Student
+
 	scoreSocraticQuestionProtocolThinkPairGrade(
 		input: ScoreSocraticQuestionProtocolThinkPairInput
 	): Student
+	undoScoreSocraticQuestionProtocolThinkPairGrade(
+		input: UndoScoreSocraticQuestionProtocolThinkPairInput
+	): Student
+
 	scoreSocraticQuestionProtocolShareGrade(input: ScoreSocraticQuestionProtocolShareInput): Student
+	undoScoreSocraticQuestionProtocolShareGrade(
+		input: UndoScoreSocraticQuestionProtocolShareInput
+	): Student
+
 	deleteSocraticQuestionProtocol(
 		input: DeleteSocraticQuestionProtocolInput
 	): DeletedSocraticQuestionProtocolPayload
@@ -536,6 +547,7 @@ interface Protocol {
 	isActive: Boolean
 	isPresent: Boolean
 }
+
 input ProtocolInput {
 	period: periodName
 	markingPeriod: MarkingPeriodEnum
@@ -556,6 +568,8 @@ type SocraticQuestionProtocol implements Protocol {
 	assignedDate: Date!
 	isActive: Boolean
 	isPresent: Boolean
+	thinkPairComments: [String]
+	shareComments: [String]
 }
 
 input ScoreSocraticQuestionProtocolThinkPairInput {
@@ -563,9 +577,29 @@ input ScoreSocraticQuestionProtocolThinkPairInput {
 	socraticQuestion: String
 	thinkPairScore: Int
 	thinkPairEarnedPoints: Int
-
-	isActive: Boolean
+	thinkPairComments: [String]
 }
+
+input UndoScoreSocraticQuestionProtocolThinkPairInput {
+	_id: ID!
+	socraticQuestion: String
+	thinkPairEarnedPoints: Int
+}
+
+input ScoreSocraticQuestionProtocolShareInput {
+	_id: ID!
+	socraticQuestion: String
+	shareScore: Int
+	shareEarnedPoints: Int
+	shareComments: [String]
+}
+
+input UndoScoreSocraticQuestionProtocolShareInput {
+	_id: ID!
+	socraticQuestion: String
+	shareEarnedPoints: Int
+}
+
 input SetSocraticQuestionProtcolIsPresentInput {
 	_id: ID!
 	socraticQuestion: String
@@ -575,13 +609,6 @@ input SetSocraticQuestionProtcolIsPresentInput {
 input UndoSetSocraticQuestionProtcolIsPresentInput {
 	_id: ID!
 	socraticQuestion: String
-	isActive: Boolean
-}
-input ScoreSocraticQuestionProtocolShareInput {
-	_id: ID!
-	socraticQuestion: String
-	shareScore: Int
-	shareEarnedPoints: Int
 	isActive: Boolean
 }
 

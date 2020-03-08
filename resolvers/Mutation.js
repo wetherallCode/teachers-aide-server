@@ -590,7 +590,9 @@ module.exports = {
 						markingPeriod: markingPeriod,
 						assignedDate: assignedDate,
 						isActive: isActive,
-						isPresent: false
+						isPresent: false,
+						thinkPairComments: [],
+						shareComments: []
 					}
 				}
 			}
@@ -648,18 +650,19 @@ module.exports = {
 
 	async scoreSocraticQuestionProtocolThinkPairGrade(
 		_,
-		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints, isActive } },
+		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints, thinkPairComments } },
 		{ studentData }
 	) {
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
-				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
 			},
 			{
 				$set: {
 					thinkPairScore: thinkPairScore,
-					thinkPairEarnedPoints: thinkPairEarnedPoints
+					thinkPairEarnedPoints: thinkPairEarnedPoints,
+					thinkPairComments: thinkPairComments
 				},
 				$inc: { responsibilityPoints: thinkPairEarnedPoints }
 			}
@@ -668,22 +671,69 @@ module.exports = {
 		return student
 	},
 
-	async scoreSocraticQuestionProtocolShareGrade(
+	async undoScoreSocraticQuestionProtocolThinkPairGrade(
 		_,
-		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints, isActive } },
+		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints } },
 		{ studentData }
 	) {
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
-				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion, isActive: true } }
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+			},
+			{
+				$set: {
+					thinkPairScore: 0,
+					thinkPairEarnedPoints: 0,
+					thinkPairComments: []
+				},
+				$inc: { responsibilityPoints: -thinkPairEarnedPoints }
+			}
+		)
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		return student
+	},
+
+	async scoreSocraticQuestionProtocolShareGrade(
+		_,
+		{ input: { _id, socraticQuestion, shareScore, shareEarnedPoints, shareComments } },
+		{ studentData }
+	) {
+		const scoreSocraticQuestionProtocol = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
 			},
 			{
 				$set: {
 					shareScore: shareScore,
-					shareEarnedPoints: shareEarnedPoints
+					shareEarnedPoints: shareEarnedPoints,
+					shareComments: shareComments
 				},
 				$inc: { responsibilityPoints: shareEarnedPoints }
+			}
+		)
+		const student = await studentData.findOne({ _id: ObjectID(_id) })
+		return student
+	},
+
+	async undoScoreSocraticQuestionProtocolShareGrade(
+		_,
+		{ input: { _id, socraticQuestion, shareEarnedPoints } },
+		{ studentData }
+	) {
+		const scoreSocraticQuestionProtocol = await studentData.updateOne(
+			{
+				_id: ObjectID(_id),
+				hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+			},
+			{
+				$set: {
+					shareScore: 0,
+					shareEarnedPoints: 0,
+					shareComments: []
+				},
+				$inc: { responsibilityPoints: -shareEarnedPoints }
 			}
 		)
 		const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -695,7 +745,6 @@ module.exports = {
 		{ input: { _id, socraticQuestion, isActive, isPresent } },
 		{ studentData }
 	) {
-		console.log(_id, socraticQuestion, isActive, isPresent)
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
