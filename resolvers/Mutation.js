@@ -653,6 +653,7 @@ module.exports = {
 		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints, thinkPairComments } },
 		{ studentData }
 	) {
+		console.log(thinkPairComments)
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
 			{
 				_id: ObjectID(_id),
@@ -673,7 +674,7 @@ module.exports = {
 
 	async undoScoreSocraticQuestionProtocolThinkPairGrade(
 		_,
-		{ input: { _id, socraticQuestion, thinkPairScore, thinkPairEarnedPoints } },
+		{ input: { _id, socraticQuestion, thinkPairEarnedPoints } },
 		{ studentData }
 	) {
 		const scoreSocraticQuestionProtocol = await studentData.updateOne(
