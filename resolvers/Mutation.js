@@ -707,9 +707,9 @@ module.exports = {
 			},
 			{
 				$set: {
-					shareScore: shareScore,
-					shareEarnedPoints: shareEarnedPoints,
-					shareComments: shareComments
+					'hasProtocols.$.shareScore': shareScore,
+					'hasProtocols.$.shareEarnedPoints': shareEarnedPoints,
+					'hasProtocols.$.shareComments': shareComments
 				},
 				$inc: { responsibilityPoints: shareEarnedPoints }
 			}
@@ -730,9 +730,9 @@ module.exports = {
 			},
 			{
 				$set: {
-					shareScore: 0,
-					shareEarnedPoints: 0,
-					shareComments: []
+					'hasProtocols.$.shareScore': 0,
+					'hasProtocols.$.shareEarnedPoints': 0,
+					'hasProtocols.$.shareComments': []
 				},
 				$inc: { responsibilityPoints: -shareEarnedPoints }
 			}
