@@ -21,7 +21,7 @@ module.exports = {
 			return null
 		}
 		const me = await users.findOne({ _id: ObjectID(req.session.userId) })
-		console.log(me)
+		// console.log(me)
 		return me
 	},
 
