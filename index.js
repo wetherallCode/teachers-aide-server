@@ -30,13 +30,13 @@ async function start() {
 		resave: false,
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24 * 7,
-			// sameSite: 'none',
+			sameSite: 'none',
 			httpOnly: false
 		},
 		store: store,
 		saveUninitialized: false
 	}
-	// sess.cookie.secure = true
+	sess.cookie.secure = true
 	app.use(session(sess))
 
 	const MONGO_DB = process.env.DB_HOST
