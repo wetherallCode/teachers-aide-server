@@ -25,19 +25,21 @@ async function start() {
 		console.log(error)
 	})
 
-	const sess = {
-		secret: process.env.SESSION_SECRET,
-		resave: false,
-		cookie: {
-			maxAge: 1000 * 60 * 60 * 24 * 7,
-			sameSite: 'none',
-			httpOnly: false
-		},
-		store: store,
-		saveUninitialized: false
-	}
-	sess.cookie.secure = true
-	app.use(session(sess))
+	app.use(
+		session({
+			secret: process.env.SESSION_SECRET,
+			resave: false,
+			cookie: {
+				maxAge: 1000 * 60 * 60 * 24 * 7,
+				httpOnly: false,
+				sameSite: 'none',
+				secure: true
+			},
+
+			store: store,
+			saveUninitialized: false
+		})
+	)
 
 	const MONGO_DB = process.env.DB_HOST
 	const client = await MongoClient.connect(MONGO_DB, {
@@ -47,6 +49,7 @@ async function start() {
 	const db = client.db()
 
 	const context = async ({ req }) => {
+		console.log(req.session)
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')

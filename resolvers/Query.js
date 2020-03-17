@@ -16,14 +16,11 @@ module.exports = {
 	allUsers: (_, __, { users }) => users.find().toArray(),
 
 	async me(_, __, { req, users }) {
-		console.log(req.session)
-		console.log('me: ' + req.session.userId)
 		if (!req.session.userId) {
 			console.log('user is null')
 			return null
 		}
 		const me = await users.findOne({ _id: ObjectID(req.session.userId) })
-		// console.log(me)
 		return me
 	},
 
