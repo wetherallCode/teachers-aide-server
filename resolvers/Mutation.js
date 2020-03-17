@@ -19,6 +19,8 @@ module.exports = {
 	},
 
 	async login(parent, { name, password }, { req, users }) {
+		console.log(name, password)
+		console.log(req)
 		// checks the name of the login against the database
 		const user = await users.findOne({ name })
 		// if username or password don't match the database the client will recieve an error
