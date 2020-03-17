@@ -35,6 +35,7 @@ module.exports = {
 		// starts the session
 		req.session.userId = user.id
 		console.log(req.session.user)
+		console.log(req.session.user.id)
 		return user
 	},
 
