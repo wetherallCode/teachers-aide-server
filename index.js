@@ -47,7 +47,6 @@ async function start() {
 	const db = client.db()
 
 	const context = async ({ req }) => {
-		console.log(req)
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')
