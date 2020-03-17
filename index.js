@@ -25,22 +25,18 @@ async function start() {
 		console.log(error)
 	})
 
-	app.use(
-		session({
-			secret: process.env.SESSION_SECRET,
-			resave: false,
-			cookie: {
-				maxAge: 1000 * 60 * 60 * 24 * 7,
-				hostOnly: false,
-				httpOnly: false, //hope it works
-				sameSite: 'none',
-				secure: true
-			},
-
-			store: store,
-			saveUninitialized: false
-		})
-	)
+	const sess = {
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		cookie: {
+			maxAge: 1000 * 60 * 60 * 24 * 7,
+			sameSite: 'none'
+		},
+		store: store,
+		saveUninitialized: false
+	}
+	sess.cookie.secure = true
+	app.use(session(sess))
 
 	const MONGO_DB = process.env.DB_HOST
 	const client = await MongoClient.connect(MONGO_DB, {
