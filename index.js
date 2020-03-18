@@ -24,6 +24,7 @@ async function start() {
 	store.on('error', function(error) {
 		console.log(error)
 	})
+
 	app.set('trust proxy', 1)
 	app.use(
 		session({
@@ -35,7 +36,6 @@ async function start() {
 				sameSite: 'none',
 				secure: true
 			},
-
 			store: store,
 			saveUninitialized: false
 		})
@@ -49,7 +49,6 @@ async function start() {
 	const db = client.db()
 
 	const context = async ({ req }) => {
-		console.log(req.session)
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')
@@ -100,9 +99,12 @@ async function start() {
 	const httpServer = createServer(app)
 	server.installSubscriptionHandlers(httpServer)
 
-	httpServer.listen({ port: process.env.PORT || 4000 }),
-		() => {
-			console.log(`🚀 Server ready at ${port}`)
-		}
+	// httpServer.listen({ port: process.env.PORT || 4000 }),
+	// 	() => {
+	// 		console.log(`🚀 Server ready at ${port}`)
+	// 	}
+	httpServer.listen({ port: process.env.PORT || 4000 }, () =>
+		console.log(`🚀 Server ready at ${server.graphqlPath}`)
+	)
 }
 start()
