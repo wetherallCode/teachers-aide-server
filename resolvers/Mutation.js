@@ -559,7 +559,7 @@ module.exports = {
 				isActive
 			}
 		},
-		{ studentData, classPeriodData }
+		{ studentData, classPeriodData, pubsub }
 	) {
 		const classPeriodInfo = await classPeriodData.findOne({
 			period: period,
@@ -613,6 +613,10 @@ module.exports = {
 		const classPeriod = await classPeriodData.findOne({
 			period: period,
 			assignedDate: assignedDate
+		})
+
+		pubsub.publish('socraticQuestion-added', {
+			newSocraticQuestion: classPeriod
 		})
 		return { students, classPeriod }
 	},

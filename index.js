@@ -1,4 +1,4 @@
-const { ApolloServer } = require('apollo-server-express')
+const { ApolloServer, PubSub } = require('apollo-server-express')
 const expressPlayground = require('graphql-playground-middleware-express').default
 const express = require('express')
 const path = require('path')
@@ -48,6 +48,8 @@ async function start() {
 	})
 	const db = client.db()
 
+	const pubsub = new PubSub()
+
 	const context = async ({ req }) => {
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
@@ -66,7 +68,8 @@ async function start() {
 			unitData,
 			generalInfo,
 			db,
-			req
+			req,
+			pubsub
 		}
 	}
 

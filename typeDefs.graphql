@@ -1,5 +1,9 @@
 scalar Date
 
+type Subscription {
+	newSocraticQuestion: ClassPeriod
+}
+
 type Query {
 	me: User
 	findCurrentMarkingPeriod(_id: ID!): CurrentMarkingPeriod!
@@ -104,6 +108,9 @@ type Mutation {
 	): DeletedSocraticQuestionProtocolPayload
 }
 
+type SocraticQuestionSubscriptionPayload {
+	classPeriod: ClassPeriod
+}
 input DeleteAssignmentInput {
 	period: periodName
 	assignmentType: AssignmentType
