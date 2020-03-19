@@ -106,8 +106,11 @@ async function start() {
 	// 	() => {
 	// 		console.log(`🚀 Server ready at ${port}`)
 	// 	}
-	httpServer.listen({ port: process.env.PORT || 4000 }, () =>
+
+	const PORT = process.env.PORT || 4000
+	httpServer.listen({ port: PORT }, () => {
 		console.log(`🚀 Server ready at ${server.graphqlPath}`)
-	)
+		console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
+	})
 }
 start()
