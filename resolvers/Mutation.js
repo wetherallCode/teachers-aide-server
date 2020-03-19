@@ -618,6 +618,7 @@ module.exports = {
 		pubsub.publish('socraticQuestion-added', {
 			newSocraticQuestion: classPeriod
 		})
+		console.log(pubsub)
 		return { students, classPeriod }
 	},
 
