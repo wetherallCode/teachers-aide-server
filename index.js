@@ -50,7 +50,7 @@ async function start() {
 
 	const pubsub = new PubSub()
 
-	const context = async ({ req }) => {
+	const context = async ({ req, connection }) => {
 		let users = db.collection('users')
 		let studentData = db.collection('studentData')
 		let lessonData = db.collection('lessonData')
