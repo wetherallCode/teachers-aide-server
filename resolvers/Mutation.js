@@ -103,6 +103,7 @@ module.exports = {
 		},
 		{ studentData }
 	) {
+		console.log(input)
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
