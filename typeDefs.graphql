@@ -54,7 +54,7 @@ type Mutation {
 
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
 	removeClassPeriod(input: RemoveClassPeriodInput!): RemoveClassPeriodPayLoad!
-	updateClassPeriodLive(input: ClassPeriodLiveInput): ClassPeriod
+	updateLivePeriod(input: LivePeriodInput): ClassPeriod
 
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!, input: LessonInput): Lesson!
@@ -109,7 +109,7 @@ type Mutation {
 	): DeletedSocraticQuestionProtocolPayload
 }
 
-input ClassPeriodLiveInput {
+input LivePeriodInput {
 	period: periodName!
 	assignedDate: Date!
 	liveStatus: livePeriodEnums
