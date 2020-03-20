@@ -305,6 +305,7 @@ type ClassPeriod {
 
 enum livePeriodEnums {
 	NONE
+	DISABLED
 	STUDY_GUIDE
 	WARMUP
 	ESSENTIAL_QUESTION
