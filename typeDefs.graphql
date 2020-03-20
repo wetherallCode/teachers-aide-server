@@ -54,6 +54,7 @@ type Mutation {
 
 	createClassPeriod(input: ClassPeriodInput): ClassPeriod
 	removeClassPeriod(input: RemoveClassPeriodInput!): RemoveClassPeriodPayLoad!
+	updateClassPeriodLive(input: ClassPeriodLiveInput): ClassPeriod
 
 	createLesson(input: LessonInput): Lesson!
 	editLesson(_id: ID!, input: LessonInput): Lesson!
@@ -106,6 +107,12 @@ type Mutation {
 	deleteSocraticQuestionProtocol(
 		input: DeleteSocraticQuestionProtocolInput
 	): DeletedSocraticQuestionProtocolPayload
+}
+
+input ClassPeriodLiveInput {
+	period: periodName!
+	assignedDate: Date!
+	liveStatus: livePeriodEnums
 }
 
 type SocraticQuestionSubscriptionPayload {
@@ -293,6 +300,18 @@ type ClassPeriod {
 	assignedHomework: [AssignedHomework]
 	assignedTest: AssignedTest
 	assignedProtocols: [ClassProtocols]
+	livePeriod: livePeriodEnums
+}
+
+enum livePeriodEnums {
+	NONE
+	STUDY_GUIDE
+	WARMUP
+	ESSENTIAL_QUESTION
+	READINGS
+	VOCAB
+	PROTOCOLS
+	HOMEWORK
 }
 
 interface ClassProtocols {
