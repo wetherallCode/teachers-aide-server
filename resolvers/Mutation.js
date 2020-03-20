@@ -103,18 +103,6 @@ module.exports = {
 		},
 		{ studentData }
 	) {
-		console.log(
-			_id,
-			firstName,
-			lastName,
-			responsibilityPoints,
-			period,
-			desk,
-			teacher,
-			nickName,
-			schoolID,
-			learningStyle
-		)
 		const updateStudent = await studentData.updateOne(
 			{ _id: ObjectID(_id) },
 			{
@@ -246,7 +234,7 @@ module.exports = {
 			assignedHomework,
 			assignedTest,
 			assignedProtocols: [],
-			livePeriod: 'NONE'
+			livePeriod: 'DISABLED'
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
@@ -336,7 +324,6 @@ module.exports = {
 		{ studentData, classPeriodData }
 	) {
 		if (assignmentType !== 'TEST') {
-			console.log('updating homework')
 			const updatedAssignment = await studentData.updateMany(
 				{
 					period: period,
