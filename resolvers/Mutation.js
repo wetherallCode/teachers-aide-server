@@ -233,7 +233,8 @@ module.exports = {
 			period,
 			assignedHomework,
 			assignedTest,
-			assignedProtocols: []
+			assignedProtocols: [],
+			livePeriod: 'NONE'
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
@@ -286,6 +287,17 @@ module.exports = {
 		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
+	},
+
+	async updateClassPeriodLive(
+		_,
+		{ input: { period, assignedDate, liveStatus } },
+		{ classPeriodData }
+	) {
+		const livePeriodStatusUpdate = await classPeriodData.updateOne(
+			{ assignedDate: assignedDate, period: period },
+			{ $set: { livePeriod: liveStatus } }
+		)
 	},
 
 	async updateAssignment(
@@ -618,7 +630,7 @@ module.exports = {
 		pubsub.publish('socraticQuestion-added', {
 			newSocraticQuestion: classPeriod
 		})
-		console.log(pubsub)
+
 		return { students, classPeriod }
 	},
 
