@@ -289,6 +289,24 @@ module.exports = {
 		return newClassPeriod
 	},
 
+	async updateClassPeriodLive(
+		_,
+		{ input: { period, assignedDate, liveStatus } },
+		{ classPeriodData }
+	) {
+		const livePeriodStatusUpdate = await classPeriodData.updateOne(
+			{ assignedDate: assignedDate, period: period },
+			{ $set: { livePeriod: liveStatus } }
+		)
+
+		const classPeriod = await classPeriodData.findOne({
+			period: period,
+			assignedDate: assignedDate
+		})
+
+		return classPeriod
+	},
+
 	async updateAssignment(
 		_,
 		{
