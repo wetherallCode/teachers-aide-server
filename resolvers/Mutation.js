@@ -233,8 +233,7 @@ module.exports = {
 			period,
 			assignedHomework,
 			assignedTest,
-			assignedProtocols: [],
-			livePeriod: 'STUDY_GUIDE'
+			assignedProtocols: []
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
@@ -619,7 +618,7 @@ module.exports = {
 		pubsub.publish('socraticQuestion-added', {
 			newSocraticQuestion: classPeriod
 		})
-
+		console.log(pubsub)
 		return { students, classPeriod }
 	},
 

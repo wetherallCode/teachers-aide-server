@@ -56,9 +56,9 @@ async function start() {
 		let lessonData = db.collection('lessonData')
 		let assignmentData = db.collection('assignmentData')
 		let unitData = db.collection('unitData')
-		let classPeriodData = npmdb.collection('classPeriodData')
+		let classPeriodData = db.collection('classPeriodData')
 		let generalInfo = db.collection('generalInfo')
-
+		console.log(connection)
 		return {
 			users,
 			studentData,
