@@ -234,7 +234,7 @@ module.exports = {
 			assignedHomework,
 			assignedTest,
 			assignedProtocols: [],
-			livePeriod: 'NONE'
+			livePeriod: 'STUDY_GUIDE'
 		}
 
 		const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
@@ -287,17 +287,6 @@ module.exports = {
 		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
-	},
-
-	async updateClassPeriodLive(
-		_,
-		{ input: { period, assignedDate, liveStatus } },
-		{ classPeriodData }
-	) {
-		const livePeriodStatusUpdate = await classPeriodData.updateOne(
-			{ assignedDate: assignedDate, period: period },
-			{ $set: { livePeriod: liveStatus } }
-		)
 	},
 
 	async updateAssignment(
