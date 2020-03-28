@@ -112,7 +112,7 @@ type Mutation {
 input LivePeriodInput {
 	period: periodName!
 	assignedDate: Date!
-	liveStatus: livePeriodEnums
+	liveStatus: livePeriodEnums!
 }
 
 type SocraticQuestionSubscriptionPayload {

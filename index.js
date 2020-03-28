@@ -58,7 +58,7 @@ async function start() {
 		let unitData = db.collection('unitData')
 		let classPeriodData = db.collection('classPeriodData')
 		let generalInfo = db.collection('generalInfo')
-		console.log(connection)
+
 		return {
 			users,
 			studentData,

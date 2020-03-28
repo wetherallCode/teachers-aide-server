@@ -262,6 +262,10 @@ module.exports = {
 					}
 				}
 			)
+			if (assignment.assignmentType === 'THINKING_GUIDE') {
+				console.log('subtracted two responsibility points for the assigned thinking guide')
+				studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
+			}
 		})
 
 		const test = await studentData.updateMany(
@@ -283,8 +287,6 @@ module.exports = {
 				}
 			}
 		)
-
-		studentData.updateMany({ period: period }, { $inc: { responsibilityPoints: -2 } })
 
 		return newClassPeriod
 	},
