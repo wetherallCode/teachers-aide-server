@@ -493,6 +493,13 @@ module.exports = {
 				}
 			}
 		)
+		if (assignmentType === 'THINKING_GUIDE') {
+			console.log('added two points for deleting the thinking guide')
+			const updateResponsibilityPoints = await studentData.updateMany(
+				{ period: period },
+				{ $set: { responsibilityPoints: 2 } }
+			)
+		}
 
 		const students = await studentData.find({ period: period }).toArray()
 		const classPeriod = await classPeriodData.findOne({
