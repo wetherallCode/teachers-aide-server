@@ -530,6 +530,7 @@ type RemoveStudentPayLoad {
 type User {
   _id: ID!
   name: String!
+  password: String
 }
 
 enum periodName {
