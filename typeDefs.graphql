@@ -1,328 +1,339 @@
 scalar Date
 
 type Subscription {
-	newSocraticQuestion: ClassPeriod
+  newSocraticQuestion: ClassPeriod
 }
 
 type Query {
-	me: User
-	findCurrentMarkingPeriod(_id: ID!): CurrentMarkingPeriod!
-	totalUsers: Int!
-	allUsers: [User!]!
+  me: User
+  findCurrentMarkingPeriod(_id: ID!): CurrentMarkingPeriod!
+  totalUsers: Int!
+  allUsers: [User!]!
 
-	totalStudents: Int!
-	allStudents: [Student!]!
-	classRoster(period: periodName): [Student!]!
-	student(_id: ID!): Student!
-	lesson(_id: ID!): Lesson!
+  totalStudents: Int!
+  allStudents: [Student!]!
+  classRoster(period: periodName): [Student!]!
+  student(_id: ID!): Student!
+  lesson(_id: ID!): Lesson!
 
-	findStudentByPeriodAndDesk(period: periodName!, desk: Int!): Student
-	numberOfStudentsInCourse(period: periodName): Int!
+  findStudentByPeriodAndDesk(period: periodName!, desk: Int!): Student
+  numberOfStudentsInCourse(period: periodName): Int!
 
-	findLesson(_id: ID!): Lesson
-	findLessonByName(name: String!): Lesson
-	findLessonsByUnit(inUnit: String): [Lesson]
-	findAllLessons: [Lesson!]
+  findLesson(_id: ID!): Lesson
+  findLessonByName(name: String!): Lesson
+  findLessonsByUnit(inUnit: String): [Lesson]
+  findAllLessons: [Lesson!]
 
-	findUnit(_id: ID!): Unit!
-	findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
+  findUnit(_id: ID!): Unit!
+  findUnitsByGrade(gradeLevel: GradeLevelEnum): [Unit!]
 
-	findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
-	findClassPeriodsForCourse(period: periodName): [ClassPeriod]
-	findClassPeriods: [ClassPeriod]
-	findClassPeriodById(_id: ID!): ClassPeriod!
-	findClassPeriodByTestDueDate(period: periodName, dueDate: Date): ClassPeriod
+  findClassPeriod(period: periodName, assignedDate: Date): ClassPeriod
+  findClassPeriodsForCourse(period: periodName): [ClassPeriod]
+  findClassPeriods: [ClassPeriod]
+  findClassPeriodById(_id: ID!): ClassPeriod!
+  findClassPeriodByTestDueDate(period: periodName, dueDate: Date): ClassPeriod
 
-	findAssignmentByStudentAndDateAndType(input: FindAssignmentByStudentAndDateAndType): Student!
+  findAssignmentByStudentAndDateAndType(
+    input: FindAssignmentByStudentAndDateAndType
+  ): Student!
 }
 
 type Mutation {
-	createAccount(name: String!, password: String!): User!
-	login(name: String!, password: String!): User
-	logout: Boolean
-	setCurrentMarkingPeriod(_id: ID!, markingPeriod: MarkingPeriodEnum): CurrentMarkingPeriod
-	createMarkingPeriod(markingPeriod: MarkingPeriodEnum): CurrentMarkingPeriod
-	addStudent(input: StudentDetails!): Student!
-	removeStudent(_id: ID!): RemoveStudentPayLoad!
-	updateStudent(input: UpdateStudentInput!): Student!
-	createDaysAbsentArray(_id: ID!): Student
-	addLearningStyle(_id: ID!, learningStyle: String!): Student
+  createAccount(name: String!, password: String!): User!
+  login(name: String!, password: String!): User
+  logout: Boolean
+  setCurrentMarkingPeriod(
+    _id: ID!
+    markingPeriod: MarkingPeriodEnum
+  ): CurrentMarkingPeriod
+  createMarkingPeriod(markingPeriod: MarkingPeriodEnum): CurrentMarkingPeriod
+  addStudent(input: StudentDetails!): Student!
+  removeStudent(_id: ID!): RemoveStudentPayLoad!
+  updateStudent(input: UpdateStudentInput!): Student!
+  createDaysAbsentArray(_id: ID!): Student
+  addLearningStyle(_id: ID!, learningStyle: String!): Student
 
-	updateResponsibilityPoints(input: UpdateResponsibilityPointsInput): Student!
+  updateResponsibilityPoints(input: UpdateResponsibilityPointsInput): Student!
 
-	hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
+  hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
 
-	createClassPeriod(input: ClassPeriodInput): ClassPeriod
-	removeClassPeriod(input: RemoveClassPeriodInput!): RemoveClassPeriodPayLoad!
-	updateLivePeriod(input: LivePeriodInput): ClassPeriod
+  createClassPeriod(input: ClassPeriodInput): ClassPeriod
+  removeClassPeriod(input: RemoveClassPeriodInput!): RemoveClassPeriodPayLoad!
+  updateLivePeriod(input: LivePeriodInput): ClassPeriod
 
-	createLesson(input: LessonInput): Lesson!
-	editLesson(_id: ID!, input: LessonInput): Lesson!
-	removeLesson(_id: ID!): RemoveLessonPayLoad!
+  createLesson(input: LessonInput): Lesson!
+  editLesson(_id: ID!, input: LessonInput): Lesson!
+  removeLesson(_id: ID!): RemoveLessonPayLoad!
 
-	createUnit(input: UnitInput): Unit!
-	removeUnit(gradeLevel: GradeLevelEnum!, name: String!): RemoveUnitPayLoad!
+  createUnit(input: UnitInput): Unit!
+  removeUnit(gradeLevel: GradeLevelEnum!, name: String!): RemoveUnitPayLoad!
 
-	markStudentAbsent(_id: ID!, date: Date): Student
-	unduMarkStudentAbsent(_id: ID!, date: Date): Student
-	markStudentLate(_id: ID!, date: Date): Student
-	unduMarkStudentLate(_id: ID!, date: Date): Student
+  markStudentAbsent(_id: ID!, date: Date): Student
+  unduMarkStudentAbsent(_id: ID!, date: Date): Student
+  markStudentLate(_id: ID!, date: Date): Student
+  unduMarkStudentLate(_id: ID!, date: Date): Student
 
-	addAssignment(input: AddAssignmentInput): AddAssignmentPayload!
-	deleteAssignment(input: DeleteAssignmentInput): DeleteAssignmentPayload!
-	scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
-	undoScoreAssignment(input: UndoAssignmentScoringInput): UndoScoreAssignmentPayload!
-	updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
+  addAssignment(input: AddAssignmentInput): AddAssignmentPayload!
+  deleteAssignment(input: DeleteAssignmentInput): DeleteAssignmentPayload!
+  scoreAssignment(input: AssignmentScoringInput): ScoreAssignmentPayload!
+  undoScoreAssignment(
+    input: UndoAssignmentScoringInput
+  ): UndoScoreAssignmentPayload!
+  updateAssignment(input: UpdateAssignmentInput): UpdateAssignmentPayload!
 
-	addTest(input: AddTestInput): AddTestPayload!
-	removeTest(input: RemoveTestInput): RemoveTestPayload!
-	scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
-	undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
+  addTest(input: AddTestInput): AddTestPayload!
+  removeTest(input: RemoveTestInput): RemoveTestPayload!
+  scoreMultipleTests(input: MultipleTestScoringInput): MultipleScoreTestPayload!
+  undoScoreTest(input: UndoScoreTestInput): UndoScoreTestPayload!
 
-	createSocraticQuestionProtocol(
-		input: SocraticQuestionProtocolInput
-	): SocraticQuestionProtocolPayload
+  createSocraticQuestionProtocol(
+    input: SocraticQuestionProtocolInput
+  ): SocraticQuestionProtocolPayload
 
-	setSocraticQuestionProtcolIsActive(
-		input: SetSocraticQuestionProtocolIsActiveInput
-	): SetSocraticQuestionProtcolIsActivePayLoad
-	setSocraticQuestionProtocolIsPresent(input: SetSocraticQuestionProtcolIsPresentInput): Student
+  setSocraticQuestionProtcolIsActive(
+    input: SetSocraticQuestionProtocolIsActiveInput
+  ): SetSocraticQuestionProtcolIsActivePayLoad
+  setSocraticQuestionProtocolIsPresent(
+    input: SetSocraticQuestionProtcolIsPresentInput
+  ): Student
 
-	undoSetSocraticQuestionProtocolIsPresent(
-		input: UndoSetSocraticQuestionProtcolIsPresentInput
-	): Student
+  undoSetSocraticQuestionProtocolIsPresent(
+    input: UndoSetSocraticQuestionProtcolIsPresentInput
+  ): Student
 
-	scoreSocraticQuestionProtocolThinkPairGrade(
-		input: ScoreSocraticQuestionProtocolThinkPairInput
-	): Student
-	undoScoreSocraticQuestionProtocolThinkPairGrade(
-		input: UndoScoreSocraticQuestionProtocolThinkPairInput
-	): Student
+  scoreSocraticQuestionProtocolThinkPairGrade(
+    input: ScoreSocraticQuestionProtocolThinkPairInput
+  ): Student
+  undoScoreSocraticQuestionProtocolThinkPairGrade(
+    input: UndoScoreSocraticQuestionProtocolThinkPairInput
+  ): Student
 
-	scoreSocraticQuestionProtocolShareGrade(input: ScoreSocraticQuestionProtocolShareInput): Student
-	undoScoreSocraticQuestionProtocolShareGrade(
-		input: UndoScoreSocraticQuestionProtocolShareInput
-	): Student
+  scoreSocraticQuestionProtocolShareGrade(
+    input: ScoreSocraticQuestionProtocolShareInput
+  ): Student
+  undoScoreSocraticQuestionProtocolShareGrade(
+    input: UndoScoreSocraticQuestionProtocolShareInput
+  ): Student
 
-	deleteSocraticQuestionProtocol(
-		input: DeleteSocraticQuestionProtocolInput
-	): DeletedSocraticQuestionProtocolPayload
+  deleteSocraticQuestionProtocol(
+    input: DeleteSocraticQuestionProtocolInput
+  ): DeletedSocraticQuestionProtocolPayload
 }
 
 input LivePeriodInput {
-	period: periodName!
-	assignedDate: Date!
-	liveStatus: livePeriodEnums!
+  period: periodName!
+  assignedDate: Date!
+  liveStatus: livePeriodEnums!
 }
 
 type SocraticQuestionSubscriptionPayload {
-	classPeriod: ClassPeriod
+  classPeriod: ClassPeriod
 }
 input DeleteAssignmentInput {
-	period: periodName
-	assignmentType: AssignmentType
-	assignedDate: Date
+  period: periodName
+  assignmentType: AssignmentType
+  assignedDate: Date
 }
 
 type DeleteAssignmentPayload {
-	classPeriod: ClassPeriod
-	students: [Student]
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 input AddTestInput {
-	period: periodName
-	readingPages: String
-	readingSections: String
-	assignedDate: Date
-	dueDate: Date
-	markingPeriod: MarkingPeriodEnum
-	maxScore: Int
+  period: periodName
+  readingPages: String
+  readingSections: String
+  assignedDate: Date
+  dueDate: Date
+  markingPeriod: MarkingPeriodEnum
+  maxScore: Int
 }
 
 type AddTestPayload {
-	classPeriod: ClassPeriod
-	students: [Student]
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 input AddAssignmentInput {
-	period: periodName!
-	assignedDate: Date!
-	dueDate: Date!
-	markingPeriod: MarkingPeriodEnum
-	readingPages: String!
-	readingSections: String!
-	assignmentType: AssignmentType
-	maxScore: Int!
+  period: periodName!
+  assignedDate: Date!
+  dueDate: Date!
+  markingPeriod: MarkingPeriodEnum
+  readingPages: String!
+  readingSections: String!
+  assignmentType: AssignmentType
+  maxScore: Int!
 }
 
 type AddAssignmentPayload {
-	classPeriod: ClassPeriod
-	students: [Student]
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 type CurrentMarkingPeriod {
-	markingPeriod: MarkingPeriodEnum!
+  markingPeriod: MarkingPeriodEnum!
 }
 
 input MultipleTestScoringInput {
-	period: periodName
-	dueDate: Date
-	scoredTests: [ScoredTestInput]
+  period: periodName
+  dueDate: Date
+  scoredTests: [ScoredTestInput]
 }
 
 input ScoredTestInput {
-	_id: ID!
-	dueDate: Date!
-	period: periodName
-	missing: Boolean!
-	exempt: Boolean
-	score: Int!
-	earnedPoints: Int!
-	studyTime: Int!
+  _id: ID!
+  dueDate: Date!
+  period: periodName
+  missing: Boolean!
+  exempt: Boolean
+  score: Int!
+  earnedPoints: Int!
+  studyTime: Int!
 }
 
 input UndoScoreTestInput {
-	_id: ID!
-	dueDate: Date!
-	earnedPoints: Int
+  _id: ID!
+  dueDate: Date!
+  earnedPoints: Int
 }
 
 type UndoScoreTestPayload {
-	testScoreReset: Boolean
-	student: Student
+  testScoreReset: Boolean
+  student: Student
 }
 
 type MultipleScoreTestPayload {
-	# scored: Boolean
-	students: [Student]
-	classPeriod: ClassPeriod
+  # scored: Boolean
+  students: [Student]
+  classPeriod: ClassPeriod
 }
 
 input RemoveTestInput {
-	assignedDate: Date!
-	period: periodName
+  assignedDate: Date!
+  period: periodName
 }
 
 type RemoveTestPayload {
-	removed: Boolean
-	classPeriod: ClassPeriod
-	students: [Student]
+  removed: Boolean
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 input RemoveClassPeriodInput {
-	_id: ID!
-	date: Date!
-	withAssignments: Boolean
-	withTest: Boolean
-	period: periodName
+  _id: ID!
+  date: Date!
+  withAssignments: Boolean
+  withTest: Boolean
+  period: periodName
 }
 
 input UpdateResponsibilityPointsInput {
-	_id: ID!
-	responsibilityPoints: Int!
+  _id: ID!
+  responsibilityPoints: Int!
 }
 
 type ScoreAssignmentPayload {
-	scored: Boolean!
-	student: Student!
+  scored: Boolean!
+  student: Student!
 }
 type UpdateAssignmentPayload {
-	students: [Student]
-	classPeriod: ClassPeriod
+  students: [Student]
+  classPeriod: ClassPeriod
 }
 
 type UndoScoreAssignmentPayload {
-	assignmentScoreReset: Boolean!
-	student: Student!
+  assignmentScoreReset: Boolean!
+  student: Student!
 }
 
 input FindAssignmentByStudentAndDateAndType {
-	_id: ID!
-	date: Date
-	assignmentType: AssignmentType
+  _id: ID!
+  date: Date
+  assignmentType: AssignmentType
 }
 
 input UpdateAssignmentInput {
-	period: periodName!
-	assignedDate: Date!
-	dueDate: Date!
-	markingPeriod: MarkingPeriodEnum
-	readingPages: String!
-	readingSections: String!
-	assignmentType: AssignmentType
-	maxScore: Int!
+  period: periodName!
+  assignedDate: Date!
+  dueDate: Date!
+  markingPeriod: MarkingPeriodEnum
+  readingPages: String!
+  readingSections: String!
+  assignmentType: AssignmentType
+  maxScore: Int!
 }
 
 input AssignmentScoringInput {
-	_id: ID!
-	date: Date!
-	responsibilityPoints: Int!
-	missing: Boolean!
-	exempt: Boolean
-	assignmentType: AssignmentType!
-	score: Int!
-	earnedPoints: Int
-	comments: [String]
-	late: Boolean!
+  _id: ID!
+  date: Date!
+  responsibilityPoints: Int!
+  missing: Boolean!
+  exempt: Boolean
+  assignmentType: AssignmentType!
+  score: Int!
+  earnedPoints: Int
+  comments: [String]
+  late: Boolean!
 }
 
 input UndoAssignmentScoringInput {
-	_id: ID!
-	date: Date!
-	assignmentType: AssignmentType!
-	score: Int!
-	earnedPoints: Int
+  _id: ID!
+  date: Date!
+  assignmentType: AssignmentType!
+  score: Int!
+  earnedPoints: Int
 }
 
 input UnitInput {
-	name: String!
-	gradeLevel: GradeLevelEnum!
+  name: String!
+  gradeLevel: GradeLevelEnum!
 }
 
 type Unit {
-	_id: ID!
-	name: String!
-	hasLessons: [Lesson]
-	gradeLevel: GradeLevelEnum!
+  _id: ID!
+  name: String!
+  hasLessons: [Lesson]
+  gradeLevel: GradeLevelEnum!
 }
 
 type ClassPeriodPayLoad {
-	classPeriod: ClassPeriod
+  classPeriod: ClassPeriod
 }
 
 type ClassPeriod {
-	_id: ID
-	grade: GradeLevelEnum
-	assignedLesson: Lesson
-	assignedDate: Date
-	period: periodName
-	absentStudents: [Student]
-	assignedHomework: [AssignedHomework]
-	assignedTest: AssignedTest
-	assignedProtocols: [ClassProtocols]
-	livePeriod: livePeriodEnums
+  _id: ID
+  grade: GradeLevelEnum
+  assignedLesson: Lesson
+  assignedDate: Date
+  period: periodName
+  absentStudents: [Student]
+  assignedHomework: [AssignedHomework]
+  assignedTest: AssignedTest
+  assignedProtocols: [ClassProtocols]
+  livePeriod: livePeriodEnums
 }
 
 enum livePeriodEnums {
-	NONE
-	DISABLED
-	STUDY_GUIDE
-	WARMUP
-	ESSENTIAL_QUESTION
-	READINGS
-	VOCAB
-	PROTOCOLS
-	HOMEWORK
+  NONE
+  DISABLED
+  STUDY_GUIDE
+  WARMUP
+  ESSENTIAL_QUESTION
+  READINGS
+  VOCAB
+  PROTOCOLS
+  HOMEWORK
 }
 
 interface ClassProtocols {
-	isActive: Boolean
+  isActive: Boolean
 }
 
 type SocraticQuestionProtocolForClassPeriod implements ClassProtocols {
-	socraticQuestion: String
-	socraticQuestionType: socraticQuestionsTypeEnum
-	isActive: Boolean
+  socraticQuestion: String
+  socraticQuestionType: socraticQuestionsTypeEnum
+  isActive: Boolean
 }
 
 # input ClassProtocolInput {
@@ -330,479 +341,479 @@ type SocraticQuestionProtocolForClassPeriod implements ClassProtocols {
 # 	isActive: Boolean
 # }
 input ClassPeriodInput {
-	grade: GradeLevelEnum
-	assignedLesson: String
-	assignedDate: Date
-	period: periodName
-	assignedHomework: [AssignedHomeworkInput]
-	assignedTest: AssignedTestInput
+  grade: GradeLevelEnum
+  assignedLesson: String
+  assignedDate: Date
+  period: periodName
+  assignedHomework: [AssignedHomeworkInput]
+  assignedTest: AssignedTestInput
 }
 
 input AssignedTestInput {
-	assignedDate: Date
-	dueDate: Date
-	markingPeriod: MarkingPeriodEnum
-	readingPages: String
-	readingSections: String
-	assignmentType: AssignmentType
-	maxScore: Int
-	scored: Boolean
+  assignedDate: Date
+  dueDate: Date
+  markingPeriod: MarkingPeriodEnum
+  readingPages: String
+  readingSections: String
+  assignmentType: AssignmentType
+  maxScore: Int
+  scored: Boolean
 }
 
 type AssignedTest {
-	assignedDate: Date
-	dueDate: Date
-	markingPeriod: MarkingPeriodEnum
-	readingPages: String
-	readingSections: String
-	assignmentType: AssignmentType
-	maxScore: Int
-	scored: Boolean
+  assignedDate: Date
+  dueDate: Date
+  markingPeriod: MarkingPeriodEnum
+  readingPages: String
+  readingSections: String
+  assignmentType: AssignmentType
+  maxScore: Int
+  scored: Boolean
 }
 
 input AssignedHomeworkInput {
-	assignedDate: Date
-	dueDate: Date
-	markingPeriod: MarkingPeriodEnum
-	readingPages: String
-	readingSections: String
-	assignmentType: AssignmentType
-	maxScore: Int
+  assignedDate: Date
+  dueDate: Date
+  markingPeriod: MarkingPeriodEnum
+  readingPages: String
+  readingSections: String
+  assignmentType: AssignmentType
+  maxScore: Int
 }
 
 type AssignedHomework {
-	_id: ID!
-	assignedDate: Date!
-	dueDate: Date!
-	markingPeriod: MarkingPeriodEnum
-	readingPages: String!
-	readingSections: String!
-	assignmentType: AssignmentType
-	maxScore: Int
+  _id: ID!
+  assignedDate: Date!
+  dueDate: Date!
+  markingPeriod: MarkingPeriodEnum
+  readingPages: String!
+  readingSections: String!
+  assignmentType: AssignmentType
+  maxScore: Int
 }
 
 type RemoveLessonPayLoad {
-	removed: Boolean!
-	lesson: Lesson!
+  removed: Boolean!
+  lesson: Lesson!
 }
 
 type RemoveUnitPayLoad {
-	removed: Boolean!
-	unit: Unit!
+  removed: Boolean!
+  unit: Unit!
 }
 
 type RemoveClassPeriodPayLoad {
-	removed: Boolean!
-	classPeriod: ClassPeriod!
+  removed: Boolean!
+  classPeriod: ClassPeriod!
 }
 
 input LessonInput {
-	lessonName: String!
-	inUnit: String
-	essentialQuestion: EssentialQuestionInput
-	socraticQuestions: [SocraticQuestionInput]
-	studyGuideQuestions: [String]
-	vocabWords: [VocabInput]
-	readings: ReadingsInput
-	workDue: [AssignmentsInput]
-	warmup: String!
+  lessonName: String!
+  inUnit: String
+  essentialQuestion: EssentialQuestionInput
+  socraticQuestions: [SocraticQuestionInput]
+  studyGuideQuestions: [String]
+  vocabWords: [VocabInput]
+  readings: ReadingsInput
+  workDue: [AssignmentsInput]
+  warmup: String!
 }
 
 type Lesson {
-	_id: ID
-	lessonName: String
-	inUnit: Unit
-	essentialQuestion: EssentialQuestion
-	socraticQuestions: [SocraticQuestion]
-	studyGuideQuestions: [String]
-	vocabWords: [Vocab]
-	readings: Readings
-	workDue: [Assignments]
-	warmup: String
+  _id: ID
+  lessonName: String
+  inUnit: Unit
+  essentialQuestion: EssentialQuestion
+  socraticQuestions: [SocraticQuestion]
+  studyGuideQuestions: [String]
+  vocabWords: [Vocab]
+  readings: Readings
+  workDue: [Assignments]
+  warmup: String
 }
 
 type SocraticQuestion {
-	type: socraticQuestionsTypeEnum!
-	question: String!
+  type: socraticQuestionsTypeEnum!
+  question: String!
 }
 
 enum GradeLevelEnum {
-	EIGHTH
-	SEVENTH
-	SIXTH
+  EIGHTH
+  SEVENTH
+  SIXTH
 }
 
 input AssignmentsInput {
-	type: AssignmentType!
-	readingPages: String
-	readingSections: String
+  type: AssignmentType!
+  readingPages: String
+  readingSections: String
 }
 
 enum AssignmentType {
-	OEQ
-	THINKING_GUIDE
-	BLOG
-	TEST
-	EXTRA_CREDIT
-	PARENT_CONTACT
+  OEQ
+  THINKING_GUIDE
+  BLOG
+  TEST
+  EXTRA_CREDIT
+  PARENT_CONTACT
 }
 
 type Assignments {
-	type: AssignmentType!
-	readingPages: String
-	readingSections: String
+  type: AssignmentType!
+  readingPages: String
+  readingSections: String
 }
 
 type Readings {
-	pages: String
-	sections: String
+  pages: String
+  sections: String
 }
 
 input ReadingsInput {
-	pages: String!
-	sections: String!
+  pages: String!
+  sections: String!
 }
 
 input VocabInput {
-	word: String!
-	partOfSpeech: partsOfSpeechEnum!
-	definition: String!
+  word: String!
+  partOfSpeech: partsOfSpeechEnum!
+  definition: String!
 }
 
 enum partsOfSpeechEnum {
-	NOUN
-	VERB
-	ADJECTIVE
-	ADVERB
-	PREPOSITION
-	PRONOUN
-	INTERJECTION
-	CONJUNCTION
+  NOUN
+  VERB
+  ADJECTIVE
+  ADVERB
+  PREPOSITION
+  PRONOUN
+  INTERJECTION
+  CONJUNCTION
 }
 
 input EssentialQuestionInput {
-	type: essentialQuestionTypeEnum!
-	textStructure: majorTextStructureEnum!
-	question: String!
+  type: essentialQuestionTypeEnum!
+  textStructure: majorTextStructureEnum!
+  question: String!
 }
 
 input SocraticQuestionInput {
-	type: socraticQuestionsTypeEnum!
-	question: String!
+  type: socraticQuestionsTypeEnum!
+  question: String!
 }
 
 enum socraticQuestionsTypeEnum {
-	CONCEPTUAL_CLARIFICATION
-	PROBING_ASSUMPTIONS
-	PROBING_RATIONALE_REASONS_EVIDENCE
-	QUESTIONING_VIEWPOINTS_AND_PERSPECTIVE
-	PROBING_IMPLICATIONS_AND_CONSEQUENCES
-	QUESTION_THE_QUESTION
+  CONCEPTUAL_CLARIFICATION
+  PROBING_ASSUMPTIONS
+  PROBING_RATIONALE_REASONS_EVIDENCE
+  QUESTIONING_VIEWPOINTS_AND_PERSPECTIVE
+  PROBING_IMPLICATIONS_AND_CONSEQUENCES
+  QUESTION_THE_QUESTION
 }
 
 enum essentialQuestionTypeEnum {
-	HOW
-	WHY
+  HOW
+  WHY
 }
 
 type EssentialQuestion {
-	type: essentialQuestionTypeEnum!
-	textStructure: majorTextStructureEnum!
-	question: String!
+  type: essentialQuestionTypeEnum!
+  textStructure: majorTextStructureEnum!
+  question: String!
 }
 
 type RemoveStudentPayLoad {
-	removed: Boolean
-	student: Student!
+  removed: Boolean
+  student: Student!
 }
 
 type User {
-	_id: ID!
-	name: String!
+  _id: ID!
+  name: String!
 }
 
 enum periodName {
-	A_12
-	B_12
-	A_34
-	B_34
-	A_67
-	B_67
-	Reserved
+  A_12
+  B_12
+  A_34
+  B_34
+  A_67
+  B_67
+  Reserved
 }
 
 input StudentDetails {
-	firstName: String!
-	lastName: String!
-	nickName: String
-	schoolID: String
-	responsibilityPoints: Int!
-	period: periodName!
-	desk: Int!
-	teacher: String!
-	isHiddenFromRoster: Boolean!
-	daysAbsent: [Date]
-	daysLate: [Date]
-	hasAssignments: [StudentAssignmentsInput]
-	hasTests: [StudentTestsInput]
-	hasProtocols: [ProtocolInput]
+  firstName: String!
+  lastName: String!
+  nickName: String
+  schoolID: String
+  responsibilityPoints: Int!
+  period: periodName!
+  desk: Int!
+  teacher: String!
+  isHiddenFromRoster: Boolean!
+  daysAbsent: [Date]
+  daysLate: [Date]
+  hasAssignments: [StudentAssignmentsInput]
+  hasTests: [StudentTestsInput]
+  hasProtocols: [ProtocolInput]
 }
 
 type Student {
-	_id: ID!
-	schoolID: String
-	firstName: String!
-	lastName: String!
-	nickName: String
-	responsibilityPoints: Int!
-	period: periodName!
-	desk: Int!
-	teacher: String!
-	isHiddenFromRoster: Boolean!
-	learningStyle: String
-	daysAbsent: [Date]
-	daysLate: [Date]
-	hasAssignments: [StudentAssignments]
-	hasTests: [StudentTests]
-	hasProtocols: [Protocol]
+  _id: ID!
+  schoolID: String
+  firstName: String!
+  lastName: String!
+  nickName: String
+  responsibilityPoints: Int!
+  period: periodName!
+  desk: Int!
+  teacher: String!
+  isHiddenFromRoster: Boolean!
+  learningStyle: String
+  daysAbsent: [Date]
+  daysLate: [Date]
+  hasAssignments: [StudentAssignments]
+  hasTests: [StudentTests]
+  hasProtocols: [Protocol]
 }
 
 interface Protocol {
-	period: periodName
-	markingPeriod: MarkingPeriodEnum
-	assignedDate: Date!
-	isActive: Boolean
-	isPresent: Boolean
+  period: periodName
+  markingPeriod: MarkingPeriodEnum
+  assignedDate: Date!
+  isActive: Boolean
+  isPresent: Boolean
 }
 
 input ProtocolInput {
-	period: periodName
-	markingPeriod: MarkingPeriodEnum
-	assignedDate: Date!
-	isActive: Boolean
+  period: periodName
+  markingPeriod: MarkingPeriodEnum
+  assignedDate: Date!
+  isActive: Boolean
 }
 
 type SocraticQuestionProtocol implements Protocol {
-	socraticQuestion: String
-	socraticQuestionType: socraticQuestionsTypeEnum
-	readingSections: String
-	thinkPairScore: Int
-	thinkPairEarnedPoints: Int
-	shareScore: Int
-	shareEarnedPoints: Int
-	period: periodName
-	markingPeriod: MarkingPeriodEnum
-	assignedDate: Date!
-	isActive: Boolean
-	isPresent: Boolean
-	thinkPairComments: [String]
-	shareComments: [String]
+  socraticQuestion: String
+  socraticQuestionType: socraticQuestionsTypeEnum
+  readingSections: String
+  thinkPairScore: Int
+  thinkPairEarnedPoints: Int
+  shareScore: Int
+  shareEarnedPoints: Int
+  period: periodName
+  markingPeriod: MarkingPeriodEnum
+  assignedDate: Date!
+  isActive: Boolean
+  isPresent: Boolean
+  thinkPairComments: [String]
+  shareComments: [String]
 }
 
 input ScoreSocraticQuestionProtocolThinkPairInput {
-	_id: ID!
-	socraticQuestion: String
-	thinkPairScore: Int
-	thinkPairEarnedPoints: Int
-	thinkPairComments: [String]
+  _id: ID!
+  socraticQuestion: String
+  thinkPairScore: Int
+  thinkPairEarnedPoints: Int
+  thinkPairComments: [String]
 }
 
 input UndoScoreSocraticQuestionProtocolThinkPairInput {
-	_id: ID!
-	socraticQuestion: String
-	thinkPairEarnedPoints: Int
+  _id: ID!
+  socraticQuestion: String
+  thinkPairEarnedPoints: Int
 }
 
 input ScoreSocraticQuestionProtocolShareInput {
-	_id: ID!
-	socraticQuestion: String
-	shareScore: Int
-	shareEarnedPoints: Int
-	shareComments: [String]
+  _id: ID!
+  socraticQuestion: String
+  shareScore: Int
+  shareEarnedPoints: Int
+  shareComments: [String]
 }
 
 input UndoScoreSocraticQuestionProtocolShareInput {
-	_id: ID!
-	socraticQuestion: String
-	shareEarnedPoints: Int
+  _id: ID!
+  socraticQuestion: String
+  shareEarnedPoints: Int
 }
 
 input SetSocraticQuestionProtcolIsPresentInput {
-	_id: ID!
-	socraticQuestion: String
-	isActive: Boolean
-	isPresent: Boolean
+  _id: ID!
+  socraticQuestion: String
+  isActive: Boolean
+  isPresent: Boolean
 }
 input UndoSetSocraticQuestionProtcolIsPresentInput {
-	_id: ID!
-	socraticQuestion: String
-	isActive: Boolean
+  _id: ID!
+  socraticQuestion: String
+  isActive: Boolean
 }
 
 input DeleteSocraticQuestionProtocolInput {
-	period: periodName
-	socraticQuestion: String
-	assignedDate: Date
+  period: periodName
+  socraticQuestion: String
+  assignedDate: Date
 }
 
 type DeletedSocraticQuestionProtocolPayload {
-	classPeriod: ClassPeriod
-	students: [Student]
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 input SetSocraticQuestionProtocolIsActiveInput {
-	period: periodName
-	assignedDate: Date!
-	socraticQuestion: String
-	isActive: Boolean
+  period: periodName
+  assignedDate: Date!
+  socraticQuestion: String
+  isActive: Boolean
 }
 
 input SocraticQuestionProtocolInput {
-	period: periodName
-	socraticQuestion: String
-	socraticQuestionType: socraticQuestionsTypeEnum
-	readingSections: String
-	markingPeriod: MarkingPeriodEnum
-	assignedDate: Date!
-	isActive: Boolean
+  period: periodName
+  socraticQuestion: String
+  socraticQuestionType: socraticQuestionsTypeEnum
+  readingSections: String
+  markingPeriod: MarkingPeriodEnum
+  assignedDate: Date!
+  isActive: Boolean
 }
 
 type SetSocraticQuestionProtcolIsActivePayLoad {
-	classPeriod: ClassPeriod
-	students: [Student]
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 type SocraticQuestionProtocolPayload {
-	classPeriod: ClassPeriod
-	students: [Student]
+  classPeriod: ClassPeriod
+  students: [Student]
 }
 
 input StudentTestsInput {
-	assignmentType: AssignmentType
-	readingPages: String
-	readingSections: String
-	assignedDate: Date
-	dueDate: Date
-	markingPeriod: MarkingPeriodEnum
-	missing: Boolean
-	exempt: Boolean
-	score: Int
-	maxScore: Int
-	earnedPoints: Int
-	studyTime: Int
+  assignmentType: AssignmentType
+  readingPages: String
+  readingSections: String
+  assignedDate: Date
+  dueDate: Date
+  markingPeriod: MarkingPeriodEnum
+  missing: Boolean
+  exempt: Boolean
+  score: Int
+  maxScore: Int
+  earnedPoints: Int
+  studyTime: Int
 }
 
 type StudentTests {
-	assignmentType: AssignmentType
-	readingPages: String
-	readingSections: String
-	assignedDate: Date
-	dueDate: Date
-	markingPeriod: MarkingPeriodEnum
-	missing: Boolean
-	exempt: Boolean
-	score: Int
-	maxScore: Int
-	earnedPoints: Int
-	studyTime: Int
+  assignmentType: AssignmentType
+  readingPages: String
+  readingSections: String
+  assignedDate: Date
+  dueDate: Date
+  markingPeriod: MarkingPeriodEnum
+  missing: Boolean
+  exempt: Boolean
+  score: Int
+  maxScore: Int
+  earnedPoints: Int
+  studyTime: Int
 }
 
 input StudentAssignmentsInput {
-	assignmentType: AssignmentType!
-	readingPages: String!
-	readingSections: String!
-	assignedDate: Date!
-	dueDate: Date!
-	missing: Boolean!
-	exempt: Boolean!
-	score: Int!
-	maxScore: Int
-	earnedPoints: Int
-	late: Boolean!
-	comments: [String]
+  assignmentType: AssignmentType!
+  readingPages: String!
+  readingSections: String!
+  assignedDate: Date!
+  dueDate: Date!
+  missing: Boolean!
+  exempt: Boolean!
+  score: Int!
+  maxScore: Int
+  earnedPoints: Int
+  late: Boolean!
+  comments: [String]
 }
 
 type StudentAssignments {
-	assignmentType: AssignmentType!
-	readingPages: String!
-	readingSections: String!
-	markingPeriod: MarkingPeriodEnum
-	assignedDate: Date!
-	dueDate: Date!
-	missing: Boolean!
-	exempt: Boolean!
-	score: Int!
-	maxScore: Int
-	earnedPoints: Int
-	comments: [String]
-	late: Boolean!
+  assignmentType: AssignmentType!
+  readingPages: String!
+  readingSections: String!
+  markingPeriod: MarkingPeriodEnum
+  assignedDate: Date!
+  dueDate: Date!
+  missing: Boolean!
+  exempt: Boolean!
+  score: Int!
+  maxScore: Int
+  earnedPoints: Int
+  comments: [String]
+  late: Boolean!
 }
 
 type SchoolDayInfo {
-	_id: ID!
-	date: String!
-	number: Int!
-	markingPeriod: MarkingPeriodEnum!
+  _id: ID!
+  date: String!
+  number: Int!
+  markingPeriod: MarkingPeriodEnum!
 }
 
 input QuestionInput {
-	type: String
-	question: String
+  type: String
+  question: String
 }
 
 type Vocab {
-	word: String
-	partOfSpeech: String
-	definition: String
+  word: String
+  partOfSpeech: String
+  definition: String
 }
 
 type Questions {
-	type: String
-	question: String
-	# majorTextStructure: majorTextStructures!
-	# minorTextStructure: [minorTextStructures]
+  type: String
+  question: String
+  # majorTextStructure: majorTextStructures!
+  # minorTextStructure: [minorTextStructures]
 }
 
 enum majorTextStructureEnum {
-	CAUSE_AND_EFFECT
-	CAUSE
-	EFFECT
-	PROBLEM_AND_SOLUTION
-	PROBLEM
-	SOLUTION
+  CAUSE_AND_EFFECT
+  CAUSE
+  EFFECT
+  PROBLEM_AND_SOLUTION
+  PROBLEM
+  SOLUTION
 }
 
 enum MarkingPeriodEnum {
-	FIRST
-	SECOND
-	THIRD
-	FOURTH
+  FIRST
+  SECOND
+  THIRD
+  FOURTH
 }
 input UpdateStudentInput {
-	_id: ID!
-	nickName: String
-	schoolID: String
-	firstName: String!
-	lastName: String!
-	responsibilityPoints: Int!
-	desk: Int!
-	period: periodName!
-	teacher: String!
-	learningStyle: String!
-	daysAbsent: [Date]
+  _id: ID!
+  nickName: String
+  schoolID: String
+  firstName: String!
+  lastName: String!
+  responsibilityPoints: Int!
+  desk: Int!
+  period: periodName!
+  teacher: String!
+  learningStyle: String!
+  daysAbsent: [Date]
 }
 
 type Teacher {
-	name: String!
-	teachesCourses: [Course!]!
+  name: String!
+  teachesCourses: [Course!]!
 }
 
 type Course {
-	name: String!
-	section: String!
-	period: periodName!
-	hasTeacher: Teacher!
-	isEmpty: Boolean!
-	roster: [Student]
-	assignmentList: [Assignments]
+  name: String!
+  section: String!
+  period: periodName!
+  hasTeacher: Teacher!
+  isEmpty: Boolean!
+  roster: [Student]
+  assignmentList: [Assignments]
 }
