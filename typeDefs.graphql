@@ -133,6 +133,7 @@ type AddDocumentPayload {
   doc: Document
 }
 type Document {
+  _id: ID!
   content: String
 }
 input LivePeriodInput {
