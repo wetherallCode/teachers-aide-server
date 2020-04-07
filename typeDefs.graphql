@@ -1,4 +1,5 @@
 scalar Date
+scalar JSON
 
 type Subscription {
   newSocraticQuestion: ClassPeriod
@@ -118,6 +119,18 @@ type Mutation {
   deleteSocraticQuestionProtocol(
     input: DeleteSocraticQuestionProtocolInput
   ): DeletedSocraticQuestionProtocolPayload
+
+  addDocument(input: AddDocumentInput): AddDocumentPayload
+}
+
+type Document {
+  content: JSON
+}
+input AddAssignmentInput {
+  content: JSON
+}
+type AddAssignmentPayload {
+  document: Document
 }
 
 input LivePeriodInput {
