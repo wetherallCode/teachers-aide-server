@@ -126,10 +126,10 @@ type Mutation {
 type Document {
   content: JSON
 }
-input AddAssignmentInput {
+input AddDocumentInput {
   content: JSON
 }
-type AddAssignmentPayload {
+type AddDocumentPayload {
   document: Document
 }
 
