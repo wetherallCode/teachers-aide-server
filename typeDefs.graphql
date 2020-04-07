@@ -124,58 +124,15 @@ type Mutation {
   addDocument(input: AddDocumentInput): AddDocumentPayload
 }
 
-# type DocumentElement {
-#   type: String!
-#   children: [DocumentContent]
-# }
-# type Document {
-#   content: [DocumentElement]
-# }
-# input DocumentElementInput {
-#   type: String!
-#   children: [DocumentContentInput]
-# }
-
-# type DocumentContent {
-#   text: String
-# }
-
-# input DocumentContentInput {
-#   text: String!
-# }
-
-type Document {
-  content: [DocumentElement]
-}
-type DocumentElement {
-  type: String!
-  children: [ElementContent]
-}
-type ElementContent {
-  text: String
-}
-
 input AddDocumentInput {
-  doc: [DocumentInput]
+  doc: JSON
 }
-
-input DocumentInput {
-  content: [DocumentElementInput]
-}
-
-input DocumentElementInput {
-  type: String!
-  children: [ElementContentInput]
-}
-
-input ElementContentInput {
-  text: String
-}
-
 type AddDocumentPayload {
   doc: Document
 }
-
+type Document {
+  content: JSON
+}
 input LivePeriodInput {
   period: periodName!
   assignedDate: Date!
