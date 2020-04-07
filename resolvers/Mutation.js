@@ -1236,9 +1236,9 @@ module.exports = {
   },
   //   make addDocument async when connected to database
   async addDocument(_, { input: content }, { generalInfo }) {
-    const practiceDocument = content
-    const { insertedId } = await generalInfo.insertOne(practiceDocument)
-    practiceDocument._id = insertedId
-    return practiceDocument
+    const document = content
+    const { insertedId } = await generalInfo.insertOne(document)
+    document._id = insertedId
+    return document
   }
 }
