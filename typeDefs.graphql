@@ -124,10 +124,24 @@ type Mutation {
 }
 
 type Document {
-  content: JSON
+  type: String!
+  children: [DocumentContent]
 }
+input DocumentInput {
+  type: String!
+  children: [DocumentContentInput]
+}
+
+type DocumentContent {
+  text: String
+}
+
+input DocumentContentInput {
+  text: String!
+}
+
 input AddDocumentInput {
-  content: JSON
+  content: [DocumentInput]
 }
 type AddDocumentPayload {
   document: Document
