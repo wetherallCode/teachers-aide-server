@@ -134,6 +134,8 @@ module.exports = {
   },
   async loadDocument(_, { _id }, { generalInfo }) {
     const document = await generalInfo.findOne({ _id: ObjectID(_id) })
+    console.log(document)
+
     return document
   }
 }
