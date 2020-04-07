@@ -1235,8 +1235,21 @@ module.exports = {
     return updatedStudent
   },
   //   make addDocument async when connected to database
-  addDocument(_, { input: { type, children } }, { generalInfo }) {
-    console.log(type, children)
+  addDocument(
+    _,
+    {
+      input: {
+        content: [
+          {
+            type,
+            children: [text]
+          }
+        ]
+      }
+    },
+    { generalInfo }
+  ) {
+    console.log(type, children), text
     return null
   }
 }
