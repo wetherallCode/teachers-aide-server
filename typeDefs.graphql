@@ -38,6 +38,8 @@ type Query {
   findAssignmentByStudentAndDateAndType(
     input: FindAssignmentByStudentAndDateAndType
   ): Student!
+
+  loadDocument(_id: ID!): Document
 }
 
 type Mutation {
@@ -131,7 +133,7 @@ type AddDocumentPayload {
   doc: Document
 }
 type Document {
-  content: String
+  content: JSON
 }
 input LivePeriodInput {
   period: periodName!
