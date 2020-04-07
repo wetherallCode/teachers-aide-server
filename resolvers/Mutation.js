@@ -1237,7 +1237,7 @@ module.exports = {
   //   make addDocument async when connected to database
   addDocument(_, { input: { content } }) {
     console.log(content)
-
+    const document = content
     return document
   }
 }
