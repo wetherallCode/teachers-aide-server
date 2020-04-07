@@ -1236,6 +1236,6 @@ module.exports = {
   },
   async addDocument(_, { input: { content } }, ___) {
     console.log(content)
-    return content
+    return document
   }
 }
