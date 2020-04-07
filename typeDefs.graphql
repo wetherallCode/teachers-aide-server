@@ -121,7 +121,7 @@ type Mutation {
     input: DeleteSocraticQuestionProtocolInput
   ): DeletedSocraticQuestionProtocolPayload
 
-  addDocument(doc: JSON): AddDocumentPayload
+  addDocument(input: AddDocumentInput): AddDocumentPayload
 }
 
 input AddDocumentInput {
