@@ -1234,8 +1234,9 @@ module.exports = {
     const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
     return updatedStudent
   },
-  async addDocument(_, { input: { content } }, ___) {
+  async addDocument(_, { input: { content } }) {
     console.log(content)
+
     return document
   }
 }
