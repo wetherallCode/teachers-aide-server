@@ -1235,8 +1235,8 @@ module.exports = {
     return updatedStudent
   },
   //   make addDocument async when connected to database
-  addDocument(_, { input: { content } }) {
-    console.log(content)
+  addDocument(_, args) {
+    console.log(args)
     const document = content
     return document
   }
