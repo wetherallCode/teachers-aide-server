@@ -133,7 +133,7 @@ type AddDocumentPayload {
   doc: Document
 }
 type Document {
-  content: JSON
+  content: String
 }
 input LivePeriodInput {
   period: periodName!
