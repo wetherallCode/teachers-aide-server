@@ -1249,5 +1249,7 @@ module.exports = {
       { $set: { responsibilityPoints: 100 } }
     )
     const students = await studentData.find({ _id: ObjectID(_id) }).toArray()
+
+    return students
   }
 }
