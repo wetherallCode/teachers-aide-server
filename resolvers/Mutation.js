@@ -1235,12 +1235,19 @@ module.exports = {
     return updatedStudent
   },
   //   make addDocument async when connected to database
-  async addDocument(_, { input: { doc } }, { generalInfo }) {
+  async addDocument(_, { input: { doc, owner } }, { generalInfo }) {
     console.log(doc)
     const document = { doc }
     const { insertedId } = await generalInfo.insertOne(document)
     document._id = insertedId
 
     return document
+  },
+  async resetResponsibilityPoints(_, { teacher }, { studentData }) {
+    const resetResponsibilityPoints = await studentData.updateMany(
+      { teacher: 'Wetherall' },
+      { $set: { responsibilityPoints: 100 } }
+    )
+    const students = await studentData.find({ _id: ObjectID(_id) }).toArray()
   }
 }

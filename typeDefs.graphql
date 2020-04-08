@@ -58,6 +58,7 @@ type Mutation {
   addLearningStyle(_id: ID!, learningStyle: String!): Student
 
   updateResponsibilityPoints(input: UpdateResponsibilityPointsInput): Student!
+  resetResponsibilityPoints(teacher: String!): [Student]
 
   hideStudentFromRoster(_id: ID!, isHiddenFromRoster: Boolean!): Student!
 
@@ -127,15 +128,19 @@ type Mutation {
 }
 
 input AddDocumentInput {
-  doc: JSON
+  owner: String!
+  doc: JSON!
 }
+
 type AddDocumentPayload {
-  doc: Document
+  doc: Document!
 }
+
 type Document {
   _id: ID!
-  doc: String
+  doc: String!
 }
+
 input LivePeriodInput {
   period: periodName!
   assignedDate: Date!
