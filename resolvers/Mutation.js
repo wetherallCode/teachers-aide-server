@@ -1248,7 +1248,7 @@ module.exports = {
       { teacher: 'Wetherall' },
       { $set: { responsibilityPoints: 100 } }
     )
-    const students = await studentData.find({ _id: ObjectID(_id) }).toArray()
+    const students = await studentData.find({ teacher: teacher }).toArray()
 
     return students
   }
