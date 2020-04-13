@@ -8,7 +8,7 @@ module.exports = {
       let hashedPassword = await bcrypt.hash(password, 10)
       let newUser = {
         name,
-        password: hashedPassword
+        password: hashedPassword,
       }
       await users.insertOne(newUser)
 
@@ -53,14 +53,14 @@ module.exports = {
     )
 
     const CurrentMarkingPeriod = await generalInfo.findOne({
-      _id: ObjectID(_id)
+      _id: ObjectID(_id),
     })
 
     return CurrentMarkingPeriod
   },
   async createMarkingPeriod(_, { _id, markingPeriod }, { generalInfo }) {
     let newMarkingPeriodEntry = {
-      markingPeriod
+      markingPeriod,
     }
     const { insertedId } = await generalInfo.insertOne(newMarkingPeriodEntry)
     newMarkingPeriodEntry._id = insertedId
@@ -70,7 +70,7 @@ module.exports = {
 
   async addStudent(parent, args, { studentData }) {
     let newStudent = {
-      ...args.input
+      ...args.input,
     }
     const { insertedId } = await studentData.insertOne(newStudent)
     newStudent._id = insertedId
@@ -100,8 +100,8 @@ module.exports = {
         teacher,
         nickName,
         schoolID,
-        learningStyle
-      }
+        learningStyle,
+      },
     },
     { studentData }
   ) {
@@ -118,8 +118,8 @@ module.exports = {
           period: period,
           desk: desk,
           teacher: teacher,
-          learningStyle: learningStyle
-        }
+          learningStyle: learningStyle,
+        },
       }
     )
 
@@ -150,8 +150,8 @@ module.exports = {
       { _id: ObjectID(_id) },
       {
         $set: {
-          isHiddenFromRoster: isHiddenFromRoster
-        }
+          isHiddenFromRoster: isHiddenFromRoster,
+        },
       }
     )
     const hiddenStudent = await studentData.findOne({ _id: ObjectID(_id) })
@@ -177,7 +177,7 @@ module.exports = {
 
     let newLesson = {
       ...args.input,
-      inUnit: unitName
+      inUnit: unitName,
     }
 
     const { insertedId } = await lessonData.insertOne(newLesson)
@@ -200,8 +200,8 @@ module.exports = {
           studyGuideQuestions: args.input.studyGuideQuestions,
           vocabWords: args.input.vocabWords,
           readings: args.input.readings,
-          workDue: args.input.workDue
-        }
+          workDue: args.input.workDue,
+        },
       }
     )
     const editedLesson = await lessonData.findOne({ _id: ObjectID(_id) })
@@ -211,7 +211,7 @@ module.exports = {
 
   async createUnit(_, args, { unitData }) {
     let newUnit = {
-      ...args.input
+      ...args.input,
     }
     const { insertedId } = await unitData.insertOne(newUnit)
     newUnit._id = insertedId
@@ -228,8 +228,8 @@ module.exports = {
         assignedLesson,
         period,
         assignedHomework,
-        assignedTest
-      }
+        assignedTest,
+      },
     },
     { classPeriodData, lessonData, assignmentData, studentData }
   ) {
@@ -237,7 +237,7 @@ module.exports = {
 
     const classPeriodCheck = await classPeriodData.findOne({
       assignedDate: assignedDate,
-      period: period
+      period: period,
     })
     if (classPeriodCheck) {
       throw new Error('ClassPeriod already Created')
@@ -253,13 +253,13 @@ module.exports = {
       assignedHomework,
       assignedTest,
       assignedProtocols: [],
-      livePeriod: 'DISABLED'
+      livePeriod: 'DISABLED',
     }
 
     const { insertedId } = await classPeriodData.insertOne(newClassPeriod)
     newClassPeriod._id = insertedId
 
-    assignedHomework.forEach(assignment => {
+    assignedHomework.forEach((assignment) => {
       studentData.updateMany(
         { period: period },
         {
@@ -276,9 +276,9 @@ module.exports = {
               late: true,
               score: 0,
               maxScore: assignment.maxScore,
-              comments: ['Missing']
-            }
-          }
+              comments: ['Missing'],
+            },
+          },
         }
       )
       if (assignment.assignmentType === 'THINKING_GUIDE') {
@@ -306,9 +306,9 @@ module.exports = {
             missing: true,
             exempt: false,
             score: 0,
-            maxScore: assignedTest.maxScore
-          }
-        }
+            maxScore: assignedTest.maxScore,
+          },
+        },
       }
     )
 
@@ -327,7 +327,7 @@ module.exports = {
 
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
 
     return classPeriod
@@ -344,8 +344,8 @@ module.exports = {
         markingPeriod,
         readingPages,
         readingSections,
-        maxScore
-      }
+        maxScore,
+      },
     },
     { studentData, classPeriodData }
   ) {
@@ -356,9 +356,9 @@ module.exports = {
           hasAssignments: {
             $elemMatch: {
               assignedDate: assignedDate,
-              assignmentType: assignmentType
-            }
-          }
+              assignmentType: assignmentType,
+            },
+          },
         },
         {
           $set: {
@@ -368,8 +368,8 @@ module.exports = {
             'hasAssignments.$.readingPages': readingPages,
             'hasAssignments.$.readingSections': readingSections,
             'hasAssignments.$.assignmentType': assignmentType,
-            'hasAssignments.$.maxScore': maxScore
-          }
+            'hasAssignments.$.maxScore': maxScore,
+          },
         }
       )
 
@@ -379,9 +379,9 @@ module.exports = {
           assignedHomework: {
             $elemMatch: {
               assignedDate: assignedDate,
-              assignmentType: assignmentType
-            }
-          }
+              assignmentType: assignmentType,
+            },
+          },
         },
         {
           $set: {
@@ -391,8 +391,8 @@ module.exports = {
             'assignedHomework.$.readingPages': readingPages,
             'assignedHomework.$.readingSections': readingSections,
             'assignedHomework.$.assignmentType': assignmentType,
-            'assignedHomework.$.maxScore': maxScore
-          }
+            'assignedHomework.$.maxScore': maxScore,
+          },
         }
       )
     }
@@ -403,9 +403,9 @@ module.exports = {
           hasTests: {
             $elemMatch: {
               assignedDate: assignedDate,
-              assignmentType: assignmentType
-            }
-          }
+              assignmentType: assignmentType,
+            },
+          },
         },
         {
           $set: {
@@ -415,14 +415,14 @@ module.exports = {
             'hasTests.$.readingPages': readingPages,
             'hasTests.$.readingSections': readingSections,
             'hasTests.$.assignmentType': assignmentType,
-            'hasTests.$.maxScore': maxScore
-          }
+            'hasTests.$.maxScore': maxScore,
+          },
         }
       )
       const updatedClassPeriodTest = await classPeriodData.updateMany(
         {
           period: period,
-          assignedDate: assignedDate
+          assignedDate: assignedDate,
         },
         {
           $set: {
@@ -432,8 +432,8 @@ module.exports = {
             'assignedTest.readingPages': readingPages,
             'assignedTest.readingSections': readingSections,
             'assignedTest.assignmentType': assignmentType,
-            'assignedTest.maxScore': maxScore
-          }
+            'assignedTest.maxScore': maxScore,
+          },
         }
       )
     }
@@ -441,7 +441,7 @@ module.exports = {
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     return { students, classPeriod }
   },
@@ -457,8 +457,8 @@ module.exports = {
         readingPages,
         readingSections,
         assignmentType,
-        maxScore
-      }
+        maxScore,
+      },
     },
     { studentData, classPeriodData }
   ) {
@@ -478,16 +478,16 @@ module.exports = {
             late: true,
             score: 0,
             maxScore: maxScore,
-            comments: ['Missing']
-          }
-        }
+            comments: ['Missing'],
+          },
+        },
       }
     )
 
     const newAssignmentInClassPeriod = await classPeriodData.updateOne(
       {
         period: period,
-        assignedDate: assignedDate
+        assignedDate: assignedDate,
       },
 
       {
@@ -499,15 +499,15 @@ module.exports = {
             readingPages: readingPages,
             readingSections: readingSections,
             assignmentType: assignmentType,
-            maxScore: maxScore
-          }
-        }
+            maxScore: maxScore,
+          },
+        },
       }
     )
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     return { students, classPeriod }
   },
@@ -524,17 +524,17 @@ module.exports = {
         $pull: {
           hasAssignments: {
             assignmentType: assignmentType,
-            assignedDate: assignedDate
-          }
-        }
+            assignedDate: assignedDate,
+          },
+        },
       }
     )
     const assignmentToDeleteInClassPeriod = await classPeriodData.updateOne(
       { assignedDate: assignedDate, period: period },
       {
         $pull: {
-          assignedHomework: { assignmentType: assignmentType }
-        }
+          assignedHomework: { assignmentType: assignmentType },
+        },
       }
     )
     if (assignmentType === 'THINKING_GUIDE') {
@@ -548,7 +548,7 @@ module.exports = {
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     return { students, classPeriod }
   },
@@ -563,8 +563,8 @@ module.exports = {
         assignedDate,
         maxScore,
         dueDate,
-        markingPeriod
-      }
+        markingPeriod,
+      },
     },
     { studentData, classPeriodData }
   ) {
@@ -582,16 +582,16 @@ module.exports = {
             missing: true,
             exempt: false,
             score: 0,
-            maxScore: maxScore
-          }
-        }
+            maxScore: maxScore,
+          },
+        },
       }
     )
 
     const updatedClassPeriodTest = await classPeriodData.updateMany(
       {
         period: period,
-        assignedDate: assignedDate
+        assignedDate: assignedDate,
       },
       {
         $set: {
@@ -601,14 +601,14 @@ module.exports = {
           'assignedTest.readingPages': readingPages,
           'assignedTest.readingSections': readingSections,
           'assignedTest.assignmentType': 'TEST',
-          'assignedTest.maxScore': maxScore
-        }
+          'assignedTest.maxScore': maxScore,
+        },
       }
     )
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     return { students, classPeriod }
   },
@@ -623,17 +623,17 @@ module.exports = {
         readingSections,
         markingPeriod,
         assignedDate,
-        isActive
-      }
+        isActive,
+      },
     },
     { studentData, classPeriodData, pubsub }
   ) {
     const classPeriodInfo = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     const socraticQuestionCheck = classPeriodInfo.assignedProtocols.some(
-      protocol => protocol.socraticQuestion === socraticQuestion
+      (protocol) => protocol.socraticQuestion === socraticQuestion
     )
 
     if (socraticQuestionCheck) {
@@ -642,7 +642,7 @@ module.exports = {
 
     const updatedStudents = await studentData.updateMany(
       {
-        period: period
+        period: period,
       },
       {
         $push: {
@@ -659,9 +659,9 @@ module.exports = {
             isActive: isActive,
             isPresent: false,
             thinkPairComments: [],
-            shareComments: []
-          }
-        }
+            shareComments: [],
+          },
+        },
       }
     )
     const updatedClassPeriod = await classPeriodData.updateOne(
@@ -671,19 +671,19 @@ module.exports = {
           assignedProtocols: {
             socraticQuestion: socraticQuestion,
             socraticQuestionType: socraticQuestionType,
-            isActive: true
-          }
-        }
+            isActive: true,
+          },
+        },
       }
     )
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
 
     pubsub.publish('socraticQuestion-added', {
-      newSocraticQuestion: classPeriod
+      newSocraticQuestion: classPeriod,
     })
 
     return { students, classPeriod }
@@ -697,12 +697,12 @@ module.exports = {
     const updatedStudent = await studentData.updateMany(
       {
         period: period,
-        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } },
       },
       {
         $set: {
-          'hasProtocols.$.isActive': isActive
-        }
+          'hasProtocols.$.isActive': isActive,
+        },
       }
     )
     const updatedClassPeriod = await classPeriodData.updateOne(
@@ -710,15 +710,15 @@ module.exports = {
         period: period,
         assignedDate: assignedDate,
         assignedProtocols: {
-          $elemMatch: { socraticQuestion: socraticQuestion }
-        }
+          $elemMatch: { socraticQuestion: socraticQuestion },
+        },
       },
       { $set: { 'assignedProtocols.$.isActive': isActive } }
     )
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     return { students, classPeriod }
   },
@@ -731,8 +731,8 @@ module.exports = {
         socraticQuestion,
         thinkPairScore,
         thinkPairEarnedPoints,
-        thinkPairComments
-      }
+        thinkPairComments,
+      },
     },
     { studentData }
   ) {
@@ -740,15 +740,15 @@ module.exports = {
     const scoreSocraticQuestionProtocol = await studentData.updateOne(
       {
         _id: ObjectID(_id),
-        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } },
       },
       {
         $set: {
           'hasProtocols.$.thinkPairScore': thinkPairScore,
           'hasProtocols.$.thinkPairEarnedPoints': thinkPairEarnedPoints,
-          'hasProtocols.$.thinkPairComments': thinkPairComments
+          'hasProtocols.$.thinkPairComments': thinkPairComments,
         },
-        $inc: { responsibilityPoints: thinkPairEarnedPoints }
+        $inc: { responsibilityPoints: thinkPairEarnedPoints },
       }
     )
     const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -763,15 +763,15 @@ module.exports = {
     const scoreSocraticQuestionProtocol = await studentData.updateOne(
       {
         _id: ObjectID(_id),
-        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } },
       },
       {
         $set: {
           'hasProtocols.$.thinkPairScore': 0,
           'hasProtocols.$.thinkPairEarnedPoints': 0,
-          'hasProtocols.$.thinkPairComments': []
+          'hasProtocols.$.thinkPairComments': [],
         },
-        $inc: { responsibilityPoints: -thinkPairEarnedPoints }
+        $inc: { responsibilityPoints: -thinkPairEarnedPoints },
       }
     )
     const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -786,23 +786,23 @@ module.exports = {
         socraticQuestion,
         shareScore,
         shareEarnedPoints,
-        shareComments
-      }
+        shareComments,
+      },
     },
     { studentData }
   ) {
     const scoreSocraticQuestionProtocol = await studentData.updateOne(
       {
         _id: ObjectID(_id),
-        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } },
       },
       {
         $set: {
           'hasProtocols.$.shareScore': shareScore,
           'hasProtocols.$.shareEarnedPoints': shareEarnedPoints,
-          'hasProtocols.$.shareComments': shareComments
+          'hasProtocols.$.shareComments': shareComments,
         },
-        $inc: { responsibilityPoints: shareEarnedPoints }
+        $inc: { responsibilityPoints: shareEarnedPoints },
       }
     )
     const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -817,15 +817,15 @@ module.exports = {
     const scoreSocraticQuestionProtocol = await studentData.updateOne(
       {
         _id: ObjectID(_id),
-        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } },
       },
       {
         $set: {
           'hasProtocols.$.shareScore': 0,
           'hasProtocols.$.shareEarnedPoints': 0,
-          'hasProtocols.$.shareComments': []
+          'hasProtocols.$.shareComments': [],
         },
-        $inc: { responsibilityPoints: -shareEarnedPoints }
+        $inc: { responsibilityPoints: -shareEarnedPoints },
       }
     )
     const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -840,12 +840,12 @@ module.exports = {
     const scoreSocraticQuestionProtocol = await studentData.updateOne(
       {
         _id: ObjectID(_id),
-        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } }
+        hasProtocols: { $elemMatch: { socraticQuestion: socraticQuestion } },
       },
       {
         $set: {
-          'hasProtocols.$.isPresent': isPresent
-        }
+          'hasProtocols.$.isPresent': isPresent,
+        },
       }
     )
     const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -861,13 +861,13 @@ module.exports = {
       {
         _id: ObjectID(_id),
         hasProtocols: {
-          $elemMatch: { socraticQuestion: socraticQuestion, isActive: true }
-        }
+          $elemMatch: { socraticQuestion: socraticQuestion, isActive: true },
+        },
       },
       {
         $set: {
-          'hasProtocols.&.isPresent': true
-        }
+          'hasProtocols.&.isPresent': true,
+        },
       }
     )
     const student = await studentData.findOne({ _id: ObjectID(_id) })
@@ -886,18 +886,18 @@ module.exports = {
     const deletedSocraticQuestionProtocolForClass = await classPeriodData.updateOne(
       {
         assignedDate: assignedDate,
-        period: period
+        period: period,
       },
       {
         $pull: {
-          assignedProtocols: { socraticQuestion: socraticQuestion }
-        }
+          assignedProtocols: { socraticQuestion: socraticQuestion },
+        },
       }
     )
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
     return { students, classPeriod }
   },
@@ -909,11 +909,11 @@ module.exports = {
   ) {
     const studentsInClass = await studentData.find({ period: period }).toArray()
 
-    scoredTests.forEach(test => {
+    scoredTests.forEach((test) => {
       studentData.updateOne(
         {
           _id: ObjectID(test._id),
-          hasTests: { $elemMatch: { dueDate: test.dueDate } }
+          hasTests: { $elemMatch: { dueDate: test.dueDate } },
         },
         {
           $set: {
@@ -921,9 +921,9 @@ module.exports = {
             'hasTests.$.missing': test.missing,
             'hasTests.$.exempt': test.exempt,
             'hasTests.$.earnedPoints': test.earnedPoints,
-            'hasTests.$.studyTime': test.studyTime
+            'hasTests.$.studyTime': test.studyTime,
           },
-          $inc: { responsibilityPoints: test.earnedPoints }
+          $inc: { responsibilityPoints: test.earnedPoints },
         }
       )
     })
@@ -931,7 +931,7 @@ module.exports = {
       {
         period: period,
         // assignedTest: { $elemMatch: { dueDate: dueDate } }
-        'assignedTest.dueDate': dueDate
+        'assignedTest.dueDate': dueDate,
       },
       // { $set: { assignedTest: { scored: true } } }
       { $set: { 'assignedTest.scored': true } }
@@ -940,7 +940,7 @@ module.exports = {
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      'assignedTest.dueDate': dueDate
+      'assignedTest.dueDate': dueDate,
     })
     return { students, classPeriod }
   },
@@ -953,7 +953,7 @@ module.exports = {
     const undoTestScore = await studentData.updateOne(
       {
         _id: ObjectID(_id),
-        hasTests: { $elemMatch: { dueDate: dueDate } }
+        hasTests: { $elemMatch: { dueDate: dueDate } },
       },
       {
         $set: {
@@ -961,9 +961,9 @@ module.exports = {
           'hasTests.$.missing': true,
           'hasTests.$.exempt': false,
           'hasTests.$.earnedPoints': 0,
-          'hasTests.$.studyTime': 0
+          'hasTests.$.studyTime': 0,
         },
-        $inc: { responsibilityPoints: -earnedPoints }
+        $inc: { responsibilityPoints: -earnedPoints },
       }
     )
 
@@ -986,7 +986,7 @@ module.exports = {
     const testToRemoveFromClassPeriod = await classPeriodData.updateOne(
       {
         assignedDate: assignedDate,
-        period: period
+        period: period,
       },
       { $unset: { assignedTest: '' } }
     )
@@ -996,7 +996,7 @@ module.exports = {
     const students = await studentData.find({ period: period }).toArray()
     const classPeriod = await classPeriodData.findOne({
       period: period,
-      assignedDate: assignedDate
+      assignedDate: assignedDate,
     })
 
     return { students, classPeriod, removed }
@@ -1015,8 +1015,8 @@ module.exports = {
         score,
         earnedPoints,
         comments,
-        late
-      }
+        late,
+      },
     },
 
     { studentData }
@@ -1025,8 +1025,8 @@ module.exports = {
       {
         _id: ObjectID(_id),
         hasAssignments: {
-          $elemMatch: { dueDate: date, assignmentType: assignmentType }
-        }
+          $elemMatch: { dueDate: date, assignmentType: assignmentType },
+        },
       },
 
       {
@@ -1036,9 +1036,9 @@ module.exports = {
           'hasAssignments.$.missing': missing,
           'hasAssignments.$.exempt': exempt,
           'hasAssignments.$.comments': comments,
-          'hasAssignments.$.late': late
+          'hasAssignments.$.late': late,
         },
-        $inc: { responsibilityPoints: earnedPoints }
+        $inc: { responsibilityPoints: earnedPoints },
       }
     )
 
@@ -1057,8 +1057,8 @@ module.exports = {
       {
         _id: ObjectID(_id),
         hasAssignments: {
-          $elemMatch: { dueDate: date, assignmentType: assignmentType }
-        }
+          $elemMatch: { dueDate: date, assignmentType: assignmentType },
+        },
       },
 
       {
@@ -1068,9 +1068,9 @@ module.exports = {
           'hasAssignments.$.missing': true,
           'hasAssignments.$.exempt': false,
           'hasAssignments.$.comments': ['Missing'],
-          'hasAssignments.$.late': false
+          'hasAssignments.$.late': false,
         },
-        $inc: { responsibilityPoints: -earnedPoints }
+        $inc: { responsibilityPoints: -earnedPoints },
       }
     )
 
@@ -1119,25 +1119,25 @@ module.exports = {
     if (withAssignments) {
       studentData.updateMany(
         {
-          period: period
+          period: period,
         },
         {
           $pull: {
-            hasAssignments: { assignedDate: date }
+            hasAssignments: { assignedDate: date },
           },
-          $inc: { responsibilityPoints: 2 }
+          $inc: { responsibilityPoints: 2 },
         }
       )
     }
     if (withTest) {
       studentData.updateMany(
         {
-          period: period
+          period: period,
         },
         {
           $pull: {
-            hasTests: { assignedDate: date }
-          }
+            hasTests: { assignedDate: date },
+          },
         }
       )
     }
@@ -1150,8 +1150,8 @@ module.exports = {
       { _id: ObjectID(_id) },
       {
         $set: {
-          learningStyle: learningStyle
-        }
+          learningStyle: learningStyle,
+        },
       }
     )
     const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
@@ -1161,12 +1161,12 @@ module.exports = {
 
   async markStudentAbsent(_, { _id, date }, { studentData, classPeriodData }) {
     const findStudentAbsences = await studentData.findOne({
-      _id: ObjectID(_id)
+      _id: ObjectID(_id),
     })
 
     if (findStudentAbsences.daysAbsent !== undefined) {
       var checkForDuplicateAbsences = findStudentAbsences.daysAbsent.find(
-        element => element === date
+        (element) => element === date
       )
     }
 
@@ -1178,8 +1178,8 @@ module.exports = {
       { _id: ObjectID(_id) },
       {
         $push: {
-          daysAbsent: date
-        }
+          daysAbsent: date,
+        },
       }
     )
     const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
@@ -1188,12 +1188,12 @@ module.exports = {
 
   async markStudentLate(_, { _id, date }, { studentData }) {
     const findStudentLatenesses = await studentData.findOne({
-      _id: ObjectID(_id)
+      _id: ObjectID(_id),
     })
 
     if (
       findStudentLatenesses.daysLate !== undefined &&
-      findStudentLatenesses.daysLate.find(day => day === date)
+      findStudentLatenesses.daysLate.find((day) => day === date)
     ) {
       throw new Error('This student has already been marked absent')
     }
@@ -1202,9 +1202,9 @@ module.exports = {
       { _id: ObjectID(_id) },
       {
         $push: {
-          daysLate: date
+          daysLate: date,
         },
-        $inc: { responsibilityPoints: -10 }
+        $inc: { responsibilityPoints: -10 },
       }
     )
 
@@ -1216,7 +1216,7 @@ module.exports = {
     const updateStudent = await studentData.updateOne(
       { _id: ObjectID(_id) },
       {
-        $pull: { daysAbsent: { $in: [date] } }
+        $pull: { daysAbsent: { $in: [date] } },
       }
     )
     const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
@@ -1228,7 +1228,7 @@ module.exports = {
       { _id: ObjectID(_id) },
       {
         $pull: { daysLate: { $in: [date] } },
-        $inc: { responsibilityPoints: 10 }
+        $inc: { responsibilityPoints: 10 },
       }
     )
     const updatedStudent = await studentData.findOne({ _id: ObjectID(_id) })
@@ -1240,7 +1240,7 @@ module.exports = {
     const document = { doc }
     const { insertedId } = await generalInfo.insertOne(document)
     document._id = insertedId
-
+    document
     return document
   },
   async resetResponsibilityPoints(_, { teacher }, { studentData }) {
@@ -1251,5 +1251,5 @@ module.exports = {
     const students = await studentData.find({ teacher: teacher }).toArray()
 
     return students
-  }
+  },
 }
