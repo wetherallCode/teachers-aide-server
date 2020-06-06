@@ -231,7 +231,7 @@ module.exports = {
         assignedTest,
       },
     },
-    { classPeriodData, lessonData, assignmentData, studentData }
+    { classPeriodData, lessonData, studentData }
   ) {
     const studentsInClass = await studentData.find({ period: period }).toArray()
 
@@ -1236,13 +1236,13 @@ module.exports = {
   },
   //   make addDocument async when connected to database
   async addDocument(_, { input: { doc, owner } }, { generalInfo }) {
-    console.log(doc)
     const document = { doc }
     const { insertedId } = await generalInfo.insertOne(document)
     document._id = insertedId
-    document
+
     return document
   },
+
   async resetResponsibilityPoints(_, { teacher }, { studentData }) {
     const resetResponsibilityPoints = await studentData.updateMany(
       { teacher: 'Wetherall' },
